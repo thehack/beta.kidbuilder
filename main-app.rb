@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'dm-core'
+require  'dm-migrations'
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 
 # For user authentication
