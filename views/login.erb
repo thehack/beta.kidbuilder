@@ -1,0 +1,10 @@
+<center>
+	<h2 style="color:black;">Login</h2>
+
+		<p><textarea id="loginemail" name="loginemail"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
+		<p><textarea id="loginpassword" name="loginpassword" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
+		<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
+				parameters: { loginemail: $F('loginemail'), loginpassword: $F('loginpassword') }, 
+				onComplete: function(){window.location='/profile'}});">submit</a>
+	<br/>
+</center>

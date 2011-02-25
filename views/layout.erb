@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="/scripts/prototype.js" type="text/javascript"></script> 
+		<script src="/scripts/scriptaculous.js" type="text/javascript"></script>
+		<script src="/scripts/saystuff.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript" charset="utf-8">
+			var kungFu = new Image();
+			kungFu.src = "/sounds/kung_fu.mp3";
+
+			function waitUpdate() {
+				setTimeout("window.location='/'", 1500)
+			}
+		</script>
+		<link  href="//fonts.googleapis.com/css?family=Cherry+Cream+Soda:regular" rel="stylesheet" type="text/css" >
+		<link  href="//fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css" >
+		
+		<link rel="stylesheet" href="/css/simpler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/css/saystuff.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	</head>
+	<body id="body">
+		<div id="header" width='100%'>
+			<div id="top" class="container clearfix">
+				<div class="first grid9">
+					<div id='logo'>
+					<a href="/">Kidbuilder
+					</a>
+					</div>
+				</div>
+				<div class="grid3" style="text-align:right;">
+					<% if logged_in? %>
+				        <p><a class="large red awesome" href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a></p>
+					<% else %>
+					<p>
+
+
+						<a class="large yellow awesome" id='login_link' href="#">&nbsp;LogIn&nbsp;</a>
+						&nbsp;
+						<a class="large red awesome" id='signup_link' href="#">&nbsp;SignUp&nbsp;</a>
+					</p>
+					<% end %>
+				</div>
+			</div>
+		
+		</div>
+		<div class="seperator">&nbsp;
+		</div>
+		
+		<div class="main container clearfix">
+			<%= yield %>
+			</br>
+		</div>
+		<br/>
+		<div class="container clearfix">
+			<div class="first grid12 center">
+			</div>
+		</div>
+		
+		<div id='login' style='display:none;'>
+			<center>
+				<h2 style="color:black;">Login</h2>
+					<p><textarea id="loginemail" name="loginemail"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
+					<p><textarea id="loginpassword" name="loginpassword" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
+					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
+							parameters: { loginemail: $F('loginemail'), loginpassword: $F('loginpassword') }, 
+							onComplete: function(){window.location='/profile'}});">submit</a>
+				<br/>
+			</center>
+		</div>
+		
+		<div id="signup" style='display:none;'>
+			<center>
+				<h2 style="color:black;">SignUp</h2>
+					<p><textarea id="email" name="email"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
+					<p><textarea id="nickname" name="nickname"  onFocus="this.value=''; this.onfocus=null;">Nickname</textarea></p>
+
+					<p><textarea id="password" name="password" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
+					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
+							parameters: { email: $F('email'), nickname: $F('nickname'), password: $F('password')}, onComplete: function(){window.location='/profile'}})">submit</a>
+				<br/>
+			</center>
+		</div>
+		
+		<script type='text/javascript'>
+			$('login_link').observe('click', 
+			function () {
+				say('<img src=\'/images/ajax-loader.gif\' />');
+				var login=$('login').show();
+				$('paratext').update(login);
+				$('alertbox').style.height = '300px';
+			} );
+			$('signup_link').observe('click', 
+			function () {
+				say('<img src=\'/images/ajax-loader.gif\' />');
+				var signup=$('signup').show();
+				$('paratext').update(signup);
+				$('alertbox').style.height = '340px';
+			} );			
+		</script>
+	</body>
+</html>

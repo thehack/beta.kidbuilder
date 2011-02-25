@@ -1,0 +1,37 @@
+require 'sinatra'
+require 'dm-core'
+Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
+
+# For user authentication
+before do
+  def logged_in?
+    client_id = request.cookies["scramble"]
+    if client_id.nil?
+      return false
+    else
+      @current_user = User.first(:scramble => client_id)
+    end
+  end
+end
+
+helpers do
+  include Rack::Utils
+  # Make sure our template can use <%=h %>
+  alias_method :h, :escape_html
+  # Partials: Usage: partial :foo
+  def partial(page, options={})
+    erb page, options.merge!(:layout => false)
+  end
+end
+
+get '/' do
+    redirect '/world'
+end
+
+get '/:name' do
+  @users = User.all
+  @first_few = User.all(:limit => 5, :order => [ :id.desc ])
+  @name = params[:name]
+    erb :index
+end
+
