@@ -1,0 +1,12 @@
+on my local machine:
+
+git add .
+git commit -m "message"
+git push origin master
+
+
+ssh into dremhost.
+cd into directory
+git pull
+git add .
+git commit -m ""
