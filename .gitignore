@@ -1,4 +1,3 @@
 .gems
 WEB-INF
-Gemfile.lock
 kidbuilder.sqlite3

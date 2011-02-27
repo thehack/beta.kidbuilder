@@ -1,0 +1,3 @@
+How to generate a controller:
+./script/generate.rb modelname # generates a basic crud controller
+
