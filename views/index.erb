@@ -1,22 +1,63 @@
-
 <div class='first grid12'>
-	<div id="profile">
 		<div class='first grid3'>
-			<br/>
-			<div style='background-color:#999999;border-radius:2px;font-size:78px;color:#333333;height:140px;border:solid 2px black;'><img src='/images/profilepic.png' alt='profile'/>
+		<br/>
+		<div style='background-color:#999999;border-radius:2px;font-size:78px;color:#333333;height:140px;border:solid 2px black;'><img src='/images/profilepic.png' alt='profile'/>
+		</div>
+		<a href="javascript:say('Full Profile Here');">
+			<div style='background-color:yellow;text-align:center;color:#333333'>Yellow Belt
 			</div>
-			<a href="javascript:say('Full Profile Here');">
-				<div style='background-color:yellow;text-align:center;color:#333333'>Yellow Belt
-				</div>
-			</a>
-			</br>
-		</div>
-		<div class='grid9'>
-			<p style='text-align:right;'>Welcome, Timmy: P45 B4 L1</p>
-
-		</div>
-		<div class='first grid9'>
-		</div>
-		<div class='grid3'>
-			links here
-		</div>
+		</a>
+		</br>
+	</div>
+	<div class='grid3'>
+		<% for i in 1..4 %>
+		<p style='text-align:center;'>Link <%= i %></p>
+		<% end %>
+	</div>
+	<div class='grid3'>
+		<% for i in 5..8 %>
+		<p style='text-align:center;'>Link <%= i %></p>
+		<% end %>
+	</div>
+	<div class='grid3'>
+		<% for i in 9..12 %>
+		<p style='text-align:center;'>Link <%= i %></p>
+		<% end %>
+	</div>
+	<div class= 'first grid12'>
+		<img src='/images/blank.png' height="400px">
+	</div>
+	<br/>
+	<div class='first grid3' style='background-color:#0f87ff;border-radius:10px;'>
+		<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+	</div>
+	<div class='grid3' style='background-color:#f55200;border-radius:10px;'>
+		<h3 style='color:white;text-align:center;'>Tile-Game</h3>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+	</div>	
+	<div class='grid3' style='background-color:#f200cf;border-radius:10px;'>
+		<h3 style='color:white;text-align:center;'>Puzzle</h3>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+	</div>
+	<div class='grid3' style='background-color:#8fe300;border-radius:10px;'>
+		<h3 style='color:white;text-align:center;'>Recently Online</h3>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+	</div>
+</div>
