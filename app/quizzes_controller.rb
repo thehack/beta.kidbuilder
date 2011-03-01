@@ -8,6 +8,11 @@ get '/:name/quizzes/:id/show' do
   erb :quiz_show
 end
 
+get '/:name/quizzes/list' do
+  @quizzes = Quiz.all
+  erb :quiz_list
+end
+
 get '/:name/quizzes/:id/edit' do
   erb :quiz_edit
 end

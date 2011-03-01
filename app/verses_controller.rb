@@ -8,6 +8,11 @@ get '/:name/verses/:id/show' do
   erb :verse_show
 end
 
+get '/:name/verses/list' do
+  @verses = Verse.all
+  erb :verse_list
+end
+
 get '/:name/verses/:id/edit' do
   erb :verse_edit
 end
