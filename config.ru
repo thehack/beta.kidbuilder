@@ -3,5 +3,5 @@ ENV['GEM_PATH'] ||= `gem env path`.strip
 Gem.clear_paths
 
 require 'main-app'
-set :environment, :production
+set :environment, :development
 run Sinatra::Application

@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="/css/saystuff.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	</head>
 	<body id="body">
-		<div class="container clearfix white" style="padding:20px;">
+		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
 			<div class="first grid6">
 				<div id='logo'>
 					<a href="/"><img src="http://kidbuilder.net/images/kidbuilder2.png">
@@ -30,25 +30,26 @@
 			</div>
 			<div class="grid3" style="text-align:right;">
 					<% if logged_in? %>
-						<br/>
-						<div style='background-color:#999999;border-radius:2px;font-size:78px;color:#333333;height:140px;border:solid 2px black;'><img src='/images/profilepic.png' alt='profile'/>
+						<div>
+							<a href="javascript:say('Full Profile Here');">
+								<img style="border:solid black 1px;" src='/images/profilepic.png' height="100" alt='profile'/>
+							</a>	
 						</div>
-						<a href="javascript:say('Full Profile Here');">
-							<div style='background-color:yellow;text-align:center;color:#333333'>Yellow Belt
-							</div>
-						</a>
-				        <p><a class="large red awesome" href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a></p>
 					<% else %>
-						<p><a class="large blue awesome" id='login_link' href="#">&nbsp;&nbsp;Log-In&nbsp;&nbsp;</a></p>
+						<a class="large blue awesome" id='login_link' href="#">&nbsp;&nbsp;Log-In&nbsp;&nbsp;&nbsp;</a>
 						<p><a class="large pink awesome" id='signup_link' href="#">&nbsp;Sign-Up&nbsp;</a></p>
 					<% end %>
 			</div>
-
+			<div id="bar"class="first grid12 royal">
+				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;
+				<% if logged_in? %>
+				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a>
+				<% end %>		
+			</div>
 			<%= yield %>
 			</br>
 			<div class='first grid3 royal rad10'>
 				<h3 style='color:white;text-align:center;'>Levels</h3>
-				<br/>
 				<br/>
 				<br/>
 				<br/>
@@ -66,7 +67,6 @@
 				<br/>
 				<br/>
 				<br/>
-				<br/>
 			</div>	
 			<div class='grid3 lime rad10'>
 				<h3 style='color:white;text-align:center;'>Puzzle</h3>
@@ -77,11 +77,9 @@
 				<br/>
 				<br/>
 				<br/>
-				<br/>
 			</div>
 			<div class='grid3 pink rad10'>
-				<h3 style='color:white;text-align:center;'>Recently Online</h3>
-				<br/>
+				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
 				<br/>
 				<br/>
 				<br/>
@@ -90,8 +88,6 @@
 				<br/>
 				<br/>
 			</div>
-			<br/>
-			<br/>
 			<br/>
 				
 		</div><!-- container bottom of page -->
@@ -102,7 +98,8 @@
 					<p><textarea id="loginemail" name="loginemail"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
 					<p><textarea id="loginpassword" name="loginpassword" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
-							parameters: { loginemail: $F('loginemail'), loginpassword: $F('loginpassword') }, 
+							parameters: { loginemail: $F('loginemail'), loginpassword: $F('loginpassword') },
+							onSubmit: $(login).update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/profile'}});">submit</a>
 				<br/>
 			</center>
@@ -116,7 +113,9 @@
 
 					<p><textarea id="password" name="password" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
-							parameters: { email: $F('email'), nickname: $F('nickname'), password: $F('password')}, onComplete: function(){window.location='/profile'}})">submit</a>
+							parameters: { email: $F('email'), nickname: $F('nickname'), password: $F('password')},
+							onSubmit: $('signup').update('<img src=\'/images/ajax-loader.gif\'/>'),
+							onComplete: function(){window.location='/profile'}})">submit</a>
 				<br/>
 			</center>
 		</div>

@@ -34,6 +34,14 @@ a img{border:0px;}
 	line-height: 1.2;
 }
 
+#bar {
+	margin-bottom:10px; 
+	line-height:24px;
+	color:white;
+	background-image: url(/images/diagonal.png);
+	}
+#bar a { color:white;}
+#bar a:hover {text-decoration:underline;}
 #body {
 	background-color:#737373;
 	margin-top:0px;
@@ -110,3 +118,22 @@ a:hover {text-decoration:underline;}
 .orange.awesome:hover							{ background-color: #d45500; }
 .carrot.awesome, .carrot.awesome:visited		{ background-color: #f55200; }
 .carrot.awesome:hover							{ background-color: #a53700; }
+
+/** FORMS **/
+
+.imput {
+	border: 1px solid #ffffff;
+	/** remember to change image path **/
+	background: url(/images/form.png) repeat-x #ffffff;
+	font-family: tahoma, helvetica, sans-serif;
+	font-style: normal;
+	font-size: 14px;
+	color: #454743;
+}
+
+.label {
+	font-family: tahoma, helvetica, sans-serif;
+	font-style: bold;
+	font-size: 13px;
+	color: #0a5dff;
+}

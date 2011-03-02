@@ -39,6 +39,6 @@ end
 controller.close
 
 ['_show', '_edit', '_new', '_list'].each do |action|
-  view = File.open("views/#{model + action}", "w")
+  view = File.open("views/#{model + action +'.erb'}", "w")
   view.close
 end
