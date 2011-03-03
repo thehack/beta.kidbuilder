@@ -25,7 +25,7 @@ post '/login' do
     salt = pers.salt
     pw = Digest::SHA1.hexdigest("--#{salt}--#{password}--")
       if pers.scramble.nil?
-        pers.scramble = email.crypt('h3')
+        pers.scramble = pers.email.crypt('h3')
         pers.save
       end
   end
