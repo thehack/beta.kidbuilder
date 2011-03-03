@@ -28,7 +28,7 @@ DataMapper.setup(:default, {
     :database => '*******'})
 
 
-Changelog (Most of this is Bible Black Belt related)
+Bible Black Belt related:
 
 Existing Features:
 	administration: adding, editing verses, removing people
@@ -84,17 +84,4 @@ red jesus
 green holy spirit
 purple living for god
 black bible/books of the bible
-
-
-if i adapt this for ROR:
-
-Controllers:
-
-Users
-Sessions
-Profiles
-Verses
-Admin
-
-Models:
 

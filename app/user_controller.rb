@@ -18,20 +18,16 @@ post '/signup' do
   response.set_cookie("scramble", :value => user.scramble, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
 end
 
-get '/signup' do
-  partial :signup
-end
-
-get '/login' do
-  partial :login
-end
-
 post '/login' do
   password = params[:loginpassword]
   pers = User.first(:email => params[:loginemail])
   unless pers.nil?
     salt = pers.salt
     pw = Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+      if pers.scramble.nil?
+        pers.scramble = email.crypt('h3')
+        pers.save
+      end
   end
   if pers.nil?
     response.set_cookie("error", :value => "no such person", :expires => (Time.new.gmtime + 3), :path => '/')
