@@ -1,6 +1,4 @@
 # Configure DataMapper to use the App Engine datastore 
-DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/kidbuilder.sqlite3")
-
 class User
   include DataMapper::Resource
   property :id, Serial

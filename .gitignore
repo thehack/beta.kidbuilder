@@ -1,3 +1,2 @@
-.gems
-WEB-INF
+database_config.rb
 kidbuilder.sqlite3
