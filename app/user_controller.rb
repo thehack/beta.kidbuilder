@@ -1,14 +1,20 @@
 # User Authentication Views
 post '/signup' do
+  login = params[:login]
+  salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
   email = params[:email]
-  password = params[:password].crypt('h3')
+  password = params[:password]
   @people = User.all
   user = User.create(
   :email => email,
+  :crypted_password => Digest::SHA1.hexdigest("--#{salt}--#{password}--"),
   :scramble => email.crypt('h3'),
-  :nickname => params[:nickname],
-  :password => password,
-  :belt => 'white' )
+  :login => login,
+  :belt => 'white',
+  :salt => salt,
+  :points => 0,
+  :coins => 0
+  )
   response.set_cookie("scramble", :value => user.scramble, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
 end
 
@@ -21,14 +27,36 @@ get '/login' do
 end
 
 post '/login' do
-  pw = params[:loginpassword].crypt('h3')
+  password = params[:loginpassword]
   pers = User.first(:email => params[:loginemail])
+  unless pers.nil?
+    salt = pers.salt
+    pw = Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+  end
   if pers.nil?
     response.set_cookie("error", :value => "no such person", :expires => (Time.new.gmtime + 3), :path => '/')
-  elsif pers.password == pw
+  elsif pers.crypted_password == pw
     response.set_cookie("scramble", :value => pers.scramble, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
   else
     response.set_cookie("error", :value => "Password doesn't Match", :expires => (Time.new.gmtime + 3), :path => '/')
   end
+  redirect '/'
+end
+
+get '/:name/user/:id/show' do
+  @user = User.get(params[:id])
+  erb :user_show
+end
+
+get '/:name/users/list' do
+  @group = params[:name]
+  @users = User.all
+  erb :users_list
+end
+
+post '/:name/user/:id/destroy' do
+  @group = params[:name]
+  user = User.get(params[:id])
+  user.destroy
   redirect '/'
 end

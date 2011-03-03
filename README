@@ -1,3 +1,90 @@
-How to generate a controller:
+I made a little script to generate a controller and associated views:
 ./script/generate.rb modelname # generates a basic crud controller
+
+Here's a one-liner to remove deleted files from the git repo:
+git ls-files -d -z | xargs -0 git update-index --remove
+
+Self-reminder: If I want this to be compatible with the old passwords, I need to update password encryption to match.
+
+Git Workflow:
+on my local machine:
+
+git add .
+git commit -m "message"
+git push origin master
+
+ssh into Dreamhost.
+cd into directory
+git pull
+
+
+Changelog (Most of this is Bible Black Belt related)
+
+Existing Features:
+	administration: adding, editing verses, removing people
+	Basic feature set is in place, including:
+	user authentication, belt awards based on completion of verses in set.
+	basic user profiles which track progress.
+
+
+Not yet implemented:
+	choose your character: 5 boy animals, 5 girl animals, 
+	awards for special accomplishments, ie a new background or robe color.
+	ratings page: 10 Recent Yellow Belts , 10 Recent Orange Belts, etc. Links on to all yellow belts, etc.
+	video for front page
+	loop music for 'show' game page.  anime-styled animated karate chops for verse completion, and unique vids for belt completion.
+
+Belt colors:
+	White: 		
+
+	Orange:		Lord Jesus our Rescuer
+		Isaiah 9:6
+		JN 3:16
+		jn 14:6
+		Rev 3:20
+		Rom 6:23
+	
+	Blue:		Father God loves Us
+		Gen 1:1
+		Prov 3:5-6
+		2Cron 16:9
+		Jer 29:11
+	
+	Yellow:		Living for God
+		1 Jn 4:7-8
+		2 Cor 5:17 CEV
+	
+	Green:		God's Word, The Bible
+		2tim 3:16
+		Heb 4:12
+		Eph 6:17
+		Psalms 119:11
+	
+	Purple:		God's Holy Spirit: Guide, Comforter, Friend
+				gifts, fruit
+				comforter
+				guide
+				walk in the spirit
+				
+	Black:		Books of the Bible
+
+white rookie
+yellow god our father
+red jesus
+green holy spirit
+purple living for god
+black bible/books of the bible
+
+
+if i adapt this for ROR:
+
+Controllers:
+
+Users
+Sessions
+Profiles
+Verses
+Admin
+
+Models:
 

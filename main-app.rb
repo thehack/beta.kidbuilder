@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'dm-core'
 require  'dm-migrations'
+require "digest/sha1"
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 
 # For user authentication
@@ -13,6 +14,7 @@ before do
       @current_user = User.first(:scramble => client_id)
     end
   end
+  
 end
 
 helpers do
@@ -36,3 +38,13 @@ get '/:name' do
     erb :index
 end
 
+get '/:name/admin' do
+  @badges = Badge.all
+  @levels = Level.all
+  @puzzles = Puzzle.all
+  @quizzes = Quiz.all
+  @tile_games = TileGame.all
+  @users = User.all
+  @verses = Verse.all
+  erb :admin
+end
