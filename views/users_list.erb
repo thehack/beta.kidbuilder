@@ -1,4 +1,5 @@
 <% @users.each do |user| %>
-	<p><a href="/<%= @group %>/user/<%= user.id %>/show"><%= user.email %></a>&nbsp;&nbsp;<a href="#" onclick="new Ajax.Request('/<%= @group %>/user/<%= user.id %>/destroy');">x</a>
+	<p><a href="/<%= @group %>/user/<%= user.id %>/show"><%= user.email %>
+		<!-- </a>&nbsp;&nbsp;<a href="#" onclick="new Ajax.Request('/<%= @group %>/user/<%= user.id %>/destroy');">x</a> -->
 		<p>
 	<% end %>
