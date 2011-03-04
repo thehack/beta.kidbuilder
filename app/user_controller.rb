@@ -46,7 +46,7 @@ end
 
 get '/:name/users/list' do
   @group = params[:name]
-  @users = User.all
+  @users = User.all - User.get(1)
   erb :users_list
 end
 
