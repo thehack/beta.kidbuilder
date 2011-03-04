@@ -1,6 +1,6 @@
 # User Authentication Views
 post '/signup' do
-  login = params[:login]
+  login = params[:nickname]
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
   email = params[:email]
   password = params[:password]
@@ -19,8 +19,8 @@ post '/signup' do
 end
 
 post '/login' do
-  password = params[:loginpassword]
-  pers = User.first(:email => params[:loginemail])
+  password = params[:password]
+  pers = User.first(:login => params[:nickname])
   unless pers.nil?
     salt = pers.salt
     pw = Digest::SHA1.hexdigest("--#{salt}--#{password}--")
@@ -46,7 +46,7 @@ end
 
 get '/:name/users/list' do
   @group = params[:name]
-  @users = User.all - User.get(1)
+  @users = User.all - User.first(:login => 'thehack')
   erb :users_list
 end
 

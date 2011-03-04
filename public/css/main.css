@@ -33,7 +33,7 @@ a img{border:0px;}
  	word-spacing: 0em;
 	line-height: 1.2;
 }
-
+#stage {min-height:400px;}
 #bar {
 	margin-bottom:10px; 
 	line-height:24px;
@@ -121,17 +121,20 @@ a:hover {text-decoration:underline;}
 
 /** FORMS **/
 
-.imput {
-	border: 1px solid #ffffff;
+.input {
+	border: 1px solid #fefefe;
 	/** remember to change image path **/
 	background: url(/images/form.png) repeat-x #ffffff;
 	font-family: tahoma, helvetica, sans-serif;
+	margin-top:0px;
 	font-style: normal;
 	font-size: 14px;
 	color: #454743;
 }
 
 .label {
+	line-height:6px;
+	bottom-margin:-10px;
 	font-family: tahoma, helvetica, sans-serif;
 	font-style: bold;
 	font-size: 13px;

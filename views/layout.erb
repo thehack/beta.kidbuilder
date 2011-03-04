@@ -99,10 +99,12 @@
 		<div id='login_form' style='display:none;'>
 			<center>
 				<h2 style="color:black;">Login</h2>
-					<p><textarea id="loginemail" name="loginemail"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
-					<p><textarea id="loginpassword" name="loginpassword" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
+					<p class='label'>Nickname</p>
+					<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
+					<p class='label'>Password</p>
+					<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
-							parameters: { loginemail: $F('loginemail'), loginpassword: $F('loginpassword') },
+							parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
 							onSubmit: $(login_form).update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/profile'}});">submit</a>
 				<br/>
@@ -112,19 +114,22 @@
 		<div id="signup" style='display:none;'>
 			<center>
 				<h2 style="color:black;">SignUp</h2>
-					<p><textarea id="email" name="email"  onFocus="this.value=''; this.onfocus=null;">Email</textarea></p>
-					<p><textarea id="login" name="login"  onFocus="this.value=''; this.onfocus=null;">Nickname</textarea></p>
-
-					<p><textarea id="password" name="password" onFocus="this.value=''; this.onfocus=null;">Password</textarea></p>
+					<p class='label'>Nickname</p>
+					<p><input type='text' id="nickname" size='26' name="nickname"/></p>
+					<p class='label'>Email</p>
+					<p><input type='text' id="email" size='26' name="email"/></p>
+					<p class='label'>Password</p>
+					<p><input type="password" size='26' id="password" name="password"/></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
-							parameters: { email: $F('email'), login: $F('login'), password: $F('password')},
+							parameters: { nickname: $F('nickname'), email: $F('email'), password: $F('password')},
 							onSubmit: $('signup').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/profile'}})">submit</a>
+							onComplete: function(){window.location='/'}})">submit</a>
 				<br/>
 			</center>
 		</div>
 		
 		<script type='text/javascript'>
+		if ($('login_link')) {
 			$('login_link').observe('click', 
 			function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
@@ -138,7 +143,7 @@
 				var signup=$('signup').show();
 				$('paratext').update(signup);
 				$('alertbox').style.height = '340px';
-			} );			
+			} ); };			
 		</script>
 	</body>
 </html>
