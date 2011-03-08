@@ -1,0 +1,22 @@
+<script src="/scripts/colorPicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="/scripts/yahoo.color.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/css/colorPicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+<form action="/groups/create" method="get" accept-charset="utf-8">
+	<div class='first grid3'>
+		<p>Group Name&npsp;&npsp;<input type="text" name="group_name"></p>
+		<p>Logo&npsp;&npsp;<input type="text" name="logo"></p>		
+		<p>color 1 #<input type="text" id="colorfield1" name="color1" value="666666"></p>
+		<p>color 2 #<input type="text" id="colorfield2" name="color2" value="DE0000"></p> 
+		<p>color 3 #<input type="text" id="colorfield3" name="color3" value="0F87FF"></p> 
+		<p>color 4 #<input type="text" id="colorfield4" name="color4" value="F55200"></p>
+		<p>color 5 #<input type="text" id="colorfield5" name="color5" value="8FE300"></p>
+		<p>color 6 #<input type="text" id="colorfield6" name="color6" value="F200CF"></p>
+<p><input type="submit" class="awesome small royal" value="Continue &rarr;"></p>
+</div>
+
+</form>
+<script type='text/javascript'>
+["1","2","3","4","5","6"].each(function(idx) {
+	new Control.ColorPicker("colorfield" + idx); });
+</script>

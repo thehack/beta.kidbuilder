@@ -1,5 +1,19 @@
 # Controller actions for Group
-get '/:name/groups/new' do
+get '/groups/new' do
+  group = Group.create(
+   :administrator => @current_user.login,
+   :email => @current_user.email,
+   :name => params[:group_name],
+   :logo => params[:logo],
+   :color1 => params[:color1],
+   :color2 => params[:color2],
+   :color3 => params[:color3],
+   :color4 => params[:color4],
+   :color5 => params[:color5],
+   :color6 => params[:color6],
+   :created_on => Time.now,
+   :updated_at => Time.now
+  )
   erb :group_new
 end
 
@@ -17,7 +31,7 @@ get '/:name/groups/:id/edit' do
   erb :group_edit
 end
 
-post '/:name/groups/create' do
+post '/groups/create' do
 end
 
 post '/:name/groups/:id/destroy' do

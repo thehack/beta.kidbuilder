@@ -23,3 +23,20 @@ class Level
   property :updated_at, DateTime
 end
 DataMapper.auto_upgrade!
+
+class Group
+  include DataMapper::Resource
+  property :id, Serial
+  property :administrator, String
+  property :email, String
+  property :name, String
+  property :logo, String
+  property :color1, String
+  property :color2, String
+  property :color3, String
+  property :color4, String
+  property :color5, String
+  property :color6, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
+end

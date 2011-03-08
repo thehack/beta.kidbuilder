@@ -25,7 +25,7 @@
 		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
 			<div class="first grid6">
 				<div id='logo'>
-					<a href="/"><img src="http://kidbuilder.net/images/kidbuilder2.png">
+					<a href="/"><img src="/images/logo.png">
 					</a>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 						<p><a class="large pink awesome" id='signup_link' href="#">&nbsp;Sign-Up&nbsp;</a></p>
 					<% end %>
 			</div>
-			<div id="bar"class="first grid12 royal">
+			<div id="bar"class="first grid12 cherry">
 				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;
 				<% if logged_in? %>
 				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a>
@@ -52,45 +52,17 @@
 			</div>
 			<%= yield %>
 			</br>
-			<div class='first grid3 royal rad10'>
+			<div class='first grid3 royal linkbox'>
 				<h3 style='color:white;text-align:center;'>Levels</h3>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
 			</div>
-			<div class='grid3 carrot rad10' >
+			<div class='grid3 carrot linkbox' >
 				<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
 			</div>	
-			<div class='grid3 lime rad10'>
+			<div class='grid3 pink linkbox'>
 				<h3 style='color:white;text-align:center;'>Puzzle</h3>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
 			</div>
-			<div class='grid3 pink rad10'>
+			<div class='grid3 cherry linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
 			</div>
 			<br/>
 				
@@ -105,7 +77,7 @@
 					<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
 							parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
-							onSubmit: $(login_form).update('<img src=\'/images/ajax-loader.gif\'/>'),
+							onSubmit: $('login_form').update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/profile'}});">submit</a>
 				<br/>
 			</center>
