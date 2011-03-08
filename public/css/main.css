@@ -21,7 +21,6 @@ a img{border:0px;}
 	font-weight:bold;
  	text-shadow: 2px 2px 2px black;
 	font-size:48px;
-	font-family: 'Ubuntu';
 	text-decoration:none;
 }
 .logo {font-family: 'Cherry Cream Soda', serif;
@@ -46,7 +45,6 @@ a img{border:0px;}
 #bar a { color:white;}
 #bar a:hover {text-decoration:underline;}
 #body {
-	background-color:#737373;
 	margin-top:0px;
 	}
 	

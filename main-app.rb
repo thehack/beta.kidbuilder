@@ -1,8 +1,10 @@
 require 'sinatra'
 require 'dm-core'
-require  'dm-migrations'
+require 'dm-migrations'
+require 'dm-validations'
 require 'database_config'
 require "digest/sha1"
+
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 
 # For user authentication
@@ -35,8 +37,8 @@ end
 get '/:name' do
   @users = User.all
   @first_few = User.all(:limit => 5, :order => [ :id.desc ])
-  @name = params[:name]
-    erb :index
+  @group = Group.first(:name => params[:name])
+  erb :index
 end
 
 get '/:name/admin' do

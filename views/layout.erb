@@ -16,8 +16,17 @@
 		<link rel="stylesheet" href="/css/simpler.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		<link rel="stylesheet" href="/css/saystuff.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<style>
+		.color1 { background-color:#<%= @group.color1 %>; }
+		.color2 { background-color:#<%= @group.color2 %>; }
+		.color3 { background-color:#<%= @group.color3 %>; }
+		.color4 { background-color:#<%= @group.color4 %>; }
+		.color5 { background-color:#<%= @group.color5 %>; }
+		.color6 { background-color:#<%= @group.color6 %>; }
+		
+		</style>
 	</head>
-	<body id="body">
+	<body id="body" class="color1">
 		<div id="error" style='position:absolute;top:114px;left:600px;z-index:10;color:red;font-size:26px;text-shadow: 2px 2px 2px #eee;
 		'>
 			<%= request.cookies["error"] %>
@@ -25,7 +34,7 @@
 		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
 			<div class="first grid6">
 				<div id='logo'>
-					<a href="/"><img src="/images/logo.png">
+					<a href="/"><img src="/images/<%= @group.logo %>">
 					</a>
 				</div>
 			</div>
@@ -44,24 +53,24 @@
 						<p><a class="large pink awesome" id='signup_link' href="#">&nbsp;Sign-Up&nbsp;</a></p>
 					<% end %>
 			</div>
-			<div id="bar"class="first grid12 cherry">
+			<div id="bar"class="first grid12 color2">
 				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;
 				<% if logged_in? %>
 				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a>
 				<% end %>		
 			</div>
 			<%= yield %>
-			</br>
-			<div class='first grid3 royal linkbox'>
+			<br/>
+			<div class='first grid3 color3 linkbox'>
 				<h3 style='color:white;text-align:center;'>Levels</h3>
 			</div>
-			<div class='grid3 carrot linkbox' >
+			<div class='grid3 color4 linkbox' >
 				<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
 			</div>	
-			<div class='grid3 pink linkbox'>
+			<div class='grid3 color5 linkbox'>
 				<h3 style='color:white;text-align:center;'>Puzzle</h3>
 			</div>
-			<div class='grid3 cherry linkbox'>
+			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
 			</div>
 			<br/>

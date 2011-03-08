@@ -22,14 +22,13 @@ class Level
   property :created_on, DateTime
   property :updated_at, DateTime
 end
-DataMapper.auto_upgrade!
 
 class Group
   include DataMapper::Resource
   property :id, Serial
   property :administrator, String
   property :email, String
-  property :name, String
+  property :name, String, :required => true
   property :logo, String
   property :color1, String
   property :color2, String
@@ -40,3 +39,5 @@ class Group
   property :created_on, DateTime
   property :updated_at, DateTime
 end
+
+DataMapper.auto_upgrade!
