@@ -1,35 +1,47 @@
 /*
 Simple Lightbox created by Tim Inman
 
-Chris Campbell
 Website: http://inmans.org
 Date: 10 Jan 2011
 
 This is good for one-liners, but needs some work for larger boxes.
 At the minute it requires prototype for the observe line.
 */
-
-
+//for jslint
+/*global window: false */
 var say = function (message) {
-	var alertbox = document.createElement('div');
-	var paratext = document.createElement('p');
-	var closebox = document.createElement('a');
-	var overlay = document.createElement('div');
-	var closeUp = function () {
-
+	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0, closeUp;
+	alertbox = document.createElement('div');
+	paratext = document.createElement('p');
+	closebox = document.createElement('a');
+	overlay = document.createElement('div');
+	if (typeof (window.innerWidth) === 'number') {
+    //Non-IE
+		myWidth = window.innerWidth;
+		myHeight = window.innerHeight;
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+    //IE 6+ in 'standards compliant mode'
+		myWidth = document.documentElement.clientWidth;
+		myHeight = document.documentElement.clientHeight;
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+    //IE 4 compatible
+		myWidth = document.body.clientWidth;
+		myHeight = document.body.clientHeight;
+	}
+	closeUp = function () {
 		overlay.fade();
 		alertbox.fade();
 		setTimeout(function () {window.location = '/'; }, 500);
 	};
-	
-	overlay.style.width = (document.width) + 'px';
-	overlay.style.height = (document.height) + 'px';
+	overlay.style.width = myWidth + 'px';
+	overlay.style.height = myHeight + 'px';
 	overlay.id = 'overlay';
 	document.body.appendChild(overlay);
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
-	alertbox.style.left = (document.width - alertbox.style.width) / 2 - 50 + 'px';	
+	alertbox.style.left = (myWidth - alertbox.style.width) / 2  + 'px';	
+	alertbox.style.top = (myHeight - alertbox.style.height) / 2 + 'px';
 	alertbox.id = 'alertbox';
 	paratext.id = 'paratext';
 	paratext.innerHTML = message.toString();
