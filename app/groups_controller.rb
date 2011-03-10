@@ -22,11 +22,11 @@ end
 post '/groups/create' do
   if logged_in?
     administrator = @current_user.login
-    @name = params[:name]
+    name = params[:name]
     group = Group.create(
      :administrator => administrator,
      :email => @current_user.email,
-     :name => @name,
+     :name => params[:group_name],
      :logo => params[:logo],
      :color1 => params[:color1],
      :color2 => params[:color2],
@@ -38,7 +38,7 @@ post '/groups/create' do
      :updated_at => Time.now
     )
   end
-  redirect "/#{@name}/groups/#{group.id}/show"
+  redirect "/#{group.name}/groups/#{group.id}/show"
 end
 
 post '/:name/groups/:id/destroy' do

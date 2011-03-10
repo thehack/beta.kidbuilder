@@ -9,18 +9,19 @@ This is good for one-liners, but needs some work for larger boxes.
 At the minute it requires prototype for the observe line.
 */
 
-var alertbox = document.createElement('div');
-var paratext = document.createElement('p');
-var closebox = document.createElement('a');
-var overlay = document.createElement('div');
-
-var closeUp = function () {
-	overlay.fade();
-	alertbox.fade();
-	setTimeout(function () {window.location = '/'; }, 500);
-};
 
 var say = function (message) {
+	var alertbox = document.createElement('div');
+	var paratext = document.createElement('p');
+	var closebox = document.createElement('a');
+	var overlay = document.createElement('div');
+	var closeUp = function () {
+
+		overlay.fade();
+		alertbox.fade();
+		setTimeout(function () {window.location = '/'; }, 500);
+	};
+	
 	overlay.style.width = (document.width) + 'px';
 	overlay.style.height = (document.height) + 'px';
 	overlay.id = 'overlay';
