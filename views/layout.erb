@@ -86,8 +86,8 @@
 					<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
 							parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
-							onSubmit: $('login_form').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/profile'}});">submit</a>
+							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
+							onComplete: function(){window.location='/'}});">submit</a>
 				<br/>
 			</center>
 		</div>
@@ -103,14 +103,14 @@
 					<p><input type="password" size='26' id="password" name="password"/></p>
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
 							parameters: { nickname: $F('nickname'), email: $F('email'), password: $F('password')},
-							onSubmit: $('signup').update('<img src=\'/images/ajax-loader.gif\'/>'),
+							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/'}})">submit</a>
 				<br/>
 			</center>
 		</div>
 		
 		<script type='text/javascript'>
-		if ($('login_link')) {
+		if ($('login_link') || $('signup_link')) {
 			$('login_link').observe('click', 
 			function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');

@@ -35,13 +35,14 @@ var say = function (message) {
 	};
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = myHeight + 'px';
+	
 	overlay.id = 'overlay';
 	document.body.appendChild(overlay);
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
-	alertbox.style.left = (myWidth - alertbox.style.width) / 2  + 'px';	
-	alertbox.style.top = (myHeight - alertbox.style.height) / 2 + 'px';
+	alertbox.style.left = (myWidth / 2) - 112 + 'px';	
+	alertbox.style.top = (myHeight / 2) - 200 + 'px';
 	alertbox.id = 'alertbox';
 	paratext.id = 'paratext';
 	paratext.innerHTML = message.toString();
