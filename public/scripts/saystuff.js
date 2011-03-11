@@ -9,6 +9,40 @@ At the minute it requires prototype for the observe line.
 */
 //for jslint
 /*global window: false */
+
+// I wanted to make it free from dependency, but addEventListener needs sprcucing up for IE. 
+// Below is the cross-browser event binder. useage: addEvent(element, event, function)
+// I got this part from: http://net.tutsplus.com/tutorials/javascript-ajax/javascript-from-null-cross-browser-event-binding/
+
+var addEvent = (function( window, document ) {  
+    if ( document.addEventListener ) {  
+        return function( elem, type, cb ) {  
+            if ( (elem && !elem.length) || elem === window ) {  
+                elem.addEventListener(type, cb, false );  
+            }  
+            else if ( elem && elem.length ) {  
+                var len = elem.length;  
+                for ( var i = 0; i < len; i++ ) {  
+                    addEvent( elem[i], type, cb );  
+                }  
+            }  
+        };  
+    }  
+    else if ( document.attachEvent ) {  
+        return function ( elem, type, cb ) {  
+            if ( (elem && !elem.length) || elem === window ) {  
+                elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event) } );  
+            }  
+            else if ( elem.length ) {  
+                var len = elem.length;  
+                for ( var i = 0; i < len; i++ ) {  
+                    addEvent( elem[i], type, cb );  
+                }  
+            }  
+        };  
+    }  
+})( this, document );
+//And here is the main code for the say function. This is great for alerts that aren't errors.
 var say = function (message) {
 	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0, closeUp;
 	alertbox = document.createElement('div');
@@ -49,5 +83,5 @@ var say = function (message) {
 	document.body.appendChild(alertbox);
 	alertbox.appendChild(closebox);
 	alertbox.appendChild(paratext);
-	closebox.observe('click', closeUp);
+	addEvent(closebox, 'click', closeUp);
 };

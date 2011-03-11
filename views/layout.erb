@@ -111,14 +111,14 @@
 		
 		<script type='text/javascript'>
 		if ($('login_link') || $('signup_link')) {
-			$('login_link').observe('click', 
+			addEvent($('login_link'), 'click',
 			function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var login=$('login_form').show();
 				$('paratext').update(login);
 				$('alertbox').style.height = '300px';
 			} );
-			$('signup_link').observe('click', 
+			addEvent($('signup_link'), 'click',
 			function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var signup=$('signup').show();
