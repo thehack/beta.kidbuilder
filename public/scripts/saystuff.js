@@ -5,15 +5,12 @@ Website: http://inmans.org
 Date: 10 Jan 2011
 
 This is good for one-liners, but needs some work for larger boxes.
-At the minute it requires prototype for the observe line.
+I wanted to make it free from dependency, but addEventListener needs sprcucing up for IE. 
+Below is the cross-browser event binder. useage: addEvent(element, event, function)
+I got this part from: http://net.tutsplus.com/tutorials/javascript-ajax/javascript-from-null-cross-browser-event-binding/
+Actually It's not cross-browser yet.  I just realized the fade method is from scriptacluous.
 */
-//for jslint
 /*global window: false */
-
-// I wanted to make it free from dependency, but addEventListener needs sprcucing up for IE. 
-// Below is the cross-browser event binder. useage: addEvent(element, event, function)
-// I got this part from: http://net.tutsplus.com/tutorials/javascript-ajax/javascript-from-null-cross-browser-event-binding/
-
 var addEvent = (function( window, document ) {  
     if ( document.addEventListener ) {  
         return function( elem, type, cb ) {  
@@ -69,7 +66,6 @@ var say = function (message) {
 	};
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = myHeight + 'px';
-	
 	overlay.id = 'overlay';
 	document.body.appendChild(overlay);
 	closebox.href = '#';

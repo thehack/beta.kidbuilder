@@ -45,13 +45,12 @@ get '/:name/user/:id/show' do
 end
 
 get '/:name/users/list' do
-  @group = params[:name]
+  @group = Group.first(:name => params[:name])
   @users = User.all - User.first(:login => 'thehack')
   erb :users_list
 end
 
 post '/:name/user/:id/destroy' do
-  @group = params[:name]
   user = User.get(params[:id])
   user.destroy
   redirect '/'
