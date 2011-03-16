@@ -40,4 +40,28 @@ class Group
   property :updated_at, DateTime
 end
 
+class Badge
+  include DataMapper::Resource
+  property :id, Serial
+end
+
+class Quiz
+  include DataMapper::Resource
+  property :id, Serial
+end
+
+class TileGame
+  include DataMapper::Resource
+  property :id, Serial
+end
+
+class Verse
+  include DataMapper::Resource
+  property :id, Serial
+end
+
+class Puzzle
+  include DataMapper::Resource
+  property :id, Serial
+end
 DataMapper.auto_upgrade!

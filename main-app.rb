@@ -42,6 +42,7 @@ get '/:name' do
 end
 
 get '/:name/admin' do
+  @group = Group.first(:name => params[:name])
   @badges = Badge.all
   @levels = Level.all
   @puzzles = Puzzle.all
