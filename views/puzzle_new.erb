@@ -1,0 +1,17 @@
+<h1 id="create_a_puzzle">Create a Puzzle</h1>
+<form action="/<%= @group.name %>/puzzles/create" method="post" accept-charset="utf-8">
+	<p>Title:</p>
+	<input type="text" name="title" value="" id="title">
+	<p>Verse:</p>
+	<input type="text" name="verse" value="" id="verse">
+	<p>Reference</p>
+	<input type="text" name="reference" value="" id="reference">
+	<p>Select Font</p>
+	<select name="font" id="font_select" size="1">
+		<% @fontlist[2..100].each do |f| %>
+		<option value="<%= f %>"><%= f.sub('/fonts/', '').sub('.ttf', '') %></option>
+		<% end %>
+	</select>
+	<p><input type="submit" value="Continue &rarr;"></p>
+	
+</form>
