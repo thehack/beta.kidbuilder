@@ -1,4 +1,5 @@
-require 'rmagick'
+require 'RMagick'
+include Magick
 
 # Controller actions for Puzzle
 get '/:name/puzzles/new' do
@@ -16,6 +17,8 @@ get '/:name/puzzles/:id/show' do
 end
 
 get '/:name/puzzles/list' do
+  @group = Group.first(:name => params[:name])
+  
   @puzzles = Puzzle.all
   erb :puzzle_list
 end
@@ -25,13 +28,11 @@ get '/:name/puzzles/:id/edit' do
 end
 
 post '/:name/puzzles/create' do
+  @group = Group.first(:name => params[:name])  
   font = params[:font]
   verse = params[:verse].split(" ")
   reference = params[:reference]
   title = reference.gsub(" ", "")
-  
-  @group = Group.first(:name => params[:name])
-  puzzle = Puzzle.create(:title => title)
   
   # create the directory.
   FileUtils.mkdir_p("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/#{title}")
@@ -57,16 +58,16 @@ post '/:name/puzzles/create' do
   layer1.text(350, vertical*4.5, l3txt)
   layer1.text(350, vertical*6, l4txt)
   layer1.text(350, vertical*7.5, l5txt)
+  
   #find out how many pixels wide the longest line is and scale.
   #get back the text of the longest line
   width  = layer1.get_type_metrics(canvas, [l1txt, l2txt, l3txt, l4txt][line_lengths.index(longest_line_in_characters)]
   ).width
   layer1.text(350, vertical*9, width.to_s + 'px')
   canvas = canvas.composite(clown, 50, vertical, Magick::OverCompositeOp)
-  layer1.draw(canvas).scale( (0.5), (0.5)) 
-
+  layer1.draw(canvas)
   canvas.write("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif")
-  @puzzle = Puzzle.create(:big_image => "/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif" )
+
   
 #chop 'em up.
   
@@ -78,7 +79,14 @@ post '/:name/puzzles/create' do
 #    newfile = canvas.crop(x,0,74,400)
  #   newfile.write("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/title/#{title + i.to_s}.png")
 #  end
-  redirect "/#{@group.name}/puzzles/#{@puzzle.id}/show"
+  puzzle = Puzzle.create( :title => title,
+                          :background_image => background_image,
+                          :foreground_image => foreground_image,
+                          :background_color => background_color,
+                          :font => font,
+                          :font_size => font_size,
+                          :big_image => "/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif" )
+  redirect "/#{@group.name}/puzzles/#{puzzle.id}/show"
 end
 
 post '/:name/puzzles/:id/destroy' do
