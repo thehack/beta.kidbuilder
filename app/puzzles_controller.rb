@@ -80,11 +80,11 @@ post '/:name/puzzles/create' do
  #   newfile.write("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/title/#{title + i.to_s}.png")
 #  end
   puzzle = Puzzle.create( :title => title,
-                          :background_image => background_image,
-                          :foreground_image => foreground_image,
-                          :background_color => background_color,
-                          :font => font,
-                          :font_size => font_size,
+ #                         :background_image => background_image,
+  #                        :foreground_image => foreground_image,
+   #                       :background_color => background_color,
+    #                      :font => font,
+     #                     :font_size => font_size,
                           :big_image => "/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif" )
   redirect "/#{@group.name}/puzzles/#{puzzle.id}/show"
 end
