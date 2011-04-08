@@ -2,7 +2,7 @@ require 'rmagick'
 
 # Controller actions for Puzzle
 get '/:name/puzzles/new' do
-  @group = Group.first(:name => params[:name])
+  @group = Group.first(:name =>params[:name])
   @fontlist = Dir.entries("#{Dir.pwd}/public/fonts").collect { |f| "/fonts/#{f}" }
 	
   erb :puzzle_new
@@ -10,6 +10,8 @@ end
 
 get '/:name/puzzles/:id/show' do
   @puzzle = Puzzle.get(params[:id])
+  @group = Group.first(:name => params[:name])
+  
   erb :puzzle_show
 end
 
@@ -24,12 +26,15 @@ end
 
 post '/:name/puzzles/create' do
   font = params[:font]
-  title = params[:title]
   verse = params[:verse].split(" ")
   reference = params[:reference]
+  title = reference.gsub(" ", "")
+  
   @group = Group.first(:name => params[:name])
-  puzzle = Puzzle.create(:title => params[:title])
-    FileUtils.mkdir_p(File.dirname("#{Dir.pwd}/groupfiles/#{@group.name}/puzzles/title"))
+  puzzle = Puzzle.create(:title => title)
+  
+  # create the directory.
+  FileUtils.mkdir_p("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/#{title}")
   canvas = Magick::Image.new(740, 400, Magick::HatchFill.new('white','lightcyan2'))
   clown = Magick::ImageList.new("#{Dir.pwd}/public/images/clown.jpg").first
   layer1 = Magick::Draw.new
@@ -42,32 +47,38 @@ post '/:name/puzzles/create' do
   l3txt = verse[words_per_line*2..((words_per_line*3)-1)].join(" ")
   l4txt = verse[words_per_line*3..((words_per_line*4)-1)].join(" ")
   l5txt = reference
-  size = [(700/[l1txt.length, l2txt.length, l3txt.length, l4txt.length].max), 24].max
-  layer1.pointsize = size
-  layer1.text(350,size*1.5, l1txt)
-  layer1.text(350,size*3 , l2txt)
-  layer1.text(350,size*4.5 , l3txt)
-  layer1.text(350,size*6 , l4txt)
-  layer1.text(350,size*7.5 , l5txt)
-  canvas = canvas.composite(clown, 50, size,
-                                 Magick::OverCompositeOp)
-  layer1.draw(canvas)
+  #find out which line is longest
+  line_lengths = [l1txt.length, l2txt.length, l3txt.length, l4txt.length]
+  longest_line_in_characters = line_lengths.max
+  vertical = [(700/line_lengths.max), 24].max
+  layer1.pointsize = vertical
+  layer1.text(350, vertical*1.5, l1txt)
+  layer1.text(350, vertical*3, l2txt)
+  layer1.text(350, vertical*4.5, l3txt)
+  layer1.text(350, vertical*6, l4txt)
+  layer1.text(350, vertical*7.5, l5txt)
+  #find out how many pixels wide the longest line is and scale.
+  #get back the text of the longest line
+  width  = layer1.get_type_metrics(canvas, [l1txt, l2txt, l3txt, l4txt][line_lengths.index(longest_line_in_characters)]
+  ).width
+  layer1.text(350, vertical*9, width.to_s + 'px')
+  canvas = canvas.composite(clown, 50, vertical, Magick::OverCompositeOp)
+  layer1.draw(canvas).scale( (0.5), (0.5)) 
 
-  canvas.write("#{Dir.pwd}/groupfiles/#{@group.name}/puzzles/title/title_big.png")
+  canvas.write("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif")
+  @puzzle = Puzzle.create(:big_image => "/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif" )
   
 #chop 'em up.
   
-  file = Magick::ImageList.new(ARGV[0])
-  puts "usage: chopper.rb [directory location, basefilename] "
-  name = ARGV[1]
-  i = 0
-  x = -74
-  for i in 1..10
-    x += 74
-    newfile = file.crop(x,0,74,400)
-    newfile.write("desktop/#{name + i.to_s}.png")
-  end
-  
+#  puts "usage: chopper.rb [directory location, basefilename] "
+#  i = 0
+#  x = -74
+#  for i in 1..10
+#    x += 74
+#    newfile = canvas.crop(x,0,74,400)
+ #   newfile.write("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/title/#{title + i.to_s}.png")
+#  end
+  redirect "/#{@group.name}/puzzles/#{@puzzle.id}/show"
 end
 
 post '/:name/puzzles/:id/destroy' do

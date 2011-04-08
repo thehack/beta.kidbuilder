@@ -75,6 +75,7 @@ class Puzzle
   property :part_eight, String
   property :part_nine, String
   property :part_ten, String
+  property :big_image, String
   property :created_on, DateTime
   property :updated_at, DateTime
 end
