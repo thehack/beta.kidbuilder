@@ -64,7 +64,14 @@ class Puzzle
   include DataMapper::Resource
   property :id, Serial
   property :title, String
-  property :reference, String
+  property :body, String
+  property :font, String
+  property :font_size, String
+  property :background_image, String
+  property :foreground_image, String
+  property :foreground_offset, Integer
+  property :part_one, String
+  property :part_one, String
   property :part_one, String
   property :part_two, String
   property :part_three, String

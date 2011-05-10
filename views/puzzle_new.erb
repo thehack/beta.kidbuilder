@@ -15,9 +15,19 @@
 	<p><input type="submit" value="Continue &rarr;"></p>
 	
 </form>
+<div>
+	
+</div>
+
 
 <a id="say" href="#">test</a>
 <script type="text/javascript" charset="utf-8">
+	var inside = "<p id='draggable_p' style='position:absolute;' onMouseUp='$(this).update(this.positionedOffset(this));'>Test draggable para</p>";
 	addEvent($('say'), 'click',
-	function () {say('<p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p><p>howdy howdy howdy\n</p>');});
+	function () {say(inside);  new Draggable('draggable_p');
+	});
+	var stuff=Element.cumulativeScrollOffset('draggable_p');
+</script>
+<script type="text/javascript">
+
 </script>

@@ -1,0 +1,14 @@
+<div id='login_form'>
+	<center>
+		<h2 style="color:black;">Login</h2>
+			<p class='label'>Nickname</p>
+			<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
+			<p class='label'>Password</p>
+			<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
+			<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
+					parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
+					onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
+					onComplete: function(){window.location='/'}});">submit</a>
+		<br/>
+	</center>
+</div>

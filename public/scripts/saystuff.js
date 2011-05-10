@@ -60,10 +60,12 @@ var say = function (message) {
 		myHeight = document.body.clientHeight;
 	}
 	closeUp = function () {
-		overlay.fade();
-		alertbox.fade();
-		setTimeout(function () {window.location = '/'; }, 500);
+		$('body').insert( $('paratext').children[0].hide() );
+		overlay.remove();
+		alertbox.remove();
+		
 	};
+	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:white; opacity: 0.5;");
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = myHeight + 'px';
 	overlay.id = 'overlay';
@@ -71,13 +73,22 @@ var say = function (message) {
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
+	closebox.setAttribute("style", "position:relative;font-family:sans-serif;font-size:30px;float:right;padding:10px;color: #666666;text-decoration:none;");
+	alertbox.appendChild(closebox);
+	alertbox.setAttribute("style", "position: absolute;top: 150px;background-image: url('/images/grey.gif');border: solid 2px #666666;z-index:10;margin:20px;");
 	alertbox.style.left = (myWidth / 2) - 112 + 'px';	
 	alertbox.style.top = (myHeight / 2) - 200 + 'px';
 	alertbox.id = 'alertbox';
 	paratext.id = 'paratext';
 	paratext.innerHTML = message.toString();
+	paratext.setAttribute("style", "margin:20px;text-align:center;color:red;font-family:verdana;z-index:20;");	
 	document.body.appendChild(alertbox);
-	alertbox.appendChild(closebox);
 	alertbox.appendChild(paratext);
 	addEvent(closebox, 'click', closeUp);
+	closebox.onmouseover = function() {
+	    this.style.color = "red";
+	}
+	closebox.onmouseout = function() {
+	    this.style.color = "#666666";
+	}
 };
