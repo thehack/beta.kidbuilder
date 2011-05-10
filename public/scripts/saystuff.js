@@ -60,7 +60,12 @@ var say = function (message) {
 		myHeight = document.body.clientHeight;
 	}
 	closeUp = function () {
-		$('body').insert( $('paratext').children[0].hide() );
+		if ($('paratext').children[0]) {
+			$('body').insert( $('paratext').children[0].hide() );
+		}
+		else {
+			$('body').insert( $('paratext').hide() );
+		}
 		overlay.remove();
 		alertbox.remove();
 		
@@ -73,9 +78,9 @@ var say = function (message) {
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
-	closebox.setAttribute("style", "position:relative;font-family:sans-serif;font-size:30px;float:right;padding:10px;color: #666666;text-decoration:none;");
+	closebox.setAttribute("style", "font-family:sans-serif;font-size:30px;margin:20px;color: #666666;text-decoration:none;");
 	alertbox.appendChild(closebox);
-	alertbox.setAttribute("style", "position: absolute;top: 150px;background-image: url('/images/grey.gif');border: solid 2px #666666;z-index:10;margin:20px;");
+	alertbox.setAttribute("style", "text-align:right;position: absolute;background-image: url('/images/grey.gif');border: solid 2px #666666;z-index:10;margin:20px;");
 	alertbox.style.left = (myWidth / 2) - 112 + 'px';	
 	alertbox.style.top = (myHeight / 2) - 200 + 'px';
 	alertbox.id = 'alertbox';

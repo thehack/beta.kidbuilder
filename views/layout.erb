@@ -55,7 +55,7 @@
 			<div id="bar"class="first grid12 color2">
 				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;
 				<% if logged_in? %>
-				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/';">Log-Out</a>
+				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/<%= @group.name %>';">Log-Out</a>
 				<% end %>		
 			</div>
 			<%= yield %><br/>
@@ -83,7 +83,7 @@
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
 							parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
 							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/'}});">submit</a>
+							onComplete: function(){window.location='/<%= @group.name %>'}});">submit</a>
 				<br/>
 			</center>
 		</div>
@@ -99,7 +99,7 @@
 					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
 							parameters: { nickname: $F('nickname'), email: $F('email'), password: $F('password')},
 							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/'}})">submit</a>
+							onComplete: function(){window.location='/<%= @group.name %>'}})">submit</a>
 				<br/>
 			</center>
 		</div>
