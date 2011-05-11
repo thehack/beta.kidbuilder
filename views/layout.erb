@@ -105,14 +105,12 @@
 		</div>
 		<script type='text/javascript'>
 		if ($('login_link') || $('signup_link')) {
-			addEvent($('login_link'), 'click',
-			function () {
+			Event.observe( 'login_link', 'click', function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var login=$('login_form').show();
 				$('paratext').update(login);
 			} );
-			addEvent($('signup_link'), 'click',
-			function () {
+			Event.observe( 'signup_link','click', function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var signup = $('signup').show();
 				$('paratext').update(signup);
