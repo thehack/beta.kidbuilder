@@ -80,7 +80,7 @@ var say = function (message) {
 	closebox.id = "closebox";
 	closebox.setAttribute("style", "font-family:sans-serif;font-size:30px;margin:20px;color: #666666;text-decoration:none;");
 	alertbox.appendChild(closebox);
-	alertbox.setAttribute("style", "text-align:right;position: absolute;background-image: url('/images/grey.gif');border: solid 2px #666666;z-index:10;margin:20px;");
+	alertbox.setAttribute("style", "text-align:right;position: absolute;border: 2px solid #666666;background-image: -moz-linear-gradient(top, #fcfcfc, #f7f7f7 3%, #f2f2f2 12%, #cbcbcb 90%, #a3a3a3);background-image: -webkit-gradient(linear, center top, center bottom, from(#fcfcfc), to(#a3a3a3), color-stop(3%, #f7f7f7), color-stop(12%, #f2f2f2), color-stop(90%, #cbcbcb));box-shadow: 0 1px 5px rgba(0,0,0,0.75), inset 0 1px 0 white;;z-index:10;margin:20px;");
 	alertbox.style.left = (myWidth / 2) - 112 + 'px';	
 	alertbox.style.top = (myHeight / 2) - 200 + 'px';
 	alertbox.id = 'alertbox';
