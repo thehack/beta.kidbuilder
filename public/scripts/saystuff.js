@@ -27,7 +27,7 @@ var say = function (message) {
 	overlay = document.createElement('div');
 	myWidth = document.viewport.getDimensions().width;
 	myHeight = document.viewport.getDimensions().height;
-	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:white; opacity: 0.5;");
+	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:white; -moz-opacity:0.6;filter: alpha(opacity=60);opacity: 0.6;");
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = [ myHeight, 776 ].max()  + 'px';
 	overlay.id = 'overlay';
