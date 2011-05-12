@@ -109,11 +109,13 @@
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var login=$('login_form').show();
 				$('paratext').update(login);
+				$('login_nickname').focus();
 			} );
 			Event.observe( 'signup_link','click', function () {
 				say('<img src=\'/images/ajax-loader.gif\' />');
 				var signup = $('signup').show();
 				$('paratext').update(signup);
+				$('nickname').focus();
 			} ); };			
 		</script>
 	</body>

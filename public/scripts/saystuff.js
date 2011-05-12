@@ -1,5 +1,8 @@
 /*
-Simple Modal Window created by Tim Inman
+Simple Modal Window for Prototype
+Replacement for Alert Dialogue
+
+Tim Inman
 Website: http://inmans.org
 Date: 10 Jan 2011
 */
