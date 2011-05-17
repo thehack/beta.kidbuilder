@@ -71,9 +71,8 @@
 			</div>
 			<br/>
 		</div><!-- container bottom of page -->
-		<div id='login_form' style='display:none;'>
-			<center>
-				<h2 style="color:black;">Login</h2>
+		<div id='login_form' style='display:none;text-align:left;'>
+				<p>Login</p>
 					<p class='label'>Nickname</p>
 					<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
 					<p class='label'>Password</p>
@@ -83,11 +82,9 @@
 							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/<%= @group.name %>'}});">submit</a>
 				<br/>
-			</center>
 		</div>
-		<div id="signup" style='display:none;'>
-			<center>
-				<h2 style="color:black;">SignUp</h2>
+		<div id="signup" style='display:none;text-align:left;'>
+				<p>SignUp</p>
 					<p class='label'>Nickname</p>
 					<p><input type='text' id="nickname" size='26' name="nickname"/></p>
 					<p class='label'>Email</p>
@@ -99,7 +96,6 @@
 							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/<%= @group.name %>'}})">submit</a>
 				<br/>
-			</center>
 		</div>
 		<script type='text/javascript'>
 		if ($('login_link') || $('signup_link')) {
