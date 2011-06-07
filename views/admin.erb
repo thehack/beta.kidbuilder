@@ -4,15 +4,21 @@
 <div class ="first grid12">
 	<h1>Administration</h1>
 </div>
-<div class="first grid3">
-	<h3>Create a New Resource</h3>
-	<p><a>New Puzzle</a></p>
-	<p><a>New Tile Game</a></p>
-	<p><a>New Puzzle</a></p>
-	<p><a>New Bible Black Belt Verse</a></p>
-	<p><a>New Lesson</a>
+<div class="first grid8">
+	<h3>Puzzles</h3>
+	<h3>Tile-Games</h3>
+	<h3>Bible Black Belt Verses</h3>
 </div>
-<div class='grid3'>
+<div class="grid4" style="background-color:lt-grey;">
+	<h3>Create a New Resource</h3>
+	<p><a href="#" id="newPuzzle">New Puzzle</a></p>
+	<p><a href="#" id="newTileGame">New Tile Game</a></p>
+	<p><a href="#">New Bible Black Belt</a></p>
+	<p><a href="#">New Lesson</a></p>
+	<p><a href="#" id="fileUpload">Upload a File</a></p>
+	<p><a href="#" id="visualPrefs">Visual Preferences</a></p>
+</div>
+<div style="display:none;" id="prefsForm">
 	<form action="/<%= @group.name %>/groups/<%= @group.id %>/update" method="post" accept-charset="utf-8">
 			<p>Group Name&nbsp;&nbsp;<input type="text" name="group_name" value="<%= @group.name %>"></p>
 			<p>Logo&nbsp;&nbsp;<input type="text" name="logo" value="<%= @group.logo %>"></p>		
@@ -25,20 +31,18 @@
 	<p><input type="submit" class="awesome small royal" value="Save Changes &rarr;"></p>
 	</form>
 </div>
-<div class="grid3 outline">
-	<h3>Upload a file</h3>
-	<form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data">
-	  <p>
-	    <label for="file">File:</label>
-	    <input type="file" name="file">
-	  </p>
-
-	  <p>
-	    <input name="commit" type="submit" value="Upload" />
-	  </p>
-	</form>
-</div>
 <script type='text/javascript'>
 ["1","2","3","4","5","6"].each(function(idx) {
-	new Control.ColorPicker("colorfield" + idx); });
+	new Control.ColorPicker("colorfield" + idx); 
+});
+//for the new wordgames
+$('newTileGame').observe('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/tile_games/create"><textarea name="phrase" cols="40" rows="5"></textarea><br><input type="submit" value="Submit" /></form>');});
+//file upload
+$('fileUpload').observe('click', function() { say('<div><h3>Upload a file</h3><form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
+// visual prefs
+Event.observe( 'visualPrefs','click', function () {
+	say('<img src=\'/images/ajax-loader.gif\' />');
+	var prefs = $('prefsForm').show();
+	$('paratext').update(prefs);	
+} );
 </script>
