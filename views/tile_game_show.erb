@@ -1,0 +1,33 @@
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row1[(i), 1] %><% if @tile_game.row1[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row2[(i), 1] %><% if @tile_game.row2[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row3[(i), 1] %><% if @tile_game.row3[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row4[(i), 1] %><% if @tile_game.row4[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row5[(i), 1] %><% if @tile_game.row5[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<% 12.times do |i| %>
+<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
+	<%= @tile_game.row6[(i), 1] %><% if @tile_game.row6[(i)] == 32 %>&nbsp;<% end %>
+</div>
+<% end %>
+<div class="first grid12">
+	<br/>
+</div>

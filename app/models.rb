@@ -53,6 +53,15 @@ end
 class TileGame
   include DataMapper::Resource
   property :id, Serial
+  property :title, String
+  property :phrase, String
+  property :letters, String
+  property :row1, String
+  property :row2, String
+  property :row3, String
+  property :row4, String
+  property :row5, String
+  property :row6, String
 end
 
 class Verse

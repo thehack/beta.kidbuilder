@@ -1,7 +1,5 @@
 require 'sinatra'
-require 'dm-core'
-require 'dm-migrations'
-require 'dm-validations'
+require 'datamapper'
 require 'database_config'
 require "digest/sha1"
 
