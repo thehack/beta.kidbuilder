@@ -5,8 +5,9 @@ require "digest/sha1"
 
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 
-# For user authentication
+
 before do
+  # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.
   def logged_in?
     client_id = request.cookies["scramble"]
     if client_id.nil?
@@ -15,7 +16,8 @@ before do
       @current_user = User.first(:scramble => client_id)
     end
   end
-  
+  # Common variables for the layout
+  @five_games = @tile_games = TileGame.all( :limit => 3, :order => [ :updated_at.desc] )
 end
 
 helpers do

@@ -68,6 +68,9 @@
 			</div>
 			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
+				<% @five_games.each do |game| %>
+					<p> <%=h game.title %> </p>
+				<% end %>
 			</div>
 			<br/>
 		</div><!-- container bottom of page -->
@@ -91,7 +94,7 @@
 					<p><input type='text' id="email" size='26' name="email"/></p>
 					<p class='label'>Password</p>
 					<p><input type="password" size='26' id="password" name="password"/></p>
-					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/signup', {
+					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/<%= @group.name %>/signup', {
 							parameters: { nickname: $F('nickname'), email: $F('email'), password: $F('password')},
 							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
 							onComplete: function(){window.location='/<%= @group.name %>'}})">submit</a>

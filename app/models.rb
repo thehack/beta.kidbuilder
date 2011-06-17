@@ -8,8 +8,9 @@ class User
   property :salt, String
   property :scramble, String
   property :belt, String
-  property :points, Integer
+  property :score, Integer
   property :coins, Integer
+  belongs_to :group
 end
 
 class Level
@@ -38,6 +39,7 @@ class Group
   property :color6, String
   property :created_on, DateTime
   property :updated_at, DateTime
+  has n, :users
 end
 
 class Badge
@@ -62,6 +64,8 @@ class TileGame
   property :row4, String
   property :row5, String
   property :row6, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
 end
 
 class Verse

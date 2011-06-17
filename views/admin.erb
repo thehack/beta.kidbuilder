@@ -7,6 +7,14 @@
 <div class="first grid8">
 	<h3>Puzzles</h3>
 	<h3>Tile-Games</h3>
+	<table>
+		<% @tile_games.each do |game| %>
+		<tr>
+			<td><a href="/<%= @group.name %>/tile_games/<%= game.id %>/show"><%= game.title %></a></td>
+			<td><a href="#" onclick="new Ajax.Request('/<%= @group.name %>/tile_games/<%= game.id %>/destroy', {onSuccess: function() {window.location='/<%=@group.name %>/admin'} });">Destroy</a></td>
+		</tr>		
+		<% end %>
+	</table>
 	<h3>Bible Black Belt Verses</h3>
 </div>
 <div class="grid4" style="background-color:lt-grey;">
@@ -36,7 +44,7 @@
 	new Control.ColorPicker("colorfield" + idx); 
 });
 //for the new wordgames
-$('newTileGame').observe('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/tile_games/create"><textarea name="phrase" cols="40" rows="5"></textarea><br><input type="submit" value="Submit" /></form>');});
+$('newTileGame').observe('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/<%= @group.name %>/tile_games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
 //file upload
 $('fileUpload').observe('click', function() { say('<div><h3>Upload a file</h3><form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
 // visual prefs

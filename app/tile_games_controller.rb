@@ -23,7 +23,7 @@ get '/:name/tile_games/:id/edit' do
   erb :tile_game_edit
 end
 
-post '/tile_games/create' do
+post '/:name/tile_games/create' do
   s = params[:phrase]
 
   lines = []
@@ -46,18 +46,24 @@ post '/tile_games/create' do
   add_to_start.times { rows.unshift("") }
   add_to_end.times { rows << "" }
   game = TileGame.new
+  game.title = params[:title]
   game.row1 = rows[0]
   game.row2 = rows[1]
   game.row3 = rows[2]
   game.row4 = rows[3]
   game.row5 = rows[4]
   game.row6 = rows[5]
+  game.created_on = Time.now
+  game.updated_at = Time.now
   game.save
+  redirect '/' + params[:name] + '/admin'
 end
 
-post '/tile_games/:id/destroy' do
+post '/:name/tile_games/:id/destroy' do
   game = TileGame.get(params[:id])
   game.destroy
+
+  
 end
 
 post '/tile_games/:id/update' do
