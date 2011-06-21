@@ -28,6 +28,7 @@ post '/:name/tile_games/create' do
   lines = []
   cnt = 0
   s.upcase!
+#split the phrase into a list of words, stuff each line as full as possible with words.
   s.gsub(/[(,?!\'":;.)]/, '').split(" ").each { |w|
     lines[cnt] ||= ''
     cnt = cnt + 1 if ( ( lines[cnt].length + w.length + 1) > 12 && lines[cnt]!='' )
@@ -35,11 +36,13 @@ post '/:name/tile_games/create' do
     lines[cnt] << w + " "
   }
   rows = []
+# figure out how many blanks go at the beginning and end of each row.
   lines.each do |l|
     prepend_spaces = ((12 - l.length)*0.5).round
     append_spaces = 12- (prepend_spaces + l.length)
     rows << " " * prepend_spaces + l + " " * append_spaces
   end
+# figure out how many blank rows go at the beginning and end of the puzzle.
   add_to_start = (6 - rows.length)/2
   add_to_end = 6 - (rows.length + add_to_start)
   add_to_start.times { rows.unshift([" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]) }

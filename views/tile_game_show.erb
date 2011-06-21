@@ -90,6 +90,7 @@
 
 function winGame() {
 			Event.stopObserving(document);
+			say("you win!")
 };
 
 Event.observe(document, 'keydown', function(event) {
@@ -97,23 +98,23 @@ Event.observe(document, 'keydown', function(event) {
 		$$("." + (String.fromCharCode(event.keyCode))).invoke('addClassName', 'found').invoke('removeClassName', 'blue')
 		var x = $$('.found')
 		var blues = $$('.blue')
-		var greens = 48 - blues.length
-		if (x.length < greens && $$('img' + '.' + (String.fromCharCode(event.keyCode))).size() >=1) {
+		var greens = 60 - blues.length
+		if (x.length < greens && $$('.' + (String.fromCharCode(event.keyCode))).size() >=1) {
 			$('scoreboard').update("<div id='status'></div>");
-			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'>Use the KEYBOARD to guess the letters in this phrase.</div>");
+			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
 		 Sound.play('/sounds/chime.mp3');
 		};
 		if ( $$( "." + (String.fromCharCode(event.keyCode))).size() < 1) {
-//			$('scoreboard').update("<div id='status'></div>"),
-			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'>Use the KEYBOARD to guess the letters in this phrase.</div>");
+			$('scoreboard').update("<div id='status'></div>"),
+			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
 //			Element.removeClassName('outerframe', 'blackbg');
 //			Element.addClassName('outerframe', 'redbg');
 					 		 
-//			Sound.play('/sounds/2buzz.mp3');
+			Sound.play('/sounds/2buzz.mp3');
 //						Element.removeClassName.delay('.5', 'outerframe', 'redbg');
 //						Element.addClassName.delay('.5', 'outerframe', 'blackbg');
 		};	
-		if (x.length == greens) { winGame();
+		if (blues.length == 0) { winGame();
 		}; 
 	};
 });
