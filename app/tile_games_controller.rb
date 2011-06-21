@@ -42,8 +42,8 @@ post '/:name/tile_games/create' do
   end
   add_to_start = (6 - rows.length)/2
   add_to_end = 6 - (rows.length + add_to_start)
-  add_to_start.times { rows.unshift("") }
-  add_to_end.times { rows << "" }
+  add_to_start.times { rows.unshift([" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]) }
+  add_to_end.times { rows << [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "] }
   game = TileGame.new
   game.title = params[:title]
   game.row1 = rows[0]
