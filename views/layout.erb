@@ -56,7 +56,10 @@
 				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/<%= @group.name %>';">Log-Out</a>
 				<% end %>		
 			</div>
-			<%= yield %><br/>
+			<%= yield %>
+			<div id="separate" class="first grid12">
+				</br>
+			</div>
 			<div class='first grid3 color3 linkbox'>
 				<h3 style='color:white;text-align:center;'>Levels</h3>
 			</div>
@@ -69,7 +72,7 @@
 			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
 				<% @five_games.each do |game| %>
-					<p> <%=h game.title %> </p>
+					<p><a href="/<%= @group.name %>/tile_games/<%= game.id %>/show"><%=h game.title %></a></p>
 				<% end %>
 			</div>
 			<br/>

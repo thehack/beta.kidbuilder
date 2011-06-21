@@ -6,6 +6,7 @@
 .cherry {background-color:#de0000;}
 .grey {background-color:#666666;}
 .linkbox {min-height:180px;border-radius:10px;-moz-border-radius:10px;}
+.linkbox p {margin-left:15px;line-height: 10px;}
 .outline {border:1px solid #666666;}
 
 a img{border:0px;}
@@ -73,6 +74,10 @@ div {font-family:Verdana, Geneva, sans-serif; color:#333333;}
 	background: url('/images/background.png');
 
 	}
+	
+#separate {
+	line-height:12px;
+}
 .biggish {font-family: 'Gill Sans', 'Impact', sans-serif; font-size:26px;}
 
 a {text-decoration:none;}

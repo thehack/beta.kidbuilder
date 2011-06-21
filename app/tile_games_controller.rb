@@ -1,6 +1,5 @@
 # Controller actions for Tile_game
 get '/:name/tile_games/new' do
-  
   @group = Group.first(:name =>params[:name])
   erb :tile_game_new
 end
@@ -28,8 +27,8 @@ post '/:name/tile_games/create' do
 
   lines = []
   cnt = 0
-
-  s.downcase.gsub(/[^a-z ]/, "").split(" ").each { |w|
+  s.upcase!
+  s.gsub(/[(,?!\'":;.)]/, '').split(" ").each { |w|
     lines[cnt] ||= ''
     cnt = cnt + 1 if ( ( lines[cnt].length + w.length + 1) > 12 && lines[cnt]!='' )
     lines[cnt] ||= ''
@@ -62,8 +61,6 @@ end
 post '/:name/tile_games/:id/destroy' do
   game = TileGame.get(params[:id])
   game.destroy
-
-  
 end
 
 post '/tile_games/:id/update' do

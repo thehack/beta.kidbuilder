@@ -1,33 +1,120 @@
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row1[(i), 1] %><% if @tile_game.row1[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row2[(i), 1] %><% if @tile_game.row2[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row3[(i), 1] %><% if @tile_game.row3[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row4[(i), 1] %><% if @tile_game.row4[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row5[(i), 1] %><% if @tile_game.row5[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
-<% 12.times do |i| %>
-<div <% if i == 0 %> class="first grid1"<% else %>class="grid1"<%end%>>
-	<%= @tile_game.row6[(i), 1] %><% if @tile_game.row6[(i)] == 32 %>&nbsp;<% end %>
-</div>
-<% end %>
+<style>
+.letterbox {
+	float:left;
+	border:4px solid black;
+	width:70px;
+	height:60px;
+	font-size:32px;
+	text-align:center;
+	z-index:0;
+	padding-top: 18px;
+	font-weight: 800;
+}
+.green {
+	background-image: url('/images/blue.png');
+}
+.blue {
+	background-image: url('/images/green.png');
+}
+</style>
+
 <div class="first grid12">
-	<br/>
+	<!-- six rows of letters. these go behind the colourful squares. -->
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row1[(i), 1] %><% if @tile_game.row1[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row2[(i), 1] %><% if @tile_game.row2[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row3[(i), 1] %><% if @tile_game.row3[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row4[(i), 1] %><% if @tile_game.row4[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row5[(i), 1] %><% if @tile_game.row5[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @tile_game.row6[(i), 1] %><% if @tile_game.row6[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<!-- colourful squares. -->
 </div>
+
+<div style="position:absolute;width:940px;" id="tile_covers">
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row1[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row2[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row3[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row4[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row5[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @tile_game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row6[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+</div>
+<div style="position:absolute;width:940px;" id="scoreboard">
+	<div id="recieving">
+		
+	</div>
+</div>
+<script type="text/javascript">
+
+function winGame() {
+			Event.stopObserving(document);
+};
+
+Event.observe(document, 'keydown', function(event) {
+	if (event.keyCode > 64 && event.keyCode < 91 &&  $('recieving')) {
+		$$("." + (String.fromCharCode(event.keyCode))).invoke('addClassName', 'found').invoke('removeClassName', 'blue')
+		var x = $$('.found')
+		var blues = $$('.blue')
+		var greens = 48 - blues.length
+		if (x.length < greens && $$('img' + '.' + (String.fromCharCode(event.keyCode))).size() >=1) {
+			$('scoreboard').update("<div id='status'></div>");
+			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'>Use the KEYBOARD to guess the letters in this phrase.</div>");
+		 Sound.play('/sounds/chime.mp3');
+		};
+		if ( $$( "." + (String.fromCharCode(event.keyCode))).size() < 1) {
+//			$('scoreboard').update("<div id='status'></div>"),
+			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'>Use the KEYBOARD to guess the letters in this phrase.</div>");
+//			Element.removeClassName('outerframe', 'blackbg');
+//			Element.addClassName('outerframe', 'redbg');
+					 		 
+//			Sound.play('/sounds/2buzz.mp3');
+//						Element.removeClassName.delay('.5', 'outerframe', 'redbg');
+//						Element.addClassName.delay('.5', 'outerframe', 'blackbg');
+		};	
+		if (x.length == greens) { winGame();
+		}; 
+	};
+});
+</script>
