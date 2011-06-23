@@ -3,22 +3,35 @@
 	float:left;
 	border:4px solid black;
 	width:70px;
-	height:60px;
+	height:48px;
 	font-size:32px;
 	text-align:center;
 	z-index:0;
-	padding-top: 18px;
+	padding-top: 8px;
 	font-weight: 800;
 }
+.black {background-color:black;}
 .green {
 	background-image: url('/images/blue.png');
 }
+.spacer {
+	background-color:black;
+	width:4px;
+	height:384px;
+	float:left;}
 .blue {
 	background-image: url('/images/green.png');
 }
 </style>
+<div id="first grid12">
+	<div class="black">
+		<br/>
+	</div>
+</div>
 
 <div class="first grid12">
+	<div class="spacer">
+	</div>
 	<!-- six rows of letters. these go behind the colourful squares. -->
 	<% 12.times do |i| %>
 	<div class="letterbox">
@@ -51,10 +64,10 @@
 		<%= @tile_game.row6[(i), 1] %><% if @tile_game.row6[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
-	<!-- colourful squares. -->
 </div>
-
+<!-- colourful squares. -->
 <div style="position:absolute;width:940px;" id="tile_covers">
+
 	<% 12.times do |i| %>
 	<div class="letterbox <% if @tile_game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row1[(i), 1] %>">&nbsp;
 	</div>
@@ -80,7 +93,10 @@
 	<div class="letterbox <% if @tile_game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row6[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
+
 </div>
+
+<!-- This only exists to prevent the user from cheating by swiping all keys at once. -->
 <div style="position:absolute;width:940px;" id="scoreboard">
 	<div id="recieving">
 		
