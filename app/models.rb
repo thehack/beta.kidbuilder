@@ -6,7 +6,6 @@ class User
   property :login, String
   property :crypted_password, String
   property :salt, String
-  property :scramble, String
   property :belt, String
   property :score, Integer
   property :coins, Integer

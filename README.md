@@ -9,13 +9,12 @@ Self-reminder: If I want this to be compatible with the old passwords, I need to
 
 ##Git Workflow:
 on my local machine:
-
-git add .
-git commit -m "message"
-git push origin master
+	git add .
+	git commit -m "message"
+	git push origin master
 
 ssh into Dreamhost.
-
+	git pull
 ##Setup
 It needs (locally and on the server) a database_config.rb file that gets ignored by .gitignore with the following:
 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/kidbuilder.sqlite3") #locally, or:
