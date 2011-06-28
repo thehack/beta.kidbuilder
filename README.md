@@ -18,8 +18,9 @@ ssh into Dreamhost.
 
 ##Setup
 It needs (locally and on the server) a database_config.rb file that gets ignored by .gitignore with the following:
-DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/kidbuilder.sqlite3") #locally, or:
-DataMapper.setup(:default, {
+	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/kidbuilder.sqlite3") #locally, or:
+
+	DataMapper.setup(:default, {
     :adapter  => 'mysql',
     :host     => 'mysql.******.***',
     :username => '*********',
