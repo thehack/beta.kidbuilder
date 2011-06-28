@@ -9,7 +9,6 @@ post '/:name/signup' do
   user = User.create(
   :email => email,
   :crypted_password => Digest::SHA1.hexdigest("--#{salt}--#{password}--"),
-  :scramble => email.crypt('h3'),
   :login => login,
   :belt => 'white',
   :salt => salt,
@@ -17,24 +16,25 @@ post '/:name/signup' do
   :coins => 0,
   :group_id => group.id
   )
-  response.set_cookie("scramble", :value => user.scramble, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
+  response.set_cookie("salt", :value => user.salt, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
 end
 
 post '/login' do
   password = params[:password]
-  pers = User.first(:login => params[:nickname])
+  login = params[:nickname]
+  pers = User.first(:login => login)
   unless pers.nil?
     salt = pers.salt
     pw = Digest::SHA1.hexdigest("--#{salt}--#{password}--")
-      if pers.scramble.nil?
-        pers.scramble = pers.email.crypt('h3')
+      if pers.salt.nil?
+        pers.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
         pers.save
       end
   end
   if pers.nil?
     response.set_cookie("error", :value => "no such person", :expires => (Time.new.gmtime + 3), :path => '/')
   elsif pers.crypted_password == pw
-    response.set_cookie("scramble", :value => pers.scramble, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
+    response.set_cookie("salt", :value => pers.salt, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
   else
     response.set_cookie("error", :value => "Password doesn't Match", :expires => (Time.new.gmtime + 3), :path => '/')
   end

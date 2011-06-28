@@ -7,17 +7,17 @@ Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in ap
 
 
 before do
-  # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.
+  # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
   def logged_in?
-    client_id = request.cookies["scramble"]
+    client_id = request.cookies["salt"]
     if client_id.nil?
       return false
     else
-      @current_user = User.first(:scramble => client_id)
+      @current_user = User.first(:salt => client_id)
     end
   end
   # Common variables for the layout
-  @five_games = @tile_games = TileGame.all( :limit => 3, :order => [ :updated_at.desc] )
+  @five_games = @tile_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc] )
 end
 
 helpers do

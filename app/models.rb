@@ -10,7 +10,19 @@ class User
   property :belt, String
   property :score, Integer
   property :coins, Integer
+  property :animal, String
   belongs_to :group
+  has n, :verses, :through => Resource
+end
+
+class Verse
+  include DataMapper::Resource
+  property :id, Serial
+  property :body, Text
+  property :reference, String
+  property :all_words, Csv
+  property :belt_color, String
+  has n, :users, :through => Resource
 end
 
 class Level

@@ -51,9 +51,10 @@
 					<% end %>
 			</div>
 			<div id="bar"class="first grid12 color2">
-				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;
+				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;&nbsp;
 				<% if logged_in? %>
-				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'scramble = 0; expires = ' + date; window.location= '/<%= @group.name %>';">Log-Out</a>
+				<span style="margin-left:500px">Welcome, <%= @current_user.login %></span>&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0; expires = ' + date; window.location= '/<%= @group.name %>';">Log-Out</a>
 				<% end %>		
 			</div>
 			<%= yield %>
