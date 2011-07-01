@@ -1,4 +1,5 @@
-# Configure DataMapper to use the App Engine datastore 
+# Configure DataMapper to use the App Engine datastore
+# Don't use name as a property for anything, I'm keeping it available to all views.
 class User
   include DataMapper::Resource
   property :id, Serial
@@ -77,11 +78,6 @@ class TileGame
   property :row6, String
   property :created_on, DateTime
   property :updated_at, DateTime
-end
-
-class Verse
-  include DataMapper::Resource
-  property :id, Serial
 end
 
 class Puzzle

@@ -37,6 +37,8 @@ post '/groups/create' do
      :created_on => Time.now,
      :updated_at => Time.now
     )
+    @current_user.group = name
+    @current_user.save
   end
   redirect "/#{group.name}/groups/#{group.id}/show"
 end

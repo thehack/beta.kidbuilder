@@ -1,0 +1,34 @@
+<div class="grid3 first" style="text-align:center;">
+	<% if @current_user.animal.nil? %>
+	<br/>
+	<a class="awesome large magenta" id="character_select" style="text-align:center;" "/<%=@group.name %>/bbb/select_character">SELECT CHARACTER</a>
+	<% else %>
+	<img src ="/images/animals/<%= @current_user.belt %><%= @current_user.animal %>.png" width="50%" alt=""/>
+	<p style="color:black; background-color:<%=@current_user.belt%>;width:100%;"><%= @current_user.email%></p>
+	<p>You have a<% if @current_user.belt[0] == 'o' %>n<% end %> <%= @current_user.belt%> belt.</p>
+		<a class="awesome large magenta" style="text-align:center;" href="/select_character">CHANGE CHARACTER</a>
+	<% end %>
+</div>
+<div class="grid3">
+	<p>You need to complete the following challenges to achieve a <%= @belt_attempt %> belt.</p>
+	<% @beltverses.each do |verse|%>
+	<p><a href="/<%= @group.name %>/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%=h verse.reference %></a></p>
+	<% end %>
+</div>
+
+<div class="grid3">
+	<p>Completed Verses</p>
+	<% @current_user.verses.each do |verse| %>
+		<p><a href="/<%=@group.name %>/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%= verse.reference %></a></p>
+	<% end %>
+</div>
+<div class="grid3">
+	test
+</div>
+<script type="text/javascript">
+	Event.observe( 'character_select','click', function () {
+		say('<img src=\'/images/ajax-loader.gif\' />');
+		var characterSelect = new Ajax.Request("/<%=@group.name %>/bbb/select_character");
+		$('paratext').update(characterSelect);
+	} ); };
+</script>
