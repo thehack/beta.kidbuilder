@@ -47,7 +47,7 @@
 //for the new wordgames
 $('newTileGame').observe('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/<%= @group.name %>/tile_games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
 //for the new bbb
-$('new_bbb').observe('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="reference" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% for belt in @belts %><option><%=h belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
+$('new_bbb').observe('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="reference" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% @belts.each do |belt| %><option><%= belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
 //file upload
 $('fileUpload').observe('click', function() { say('<div><h3>Upload a file</h3><form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
 // visual prefs
