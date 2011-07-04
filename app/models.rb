@@ -22,6 +22,8 @@ class Verse
   property :reference, String
   property :all_words, Csv
   property :belt_color, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
   has n, :users, :through => Resource
 end
 

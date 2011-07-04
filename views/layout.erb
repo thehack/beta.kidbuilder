@@ -66,9 +66,15 @@
 			</div>
 			<div class='grid3 color4 linkbox' >
 				<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
+					<% @five_bbbs.each do |bbb| %>
+						<p><a href="/<%= @group.name %>/bbb/<%= bbb.id %>/show"><%=h bbb.reference %></a></p>
+					<% end %>
 			</div>	
 			<div class='grid3 color5 linkbox'>
 				<h3 style='color:white;text-align:center;'>Puzzle</h3>
+				<% @five_puzzles.each do |puzzle| %>
+					<p><a href="/<%= @group.name %>/puzzles/<%= puzzle.id %>/show"><%=h bbb.title %></a></p>
+				<% end %>
 			</div>
 			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>

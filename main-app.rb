@@ -17,7 +17,9 @@ before do
     end
   end
   # Common variables for the layout
-  @five_games = @tile_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc] )
+  @five_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc] )
+  @five_bbbs = Verse.all( :limit => 5, :order => [ :updated_at.desc] )
+  @five_puzzles = Puzzle.all( :limit => 5, :order => [ :updated_at.desc] )
   @belts = %w[white yellow green red purple black]
 end
 
