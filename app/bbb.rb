@@ -70,7 +70,6 @@ end
 
 get '/:name/bbb/*/show' do
   @group = Group.first(:name => params[:name])
-  
   @verse = Verse.get(params['splat'])
   @seconds = @verse.all_words.length/2
   @blanks = 0
@@ -82,10 +81,9 @@ end
 
 get '/:name/bbb/*/easy' do
   @group = Group.first(:name => params[:name])
-  
   @verse = Verse.get(params['splat'])
   @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/medium"
-  @success = "Now a little more difficult!"
+  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='550' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
   @blanks = word_count/6
@@ -107,7 +105,7 @@ get '/:name/bbb/*/medium' do
   
   @verse = Verse.get(params['splat'])
   @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/hard"
-  @success = "Now, all by yourself!"
+  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='550' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
   @blanks = word_count/2
@@ -129,7 +127,7 @@ get '/:name/bbb/*/hard' do
   
   @verse = Verse.get(params['splat'])
   @redirect_url = "/" + @group.name + "/bbb/profile"
-  @success = "You Win!"
+  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='550' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
   @blanks = word_count

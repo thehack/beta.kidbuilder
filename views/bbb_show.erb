@@ -11,9 +11,8 @@
 	.blue {border:solid 2px blue;background-color:lightyellow;}
 	.green {border:solid 2px green;background-color:yellowgreen;}
 	input {text-align:center;height:50px;font-size:40px;}
-	p {font-size:48px; line-height:70px;}
+	#verse_text {font-size:48px; line-height:70px;text-align:justify;}
 	#begin{font-size:48px; line-height:70px;text-align:center;}
-	p {text-align:justify;}
 </style>
 	<form>
 	<p id="verse_text"><%= @verse_layout %>
@@ -43,8 +42,7 @@ function respond(event) {
 	};
 	if (answers.values().length == <%= @correct %>) {
 		Event.stopObserving('verse_text', 'keyup');
-		document.body.setStyle('background-color:grey;');
-		setTimeout(function(){document.body.insert("<div style='background-color:red;width=100%;text-align:center;position:absolute;z-index:1;top:200px;font-size:800%;'><%= @success %></div></center>");Sound.play('/sounds/hooyah.mp3');}, 500);
+	Sound.play('/sounds/hooyah.mp3');$('verse_text').replace("<%= @success %>");
 	if ('<%= @redirect_url %>' == '/profile') {
 		new Ajax.Request('/<%= @verse.id %>/award', {method: 'post'});
 	};
