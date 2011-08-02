@@ -4,9 +4,9 @@
  */
  
 #stage {
+    background-color: rgba(121,109,92,1.00);
     overflow: hidden;
     height: 400px;
-    background-color: rgba(121,109,92,1.00);
     width: 960px;
 }
 #sunburst {
@@ -24,10 +24,10 @@
     -o-transform: translateX(111.6px) translateY(20.4px) rotate(0);
 }
 #mouth {
-    -webkit-transform: translateX(76px) translateY(-10px) scaleY(0);
-    -moz-transform: translateX(76px) translateY(-10px) scaleY(0);
-    -ms-transform: translateX(76px) translateY(-10px) scaleY(0);
-    -o-transform: translateX(76px) translateY(-10px) scaleY(0);
+    -webkit-transform: translateX(74px) translateY(-10px) scaleY(0);
+    -moz-transform: translateX(74px) translateY(-10px) scaleY(0);
+    -ms-transform: translateX(74px) translateY(-10px) scaleY(0);
+    -o-transform: translateX(74px) translateY(-10px) scaleY(0);
 }
 #leftArm {
     height: 316.4px;
@@ -49,32 +49,19 @@
     color: rgba(42,0,0,1.00);
     font-weight: bold;
     font-size: 98px;
-    text-align: center;
+    width: 623.2px;
     height: 198px;
     font-family: Arial, Helvetica, sans-serif;
-    width: 623.2px;
+    text-align: center;
     -webkit-transform: translateX(-310.8px) translateY(68.4px) scaleX(0) scaleY(0);
     -moz-transform: translateX(-310.8px) translateY(68.4px) scaleX(0) scaleY(0);
     -ms-transform: translateX(-310.8px) translateY(68.4px) scaleX(0) scaleY(0);
     -o-transform: translateX(-310.8px) translateY(68.4px) scaleX(0) scaleY(0);
 }
 
-.default_end_Default_Timeline #stage {
-    background-color: rgba(121,109,92,1.00);
-}
-.default_end_Default_Timeline #sunburst {
-    -webkit-transform: translateX(-138.838px) translateY(-151.6px);
-    -moz-transform: translateX(-138.838px) translateY(-151.6px);
-    -ms-transform: translateX(-138.838px) translateY(-151.6px);
-    -o-transform: translateX(-138.838px) translateY(-151.6px);
-}
-.default_end_Default_Timeline #Text1 {
-    height: 198px;
-    color: rgba(42,0,0,1.00);
-    width: 623.2px;
-    font-size: 98px;
-    -webkit-transform: translateX(-310.8px) translateY(68.4px) scaleX(1) scaleY(1);
-    -moz-transform: translateX(-310.8px) translateY(68.4px) scaleX(1) scaleY(1);
-    -ms-transform: translateX(-310.8px) translateY(68.4px) scaleX(1) scaleY(1);
-    -o-transform: translateX(-310.8px) translateY(68.4px) scaleX(1) scaleY(1);
+.default_end_Default_Timeline #mouth {
+    -webkit-transform: translateX(74px);
+    -moz-transform: translateX(74px);
+    -ms-transform: translateX(74px);
+    -o-transform: translateX(74px);
 }
