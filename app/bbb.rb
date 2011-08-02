@@ -83,7 +83,7 @@ get '/:name/bbb/*/easy' do
   @group = Group.first(:name => params[:name])
   @verse = Verse.get(params['splat'])
   @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/medium"
-  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='550' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
+  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
   @blanks = word_count/6
@@ -127,7 +127,7 @@ get '/:name/bbb/*/hard' do
   
   @verse = Verse.get(params['splat'])
   @redirect_url = "/" + @group.name + "/bbb/profile"
-  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='550' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
+  @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='960' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
   @blanks = word_count
