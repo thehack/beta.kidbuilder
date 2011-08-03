@@ -4,7 +4,7 @@
  */
  
 #stage {
-    background-color: rgba(121,109,92,1.00);
+    background-color: rgba(125,121,116,1.00);
     overflow: hidden;
     height: 400px;
     width: 960px;
@@ -64,4 +64,22 @@
     -moz-transform: translateX(74px);
     -ms-transform: translateX(74px);
     -o-transform: translateX(74px);
+}
+.default_end_Default_Timeline #leftArm {
+    -webkit-transform: translateY(20.39999px) rotate(55deg);
+    -moz-transform: translateY(20.39999px) rotate(55deg);
+    -ms-transform: translateY(20.39999px) rotate(55deg);
+    -o-transform: translateY(20.39999px) rotate(55deg);
+}
+.default_end_Default_Timeline #Text1 {
+    -webkit-transform: translateX(-309.6px) translateY(124.8px);
+    -moz-transform: translateX(-309.6px) translateY(124.8px);
+    -ms-transform: translateX(-309.6px) translateY(124.8px);
+    -o-transform: translateX(-309.6px) translateY(124.8px);
+}
+.default_end_Default_Timeline #rightArm {
+    -webkit-transform: translateY(20.39999px) rotate(-55deg);
+    -moz-transform: translateY(20.39999px) rotate(-55deg);
+    -ms-transform: translateY(20.39999px) rotate(-55deg);
+    -o-transform: translateY(20.39999px) rotate(-55deg);
 }
