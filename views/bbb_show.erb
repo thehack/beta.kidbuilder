@@ -1,16 +1,18 @@
 <script type="text/javascript" charset="utf-8">
 	function setFocus() {
-	document.forms[0].elements[0].focus();
+	document.forms[0].elements[0].focus()
+
 	}
 	window.onload=setFocus;
 	// preload the hooyah
-	var hooyah = new Image();
-	hooyah.src = "/sounds/hooyah.mp3";
+	var hooyah = document.createElement('audio');
+	hooyah.setAttribute('src', '/sounds/hooyah.mp3');
+	hooyah.load();
 </script>
 <style>
 	.blue {border:solid 2px blue;background-color:lightyellow;}
 	.green {border:solid 2px green;background-color:yellowgreen;}
-	input {text-align:center;height:50px;font-size:40px;}
+	form input {text-align:center;height:50px;font-size:40px;}
 	#verse_text {font-size:48px; line-height:70px;text-align:justify;}
 	#begin{font-size:48px; line-height:70px;text-align:center;}
 </style>
@@ -28,34 +30,39 @@
 <div style="z-index:2;position:absolute;top:100px;font-size:400px;left:50%;color:red;"id="countdown"></div>
 <script type="text/javascript" charset="utf-8">
 
-var answers = $H({});
-$('verse_text').observe('keyup' , respond);
-function respond(event) {
-	var element = event.element();
-	element.addClassName('blue');
-	if ( $F(element).toLowerCase().replace(/^\s+/,"") == element.id.toLowerCase() ) { 
-		element.removeClassName('blue'); 
-		element.addClassName('green');
-		answers.set(element.id, 1); 
-		if (element.next('input') != null) {
-			element.next('input').focus();}
+//var answers = $H({});
+var wordComplete = function(event) {
+	var answers = {};
+	var element = event.target;
+	console.log($(element).val());
+	$(element).addClass('blue');
+	if ( $(element).val().toLowerCase().replace(/^\s+/,"") == element.id.toLowerCase() ) { 
+		$(element).toggleClass('blue green');
+		answers[element.id.toString()] = 1; 
+		if ($(element).next('input') != null) {
+			$(element).next('input').focus();}
 	};
-	if (answers.values().length == <%= @correct %>) {
-		Event.stopObserving('verse_text', 'keyup');
-	Sound.play('/sounds/hooyah.mp3');$('verse_text').replace("<%= @success %>");
+	if (Object.keys(answers).length == <%= @correct %>) {
+		$('#versetext').unbind('keyup');
+		hooyah.play();
+		$('#verse_text').replaceWith("<%= @success %>");
 	if ('<%= @redirect_url %>' == '/profile') {
-		new Ajax.Request('/<%= @verse.id %>/award', {method: 'post'});
+		$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
 	};
-		setTimeout(function(){window.location='<%= @redirect_url %>'}, 3000);};}
-var seconds = 10;
-if (<%= @blanks %> == 0) {
-	new PeriodicalExecuter(function(pe) {
-		seconds -= 1;
-		$('countdown').update(seconds);
-		if (seconds <= 0) {pe.stop; window.location = '<%= @redirect_url %>'};
-		} , 1);
+		setTimeout(function(){window.location='<%= @redirect_url %>'}, 3000);};
 }
-else {
-	$('countdown').hide;
-}
+$('#verse_text').keyup( wordComplete );
+
+//var seconds = 10;
+//if (<%= @blanks %> == 0) {
+//	new PeriodicalExecuter(function(pe) {
+//		seconds -= 1;
+//		$('#countdown').update(seconds);
+//		if (seconds <= 0) {pe.stop; window.location = '<%= @redirect_url %>'};
+//		} , 1);
+//}
+//else {
+//	$('countdown').hide;
+//}
+
 </script>

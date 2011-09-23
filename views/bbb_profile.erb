@@ -26,9 +26,13 @@
 	test
 </div>
 <script type="text/javascript">
-	Event.observe( 'character_select','click', function () {
-		say('<img src=\'/images/ajax-loader.gif\' />');
-		var characterSelect = new Ajax.Request("/<%=@group.name %>/bbb/select_character");
-		$('paratext').update(characterSelect);
-	} ); };
+	$('#character_select').click( 
+		function () {
+			say('<img src=\'/images/ajax-loader.gif\' />');
+			var characterSelect = $.ajax({
+				type: 'GET', 
+				url: "/<%=@group.name %>/bbb/select_character", 
+				complete: function(data) { $('#paratext').append(data); }
+				});
+			});
 </script>

@@ -5,7 +5,6 @@ require "digest/sha1"
 
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 
-
 before do
   # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
   def logged_in?

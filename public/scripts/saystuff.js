@@ -1,35 +1,27 @@
-// Simple Modal Window for Prototype
+// Simple Modal Window for JQuery
 // Replacement for Alert Dialogue
 // Tim Inman
 // Website: http://inmans.org
 // Date: 10 Jan 2011
-
 // Use inline, like an alert.
 // Features to add: rounded corners, gradient for IE. A second function which returns a variable
 
 var say = function (message) {
 	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0;
 	var closeUp = function () {
-		if ($('paratext').children[0]) {
-			$('body').insert( $('paratext').children[0].hide() );
-		}
-		else {
-			$('body').insert( $('paratext').hide() );
-		}
-		overlay.remove();
-		alertbox.remove();
-	};
+		$([overlay, alertbox]).remove();
+	}; 
 	alertbox = document.createElement('div');
 	paratext = document.createElement('p');
 	closebox = document.createElement('a');
 	overlay = document.createElement('div');
-	myWidth = document.viewport.getDimensions().width;
-	myHeight = document.viewport.getDimensions().height;
+	myWidth = $(window).width();
+	myHeight = $(window).height();
 	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:white; -moz-opacity:0.6;filter: alpha(opacity=60);opacity: 0.6;");
 	overlay.style.width = myWidth + 'px';
-	overlay.style.height = [ myHeight, 776 ].max()  + 'px';
+	overlay.style.height = Math.max(myHeight, 776)  + 'px';
 	overlay.id = 'overlay';
-	document.body.appendChild(overlay);
+	$(body).append( $(overlay) );
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
@@ -42,13 +34,13 @@ var say = function (message) {
 	paratext.id = 'paratext';
 	paratext.innerHTML = message.toString();
 	paratext.setAttribute("style", "margin:-10px 20px 30px 20px;text-align:center;color:red;font-family:verdana;z-index:20;");	
-	document.body.appendChild(alertbox);
-	alertbox.appendChild(paratext);
-	Event.observe('closebox', 'click', closeUp );
+	$(alertbox).fadeIn().appendTo( $(body) );
+	$( paratext ).appendTo( $( alertbox) );
+	$('#closebox').click( closeUp );
 	closebox.onmouseover = function() {
 	    this.style.color = "red";
-	}
+	};
 	closebox.onmouseout = function() {
 	    this.style.color = "#666666";
-	}
+	};
 };

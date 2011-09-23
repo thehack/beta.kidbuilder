@@ -11,7 +11,13 @@
 		<% @tile_games.each do |game| %>
 		<tr>
 			<td><a href="/<%= @group.name %>/tile_games/<%= game.id %>/show"><%= game.title %></a></td>
-			<td><a href="#" onclick="new Ajax.Request('/<%= @group.name %>/tile_games/<%= game.id %>/destroy', {onSuccess: function() {window.location='/<%=@group.name %>/admin'} });">Destroy</a></td>
+			<td>
+				<a href="#" onclick="$.ajax({
+					type: 'POST', 
+					url:'/<%= @group.name %>/tile_games/<%= game.id %>/destroy', 
+					success: function() {window.location='/<%=@group.name %>/admin'} });">Destroy
+				</a>
+			</td>
 		</tr>		
 		<% end %>
 	</table>
@@ -41,19 +47,20 @@
 </div>
 
 <script type='text/javascript'>
-["1","2","3","4","5","6"].each(function(idx) {
-	new Control.ColorPicker("colorfield" + idx); 
-});
+// this makes the color picker work. it neeeds to be adapted to jQuery
+//["1","2","3","4","5","6"].each(function(idx) {
+//	new Control.ColorPicker("colorfield" + idx); 
+//});
 //for the new wordgames
-$('newTileGame').observe('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/<%= @group.name %>/tile_games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
+$('#newTileGame').bind('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/<%= @group.name %>/tile_games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
 //for the new bbb
-$('new_bbb').observe('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="reference" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% @belts.each do |belt| %><option><%= belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
+$('#new_bbb').bind('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="reference" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% @belts.each do |belt| %><option><%= belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
 //file upload
-$('fileUpload').observe('click', function() { say('<div><h3>Upload a file</h3><form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
+$('#fileUpload').bind('click', function() { say('<div><h3>Upload a file</h3><form action="/<%= @group.name %>/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
 // visual prefs
-Event.observe( 'visualPrefs','click', function () {
+$('#visualPrefs').click( function () {
 	say('<img src=\'/images/ajax-loader.gif\' />');
-	var prefs = $('prefsForm').show();
-	$('paratext').update(prefs);	
-} );
+	var prefs = $('#prefsForm').show();
+	$('#paratext').html(prefs);	
+	} );
 </script>

@@ -2,10 +2,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script src="/scripts/prototype.js" type="text/javascript"></script> 
-		<script src="/scripts/scriptaculous.js" type="text/javascript"></script>
+		<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/scripts/saystuff.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" charset="utf-8">
+		<script type="text/javascript" charset="utf-8">		
 		//	var kungFu = new Image();
 		//	kungFu.src = "/sounds/kung_fu.mp3";
 			function waitUpdate() {
@@ -24,8 +23,7 @@
 		</style>
 	</head>
 	<body id="body" class="color1">
-		<div id="error" style='position:absolute;top:114px;left:600px;z-index:10;color:red;font-size:26px;text-shadow: 2px 2px 2px #eee;
-		'>
+		<div id="error" style='position:absolute;top:114px;left:600px;z-index:10;color:red;font-size:26px;text-shadow: 2px 2px 2px #eee;'>
 			<%= request.cookies["error"] %>
 		</div>
 		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
@@ -83,17 +81,25 @@
 				<% end %>
 			</div>
 			<br/>
-		</div><!-- container bottom of page -->
-		<div id='login_form' style='display:none;text-align:left;'>
+		</div>
+		<!-- container bottom of page -->
+		<div id='login_form' style='text-align:left;display:none;'>
 				<p>Login</p>
 					<p class='label'>Nickname</p>
 					<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
 					<p class='label'>Password</p>
 					<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
-					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/login', {
-							parameters: { nickname: $F('login_nickname'), password: $F('login_password') },
-							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/<%= @group.name %>'}});">submit</a>
+					<a id="loginSubmit" class="medium magenta awesome" href="#" onclick="
+						$.ajax({
+							type: 'POST', 
+							url: '/login',
+							data: { 
+								nickname: $('#paratext #login_form #login_nickname').val(), 
+								password: $('#paratext #login_form #login_password').val(),
+							},
+							complete: function(){window.location='/<%= @group.name %>'} 
+							})">submit
+					</a>
 				<br/>
 		</div>
 		<div id="signup" style='display:none;text-align:left;'>
@@ -104,26 +110,34 @@
 					<p><input type='text' id="email" size='26' name="email"/></p>
 					<p class='label'>Password</p>
 					<p><input type="password" size='26' id="password" name="password"/></p>
-					<a class="medium magenta awesome" href="#" onclick = "new Ajax.Request('/<%= @group.name %>/signup', {
-							parameters: { nickname: $F('nickname'), email: $F('email'), password: $F('password')},
-							onSubmit: $('paratext').update('<img src=\'/images/ajax-loader.gif\'/>'),
-							onComplete: function(){window.location='/<%= @group.name %>'}})">submit</a>
+					<a id="signupSubmit" class="medium magenta awesome" href="#" onclick = "
+						$.ajax({
+							type: 'POST', 
+							url: '/<%= @group.name %>/signup',
+							data: { 
+								nickname: $('#paratext #signup #nickname').val(),
+								email: $('#paratext #signup #email').val(),
+								password: $('#paratext #signup #password').val()
+							},
+							complete: function(){window.location='/<%= @group.name %>';	
+							} 
+						});">submit
+					</a>
 				<br/>
 		</div>
 		<script type='text/javascript'>
-		if ($('login_link') || $('signup_link')) {
-			Event.observe( 'login_link', 'click', function () {
-				say('<img src=\'/images/ajax-loader.gif\' />');
-				var login=$('login_form').show();
-				$('paratext').update(login);
-				$('login_nickname').focus();
+		if ($('#login_link') || $('#signup_link')) {
+			$('#login_link').click( function () {
+				say('');
+				$('#login_form').clone().show().appendTo('#paratext');
+				$('#paratext #login_form input#login_nickname').focus();
 			} );
-			Event.observe( 'signup_link','click', function () {
-				say('<img src=\'/images/ajax-loader.gif\' />');
-				var signup = $('signup').show();
-				$('paratext').update(signup);
-				$('nickname').focus();
-			} ); };			
+			$('#signup_link').click( function () {
+				say('');
+				$('#signup').clone().show().appendTo('#paratext');
+				$('#paratext #signup input#nickname').focus();
+			} ); 
+		};
 		</script>
 	</body>
 </html>
