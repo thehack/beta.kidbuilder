@@ -35,4 +35,14 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 ##TO ACCESS CONSOLE:
 	irb -r main-app.rb
 
-
+##Brain-storming belts/lessons:
+###God =  ♥.
+###God is the Great Inventor
+God Created everything.
+We belong to Him and He makes the rules!
+###Prayer: You can Talk to God about Anything.
+It's not a formula or a spell. God wants to hear about our lives.
+He us to trust that He can make a difference.
+###Jesus has made God's Forgiveness Available to Everyone.
+###God's Spirit can help You Live for Him.
+###
