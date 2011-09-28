@@ -1,17 +1,28 @@
 <script type="text/javascript" charset="utf-8">
 	function setFocus() {
 	document.forms[0].elements[0].focus()
-
 	}
 	window.onload=setFocus;
 	// preload the hooyah
-	var hooyah = document.createElement('audio');
+	var hooyah = document.createElement('video');
+	var punch = document.createElement('video');
+	var woosh = document.createElement('video');
+	var ring = document.createElement('video');
+	punch.setAttribute('src', '/sounds/punch.mp3');
+	woosh.setAttribute('src', '/sounds/woosh.mp3');
 	hooyah.setAttribute('src', '/sounds/hooyah.mp3');
+	ring.setAttribute('src', '/sounds/ring.mp3');
+	ring.volume = 0.1;		
+	punch.volume = 0.3;
 	hooyah.load();
+	punch.load();
+	woosh.load();
+	ring.load();
 </script>
 <style>
-	.blue {border:solid 2px blue;background-color:lightyellow;}
-	.green {border:solid 2px green;background-color:yellowgreen;}
+	.greenOutline {border:solid 2px green;background-color:lightyellow;}
+	.redOutline {border:solid 2px red;background-color:#FFBDBD;}
+	.golden {border:solid 2px #B89600;background-color:#FFDF4F;color: #fff;}
 	form input {text-align:center;height:50px;font-size:40px;}
 	#verse_text {font-size:48px; line-height:70px;text-align:justify;}
 	#begin{font-size:48px; line-height:70px;text-align:center;}
@@ -31,28 +42,50 @@
 <script type="text/javascript" charset="utf-8">
 
 var answers = {};
+var increment = 0;
 var wordComplete = function(event) {
 	var element = event.target;
-	console.log($(element).val());
-	$(element).addClass('blue');
-	if ( $(element).val().toLowerCase().replace(/^\s+/,"") == element.id.toLowerCase() ) { 
-		$(element).toggleClass('blue green');
-		answers[element.id.toString()] = 1; 
+	var word = $(element).attr('rel').toLowerCase();
+	var entry = $(element).val().toLowerCase().replace(/^\s+/,"");
+	var wordSoFar = word.substring(0, entry.length );
+//	var character = entry.charAt(entry.length - 1);
+	$(element).removeClass('greenOutline redOutline');
+	
+	if ( entry != wordSoFar ) {
+		$(element).addClass('redOutline');
+		woosh.play();
+	}
+	else if ( entry != "" ) {
+		$(element).addClass('greenOutline');
+		punch.play();
+	} 
+	if ( entry ==  word ) { 
+		increment = increment +1;
+		$(element).toggleClass('golden');
+		answers[increment] = $(element).attr('rel').toString();
+	console.log(Object.keys(answers).length + "," + <%= @correct %>);
+		ring.play();
+		
 		if ($(element).next('input') != null) {
 			$(element).next('input').focus();}
-	};
+			$(element).replaceWith( $(element).attr('rel').toString() + "&nbsp;&nbsp;");
+			
+	}
 	if (Object.keys(answers).length == <%= @correct %>) {
 		$('#versetext').unbind('keyup');
 		hooyah.play();
 		$('#verse_text').replaceWith("<%= @success %>");
-	if ('<%= @redirect_url %>' == '/profile') {
-		$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
-	};
-		setTimeout(function(){window.location='<%= @redirect_url %>'}, 3000);};
-}
+		if ('<%= @redirect_url %>' == '/profile') {
+			$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
+		}
+		setTimeout(function(){window.location='<%= @redirect_url %>'}, 3000);
+	}
+	return increment;
+};
 $('#verse_text').keyup( wordComplete );
 
 //var seconds = 10;
+// old Prototype code
 //if (<%= @blanks %> == 0) {
 //	new PeriodicalExecuter(function(pe) {
 //		seconds -= 1;

@@ -37,12 +37,13 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 
 ##Brain-storming belts/lessons:
 ###God =  ♥.
-###God is the Great Inventor
-God Created everything.
+###God, the Great Inventor.
+He created everything.
 We belong to Him and He makes the rules!
 ###Prayer: You can Talk to God about Anything.
 It's not a formula or a spell. God wants to hear about our lives.
-He us to trust that He can make a difference.
-###Jesus has made God's Forgiveness Available to Everyone.
+He wants us to trust that He can make a difference.
+###Jesus has made God's Forgiveness Available to Everyone. // 
+Although selfish, sinful choices naturally build a wall between us and God, Jesus' personal sacrifice has made forgiveness 
 ###God's Spirit can help You Live for Him.
-###
+###Identity and purpose

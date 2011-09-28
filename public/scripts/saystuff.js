@@ -21,7 +21,7 @@ var say = function (message) {
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = Math.max(myHeight, 776)  + 'px';
 	overlay.id = 'overlay';
-	$(body).append( $(overlay) );
+	$('body').append( $(overlay) );
 	closebox.href = '#';
 	closebox.innerHTML = "x";
 	closebox.id = "closebox";
@@ -34,7 +34,7 @@ var say = function (message) {
 	paratext.id = 'paratext';
 	paratext.innerHTML = message.toString();
 	paratext.setAttribute("style", "margin:-10px 20px 30px 20px;text-align:center;color:red;font-family:verdana;z-index:20;");	
-	$(alertbox).fadeIn().appendTo( $(body) );
+	$(alertbox).fadeIn().appendTo( $('body') );
 	$( paratext ).appendTo( $( alertbox) );
 	$('#closebox').click( closeUp );
 	closebox.onmouseover = function() {

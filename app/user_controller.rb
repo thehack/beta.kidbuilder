@@ -38,7 +38,6 @@ post '/login' do
   else
     response.set_cookie("error", :value => "Password doesn't Match", :expires => (Time.new.gmtime + 3), :path => '/')
   end
-  redirect '/pers.group'
 end
 
 get '/:name/user/:id/show' do
