@@ -17,7 +17,7 @@ before do
   end
   # Common variables for the layout
   if logged_in?
-    @group = @current_user.group
+    @group = Group.get(@current_user.group.id)
   else
     @group = Group.first(:name => 'world')
   end
