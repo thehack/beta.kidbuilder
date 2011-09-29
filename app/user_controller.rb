@@ -1,6 +1,6 @@
 # User Authentication Views
-post '/:name/signup' do
-  group = Group.first(:name => params[:name])
+post '/signup' do
+  group = Group.first(:name => 'world') #this will change
   login = params[:nickname]
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
   email = params[:email]
@@ -40,18 +40,17 @@ post '/login' do
   end
 end
 
-get '/:name/user/:id/show' do
+get '/user/:id/show' do
   @user = User.get(params[:id])
   erb :user_show
 end
 
-get '/:name/users/list' do
-  @group = Group.first(:name => params[:name])
+get '/users/list' do
   @users = User.all - User.first(:login => 'thehack')
   erb :users_list
 end
 
-post '/:name/user/:id/destroy' do
+post '/user/:id/destroy' do
   user = User.get(params[:id])
   user.destroy
   redirect '/'

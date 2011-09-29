@@ -2,38 +2,30 @@ require 'RMagick'
 include Magick
 
 # Controller actions for Puzzle
-get '/:name/puzzles/new' do
-  @group = Group.first(:name =>params[:name])
+get '/puzzles/new' do
   @fontlist = Dir.entries("#{Dir.pwd}/public/fonts").collect { |f| "/fonts/#{f}" }
-	
   erb :puzzle_new
 end
 
-get '/:name/puzzles/:id/show' do
-  @puzzle = Puzzle.get(params[:id])
-  @group = Group.first(:name => params[:name])
-  
+get '/puzzles/:id/show' do
+  @puzzle = Puzzle.get(params[:id])  
   erb :puzzle_show
 end
 
-get '/:name/puzzles/list' do
-  @group = Group.first(:name => params[:name])
-  
+get '/puzzles/list' do
   @puzzles = Puzzle.all
   erb :puzzle_list
 end
 
-get '/:name/puzzles/:id/edit' do
+get '/puzzles/:id/edit' do
   erb :puzzle_edit
 end
 
-post '/:name/puzzles/create' do
-  @group = Group.first(:name => params[:name])  
+post '/puzzles/create' do
   font = params[:font]
   verse = params[:verse].split(" ")
   reference = params[:reference]
   title = reference.gsub(" ", "")
-  
   # create the directory.
   FileUtils.mkdir_p("#{Dir.pwd}/public/groupfiles/#{@group.name}/puzzles/#{title}")
   canvas = Magick::Image.new(740, 400, Magick::HatchFill.new('white','lightcyan2'))
@@ -89,10 +81,10 @@ post '/:name/puzzles/create' do
   redirect "/#{@group.name}/puzzles/#{puzzle.id}/show"
 end
 
-post '/:name/puzzles/:id/destroy' do
+post '/puzzles/:id/destroy' do
   @puzzle = Puzzle.get(params[:id])
 end
 
-post '/:name/puzzles/:id/update' do
+post '/puzzles/:id/update' do
   @puzzle = Puzzle.get(params[:id])
 end

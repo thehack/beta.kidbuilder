@@ -9,7 +9,6 @@ post '/verse/create' do
 end
 
 get '/verse/*/edit' do
-#  @belts = [:white, :yellow, :orange, :green, :blue, :brown, :black]
 	@verse = Verse.get(params['splat'])
 	erb :edit
 end
@@ -21,8 +20,6 @@ post '/verse/*/destroy' do
 end
 
 post '/verse/*/update' do
-#  @belts = [:white, :yellow, :orange, :green, :blue, :brown, :black]
-  # :belt is the stated belt.id value from the form. 
   verse = Verse.get(params['splat'])
   body = params[:body]
   verse.update(	            :body	  => body,
@@ -33,7 +30,7 @@ post '/verse/*/update' do
   redirect '/admin'
 end
 
-post '/:name/bbb/*/award' do
+post '/bbb/*/award' do
   if logged_in?
     belts = %w[white yellow green red purple black]
     verse = Verse.get(params['splat'])
@@ -54,9 +51,7 @@ post '/:name/bbb/*/award' do
   end  
 end
 
-get '/:name/bbb/profile' do
-  @group = Group.first(:name => params[:name])
-  
+get '/bbb/profile' do  
   if logged_in?
     @versecount = @current_user.verses.length
     @belt_attempt = @belts[(@belts.index(@current_user.belt) + 1)]    
@@ -68,21 +63,19 @@ get '/:name/bbb/profile' do
   end
 end
 
-get '/:name/bbb/*/show' do
-  @group = Group.first(:name => params[:name])
+get '/bbb/*/show' do
   @verse = Verse.get(params['splat'])
   @seconds = @verse.all_words.length/2
   @blanks = 0
   @correct = 100
-  @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/easy"
+  @redirect_url = "/bbb/" + @verse.id.to_s + "/easy"
   @verse_layout = @verse.body
   erb :bbb_show
 end
 
-get '/:name/bbb/*/easy' do
-  @group = Group.first(:name => params[:name])
+get '/bbb/*/easy' do
   @verse = Verse.get(params['splat'])
-  @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/medium"
+  @redirect_url = "/bbb/" + @verse.id.to_s + "/medium"
   @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
@@ -100,11 +93,9 @@ get '/:name/bbb/*/easy' do
   erb :bbb_show
 end
 
-get '/:name/bbb/*/medium' do
-  @group = Group.first(:name => params[:name])
-  
+get '/bbb/*/medium' do
   @verse = Verse.get(params['splat'])
-  @redirect_url = "/" + @group.name + "/bbb/" + @verse.id.to_s + "/hard"
+  @redirect_url = "/bbb/" + @verse.id.to_s + "/hard"
   @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
@@ -122,11 +113,9 @@ get '/:name/bbb/*/medium' do
   erb :bbb_show
 end
 
-get '/:name/bbb/*/hard' do
-  @group = Group.first(:name => params[:name])
-  
+get '/bbb/*/hard' do
   @verse = Verse.get(params['splat'])
-  @redirect_url = "/" + @group.name + "/bbb/profile"
+  @redirect_url = "/bbb/profile"
   @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
   words = @verse.all_words
   word_count = words.length
@@ -145,14 +134,13 @@ get '/:name/bbb/*/hard' do
 end
 
 
-get '/:name/bbb/select_character' do
-  @group = Group.first(:name => params[:name])
+get '/bbb/select_character' do
   if logged_in?
     partial :bbb_character
   end
 end
 
-post '/:name/bbb/*/animal' do
+post '/bbb/*/animal' do
   if logged_in?
   @current_user.update(:animal => params['splat'])
   end  

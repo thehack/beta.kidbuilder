@@ -52,7 +52,7 @@
 				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;&nbsp;
 				<% if logged_in? %>
 				<span style="margin-left:500px">Welcome, <%= @current_user.login %></span>&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0; expires = ' + date; window.location= '/<%= @group.name %>';">Log-Out</a>
+				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0; expires = ' + date; window.location= '/';">Log-Out</a>
 				<% end %>		
 			</div>
 			<%= yield %>
@@ -65,19 +65,19 @@
 			<div class='grid3 color4 linkbox' >
 				<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
 					<% @five_bbbs.each do |bbb| %>
-						<p><a href="/<%= @group.name %>/bbb/<%= bbb.id %>/show"><%=h bbb.reference %></a></p>
+						<p><a href="/bbb/<%= bbb.id %>/show"><%=h bbb.reference %></a></p>
 					<% end %>
 			</div>	
 			<div class='grid3 color5 linkbox'>
 				<h3 style='color:white;text-align:center;'>Puzzle</h3>
 				<% @five_puzzles.each do |puzzle| %>
-					<p><a href="/<%= @group.name %>/puzzles/<%= puzzle.id %>/show"><%=h puzzle.title %></a></p>
+					<p><a href="/puzzles/<%= puzzle.id %>/show"><%=h puzzle.title %></a></p>
 				<% end %>
 			</div>
 			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
 				<% @five_games.each do |game| %>
-					<p><a href="/<%= @group.name %>/tile_games/<%= game.id %>/show"><%=h game.title %></a></p>
+					<p><a href="/tile_games/<%= game.id %>/show"><%=h game.title %></a></p>
 				<% end %>
 			</div>
 			<br/>
@@ -97,7 +97,7 @@
 								nickname: $('#paratext #login_form #login_nickname').val(), 
 								password: $('#paratext #login_form #login_password').val(),
 							},
-							complete: function(){window.location='/<%= @group.name %>'} 
+							complete: function(){window.location='/'} 
 							})">submit
 					</a>
 				<br/>
@@ -113,13 +113,13 @@
 					<a id="signupSubmit" class="medium magenta awesome" href="#" onclick = "
 						$.ajax({
 							type: 'POST', 
-							url: '/<%= @group.name %>/signup',
+							url: '/signup',
 							data: { 
 								nickname: $('#paratext #signup #nickname').val(),
 								email: $('#paratext #signup #email').val(),
 								password: $('#paratext #signup #password').val()
 							},
-							complete: function(){window.location='/<%= @group.name %>';	
+							complete: function(){window.location='/';	
 							} 
 						});">submit
 					</a>

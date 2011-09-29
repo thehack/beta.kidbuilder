@@ -1,7 +1,7 @@
 <script src="/scripts/colorPicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="/scripts/yahoo.color.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="/css/colorPicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
-	<form action="/<%= @group.name %>/groups/<%= @group.id %>/update" method="post" accept-charset="utf-8">
+	<form action="/groups/<%= @current_user.group.id %>/update" method="post" accept-charset="utf-8">
 	<div class='first grid3'>
 		<p>Group Name&npsp;&npsp;<input type="text" name="group_name" value="<%= @group.name %>"></p>
 		<p>Logo&npsp;&npsp;<input type="text" name="logo" value="<%= @group.logo %>"></p>		

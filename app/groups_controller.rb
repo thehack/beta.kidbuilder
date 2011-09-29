@@ -1,21 +1,18 @@
 # Controller actions for Group
-get '/:name/groups/new' do
-  @group = Group.first(:name =>params[:name])
+get '/groups/new' do
   erb :group_new
 end
 
-get '/:name/groups/:id/show' do
-  @group = Group.get(params[:id])
+get '/groups/:id/show' do
   erb :group_show
 end
 
-get '/:name/groups/list' do
+get '/groups/list' do
   @groups = Group.all
   erb :group_list
 end
 
-get '/:name/groups/:id/edit' do
-  @group = Group.first(:name => params[:name])
+get '/groups/:id/edit' do
   erb :group_edit
 end
 
@@ -43,13 +40,14 @@ post '/groups/create' do
   redirect "/#{group.name}/groups/#{group.id}/show"
 end
 
-post '/:name/groups/:id/destroy' do
-  @group = Group.get(params[:id])
+post '/groups/:id/destroy' do
+  group = Group.get(params[:id])
+  group.destroy
+  redirect '/admin'
 end
 
-post '/:name/groups/:id/update' do
-  group = Group.first(:name => params[:name])
-   group.name = params[:group_name]
+post '/groups/:id/update' do
+   group.name = @group
    group.logo = params[:logo]
    group.color1 = params[:color1]
    group.color2 = params[:color2]
@@ -59,5 +57,5 @@ post '/:name/groups/:id/update' do
    group.color6 = params[:color6]
    group.updated_at = Time.now
    group.save
-   redirect "/#{group.name}/groups/#{group.id}/show"
+   redirect "/groups/#{group.id}/show"
 end

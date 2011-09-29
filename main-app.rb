@@ -16,9 +16,14 @@ before do
     end
   end
   # Common variables for the layout
-  @five_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc] )
-  @five_bbbs = Verse.all( :limit => 5, :order => [ :updated_at.desc] )
-  @five_puzzles = Puzzle.all( :limit => 5, :order => [ :updated_at.desc] )
+  if logged_in?
+    @group = @current_user.group
+  else
+    @group = Group.first(:name => 'world')
+  end
+  @five_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc ] )
+  @five_bbbs = Verse.all( :limit => 5, :order => [ :updated_at.desc ] )
+  @five_puzzles = Puzzle.all( :limit => 5, :order => [ :updated_at.desc ] )
   @belts = %w[white yellow green red purple black]
 end
 
@@ -32,19 +37,14 @@ helpers do
   end
 end
 
-get '/' do
-    redirect '/world'
-end
 
-get '/:name' do
+get '/' do
   @users = User.all
   @first_few = User.all(:limit => 5, :order => [ :id.desc ])
-  @group = Group.first(:name => params[:name])
   erb :index
 end
 
-get '/:name/admin' do
-  @group = Group.first(:name => params[:name])
+get '/admin' do
   @badges = Badge.all
   @levels = Level.all
   @puzzles = Puzzle.all
