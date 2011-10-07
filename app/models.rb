@@ -19,12 +19,12 @@ class Verse
   include DataMapper::Resource
   property :id, Serial
   property :body, Text
-  property :reference, String
+  property :title, String
   property :all_words, Csv
   property :belt_color, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  has n, :users, :through => Resource
+  has n, :users, :through => Resource    
 end
 
 class Level
@@ -33,7 +33,7 @@ class Level
   property :group, String
   property :title, String
   property :subtitle, String
-  property :body, Text
+  property :description, Text
   property :created_on, DateTime
   property :updated_at, DateTime
 end

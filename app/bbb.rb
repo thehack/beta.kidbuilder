@@ -2,7 +2,7 @@
 post '/verse/create' do
   body = params[:body]
   verse = Verse.create(	    :body	  => body,
-  													:reference => params[:reference],
+  													:title => params[:title],
   													:all_words => body.gsub(/[!.?,:;"]|\[.\]/ , "").split,
   													:belt_color => params[:belt])
   redirect '/admin'
@@ -23,7 +23,7 @@ post '/verse/*/update' do
   verse = Verse.get(params['splat'])
   body = params[:body]
   verse.update(	            :body	  => body,
-  													:reference => params[:reference],
+  													:title => params[:title],
   													:all_words => body.gsub(/[!.?,:;"]|\[.\]/ , "").split,
   													:belt_color => params[:belt]
   )

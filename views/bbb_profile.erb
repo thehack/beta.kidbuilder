@@ -12,14 +12,14 @@
 <div class="grid3">
 	<p>You need to complete the following challenges to achieve a <%= @belt_attempt %> belt.</p>
 	<% @beltverses.each do |verse|%>
-	<p><a href="/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%=h verse.reference %></a></p>
+	<p><a href="/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%=h verse.title %></a></p>
 	<% end %>
 </div>
 
 <div class="grid3">
 	<p>Completed Verses</p>
 	<% @current_user.verses.each do |verse| %>
-		<p><a href="/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%= verse.reference %></a></p>
+		<p><a href="/bbb/<%=verse.id%>/show" style="color:<%=verse.belt_color%>;"><%= verse.title %></a></p>
 	<% end %>
 </div>
 <div class="grid3">

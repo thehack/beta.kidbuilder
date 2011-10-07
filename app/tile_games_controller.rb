@@ -1,4 +1,4 @@
-# Controller actions for Tile_game
+# Controller actions for TileGame
 get '/tile_games/new' do
   erb :tile_game_new
 end

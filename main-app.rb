@@ -37,7 +37,6 @@ helpers do
   end
 end
 
-
 get '/' do
   @users = User.all
   @first_few = User.all(:limit => 5, :order => [ :id.desc ])
