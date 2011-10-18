@@ -1,5 +1,23 @@
 # Configure DataMapper to use the App Engine datastore
-# Don't use name as a property for anything, I'm keeping it available to all views.
+
+class Level
+  include DataMapper::Resource
+  property :id, Serial
+  property :title, String
+  has n, :units
+end
+
+class Unit
+  include DataMapper::Resource
+  property :id, Serial
+  property :index, Integer
+  property :kind, String
+  belongs_to :level, :required => false
+  has 1, :tileGame
+  has 1, :puzzle
+  has 1, :verse
+end
+
 class User
   include DataMapper::Resource
   property :id, Serial
@@ -24,18 +42,8 @@ class Verse
   property :belt_color, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  has n, :users, :through => Resource    
-end
-
-class Level
-  include DataMapper::Resource
-  property :id, Serial
-  property :group, String
-  property :title, String
-  property :subtitle, String
-  property :description, Text
-  property :created_on, DateTime
-  property :updated_at, DateTime
+  has n, :users, :through => Resource
+  belongs_to :unit, :required => false
 end
 
 class Group
@@ -80,6 +88,7 @@ class TileGame
   property :row6, String
   property :created_on, DateTime
   property :updated_at, DateTime
+  belongs_to :unit, :required => false
 end
 
 class Puzzle
@@ -107,5 +116,7 @@ class Puzzle
   property :big_image, String
   property :created_on, DateTime
   property :updated_at, DateTime
+  belongs_to :unit, :required => false
+  
 end
 DataMapper.auto_upgrade!

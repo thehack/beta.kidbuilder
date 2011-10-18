@@ -1,0 +1,97 @@
+<script src="/scripts/jquery-ui.js"></script>
+<style>
+
+.smoke {	
+	background-color:whiteSmoke;
+	border: 1px solid #E5E5E5;
+}
+.center {text-align:center;}
+.red { background-color: red;}
+.borders { margin: 0px 0px 0px 30px;}
+.width { width: 130px;}
+</style>
+
+<div class="first grid3">
+	<h3>new level</h3>
+	<div class="smoke">
+		<br>
+		<p>&nbsp;&nbsp;Title:&nbsp;
+		<input type="text" class="width" name="title" id="title"></p>
+		<ol id="newLevel">
+			<li class="placeholder">Drop the items here</li>
+		</ol>
+		<div class="center">
+			<a href="#" id="save" class="awesome medium orange center">SAVE</a><br>
+		</div>
+	
+	</div>
+</div>
+
+<div class="grid3">
+	<h3>Levels</h3>
+	<% @levels.each do |level| %>
+	<p><%= level.title %></p>
+	<% end %>
+	<br>
+</div>
+<div id="verses" class="grid2">
+	<h3>Verses</h3>
+	<% @verses.each do |verse| %>
+	<a href="/bbb/<%= verse.id %>/show" rel="/verses/<%= verse.id %>/create"><%= verse.title %></a>
+	<% end %>
+</div>
+<div id="puzzles" class="grid2">
+	<h3>Puzzles</h3>
+	<% @puzzles.each do |puzzle| %>
+	<a href="/puzzles/<%= puzzle.id %>/show" rel="/puzzles/<%= puzzle.id %>/create"><%= puzzle.title %></a>
+	<% end %>	
+</div>
+<div id="tileGames" class="grid2">
+	<h3>Tile Games</h3>
+	<% @tile_games.each do |tile_game| %>
+	<a href="/tile_games/<%= tile_game.id %>/show" rel="/tile_games/<%= tile_game.id %>/create"><%= tile_game.title %></a>
+	<% end %>
+</div>		
+<script>
+$(function() {
+	$( "#verses a" ).draggable({
+	//	appendTo: "body",
+		helper: "clone"
+	});
+	$( "#puzzles a" ).draggable({
+//		appendTo: "body",
+		helper: "clone"
+	});
+	$( "#tileGames a" ).draggable({
+//		appendTo: "body",
+		helper: "clone"
+	});
+	$("#newLevel").droppable({ 
+		accept: ":not(.ui-sortable-helper)",
+		 drop: function( event, ui ) {
+			$( this ).find( ".placeholder" ).remove();
+			$("<li rel= '" + ui.draggable.attr('rel') + "'" + ">" + ui.draggable.text() +"</li>").appendTo( this );
+	}
+	}).sortable({
+		items: "li:not(.placeholder)",
+		sort: function() {
+					$( this ).removeClass( "ui-state-default" );
+				}})
+
+	var i = 1;
+$('#save').bind( 'click', function(){
+	$('#newLevel li').map(function(){
+		$.ajax({	type: 'POST',
+					url:'/units/'+ $('#title').val() + '/' +i.toString() + $(this).attr('rel'),
+					beforeSend: function() {$('.center').append('<img src="/images/ajax-loader.gif">')},
+					error: function() {say('Error: you are probably missing a title or units')},
+					success: function() {	i+=1; 
+											$("#newLevel").html("<li class='placeholder'>Success! Another?</li>");
+											$('.center img').remove();
+								
+									 		} 
+										});
+							} );
+	});
+});
+</script>

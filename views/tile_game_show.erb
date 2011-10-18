@@ -122,12 +122,12 @@ $(document).bind( 'keydown', function(event) {
 		var greens = 60 - blues.length;
 		if (x.length < greens && $('.' + (String.fromCharCode(event.keyCode))).size() >=1) {
 			$('#scoreboard').html("<div id='status'></div>");
-			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
+//			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
 		 Sound.play('/sounds/chime.mp3');
 		};
 		if ( $( "." + (String.fromCharCode(event.keyCode))).size() < 1) {
 			$('#scoreboard').html("<div id='status'></div>"),
-			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
+//			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
 //			Element.removeClassName('outerframe', 'blackbg');
 //			Element.addClassName('outerframe', 'redbg');
 					 		 

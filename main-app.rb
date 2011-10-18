@@ -4,7 +4,6 @@ require 'database_config'
 require "digest/sha1"
 
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
-
 before do
   # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
   def logged_in?
@@ -53,3 +52,6 @@ get '/admin' do
   @verses = Verse.all
   erb :admin
 end
+
+
+disable :logging #This was causing everything to output twice to console.
