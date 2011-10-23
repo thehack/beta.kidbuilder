@@ -78,7 +78,7 @@ post '/puzzles/create' do
     #                      :font => font,
      #                     :font_size => font_size,
                           :big_image => "/groupfiles/#{@group.name}/puzzles/#{title}/#{title}_big.gif" )
-  redirect "/#{@group.name}/puzzles/#{puzzle.id}/show"
+  redirect "/puzzles/#{puzzle.id}/show"
 end
 
 post '/puzzles/:id/destroy' do

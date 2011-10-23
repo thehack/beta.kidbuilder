@@ -4,34 +4,57 @@
 .smoke {	
 	background-color:whiteSmoke;
 	border: 1px solid #E5E5E5;
+	text-align: center;
 }
+.drop {font-size:14px;color:red;background-color:white;text-align:center;line-height:30px;width:148px;border: 3px dashed #E5E5E5;}
 .center {text-align:center;}
 .red { background-color: red;}
 .borders { margin: 0px 0px 0px 30px;}
-.width { width: 130px;}
+ol {margin-left:-10px;}
+ol li {margin-left:0px;}
+input {outline:none;}
+.blueInput { font-size:14px;height:27px;line-height:27px;width: 115px;background-color: #000033; border-style: none;color:white;outline:none;padding:0px 0px 0px 5px;border:darkblue;}
+.shadow {
+
+}
+.saveButton {height:27px;
+	line-height:27px;
+	width:45px;
+	font-size:12px;
+	background-color:red;
+	border:1px solid darkred;
+	color:white;
+	border-radius:2px;
+	text-align:center;
+	margin:10px 0px 10px 86px;}
+.saveButton:hover {
+	background-color:darkred;
+	text-decoration:none;
+	-moz-box-shadow: 1px 1px 2px #ccc;
+	-webkit-box-shadow: 1px 2px 5px #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+	}
 </style>
 
 <div class="first grid3">
-	<h3>new level</h3>
 	<div class="smoke">
-		<br>
-		<p>&nbsp;&nbsp;Title:&nbsp;
-		<input type="text" class="width" name="title" id="title"></p>
-		<ol id="newLevel">
-			<li class="placeholder">Drop the items here</li>
+		<h3 style="text-align:center">New Level</h3>
+		<input type="text" class="drop" name="title" value="INPUT LEVEL TITLE" id="title">
+		<ol style="text-align:left;" id="newLevel">
+			<p class="drop">DROP UNITS
+				<span style="color:red;">+</span>
+			</p>
 		</ol>
-		<div class="center">
-			<a href="#" id="save" class="awesome medium orange center">SAVE</a><br>
-		</div>	
+			<br>
+			<div id="save" class="saveButton">&nbsp;&nbsp;SAVE&nbsp;&nbsp;
+			</div>
+			
 	</div>
+	<p id="spinner"> </p>
 </div>
 
 <div class="grid3">
-	<h3>Levels</h3>
-	<% @levels.each do |level| %>
-	<p><%= level.title %></p>
-	<% end %>
-	<br>
+	<h3>Pages</h3>
 </div>
 <div id="verses" class="grid2">
 	<h3>Verses</h3>
@@ -77,20 +100,23 @@ $(function() {
 					$( this ).removeClass( "ui-state-default" );
 				}})
 
-	var i = 1;
+	
 $('#save').bind( 'click', function(){
-	$('#newLevel li').map(function(){
+	$('#newLevel li').map(function(i){
 		$.ajax({	type: 'POST',
 					url:'/units/'+ $('#title').val() + '/' +i.toString() + $(this).attr('rel'),
-					beforeSend: function() {$('.center').append('<img src="/images/ajax-loader.gif">')},
+					beforeSend: function() { if ($('#spinner img') == null) {$('#spinner').append('<img src="/images/ajax-loader.gif">')}},
 					error: function() {say('Error: you are probably missing a title or units')},
-					success: function() {	i+=1; 
-											$("#newLevel").html("<li class='placeholder'>Success! Another?</li>");
-											$('.center img').remove();
-								
+					success: function() {	
+											$("#newLevel").html("<p class='drop'>DROP UNITS +</p>");
+											$('#spinner img').remove();
+											$('#title').val("NEW LEVEL TITLE")
 									 		} 
 										});
 							} );
 	});
+	$('#title').bind('keypress', function(){$(this).val("").unbind('keypress')});
+	$('#title').focus();
+	$('#title').bind('click', function(){$(this).val("")});
 });
 </script>
