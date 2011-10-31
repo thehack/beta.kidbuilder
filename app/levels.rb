@@ -12,16 +12,24 @@ get '/levels/:id/show' do
   erb :level_show
 end
 
+get '/levels/list' do
+  @levels = Level.all
+  erb :level_list
+end
+
 get '/units/:id/show' do
-  @unit = Unit.get(params[:unit_id])
-  @level = @unit.level
-  kind = @unit.kind
+  unit = Unit.get(params[:id])
+  @level = unit.level
+  kind = unit.kind
   case kind
   when "verses"
+    @verse = unit.verse
     erb :bbb_show
   when "puzzles"
+    @puzzle = unit.puzzle
     erb :puzzle_show
   when "tile_games"
+    @tile_game = unit.tileGame
     erb :tile_game_show
   end
 end

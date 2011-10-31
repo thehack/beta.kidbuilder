@@ -9,6 +9,9 @@ end
 
 class Unit
   include DataMapper::Resource
+  def item
+    self.tileGame || self.puzzle || self.verse
+  end
   property :id, Serial
   property :index, Integer
   property :kind, String

@@ -1,0 +1,9 @@
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr><th>Levels</th></tr>
+	<% @levels.each do |level| %>
+	<tr><td><%= level.title %></td></tr>
+		<% level.units.each do |unit| %>
+		<tr><td><%= unit.title %></td></tr>
+		<% end %>
+	<% end %>
+</table>
