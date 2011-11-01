@@ -3,27 +3,6 @@
 <link rel="stylesheet" href="/css/colorPicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
 <div class ="first grid12">
 	<h1>Administration</h1>
-</div>
-<div class="first grid8">
-	<h3>Puzzles</h3>
-	<h3>Tile-Games</h3>
-	<table>
-		<% @tile_games.each do |game| %>
-		<tr>
-			<td><a href="/tile_games/<%= game.id %>/show"><%= game.title %></a></td>
-			<td>
-				<a href="#" onclick="$.ajax({
-					type: 'POST', 
-					url:'/tile_games/<%= game.id %>/destroy', 
-					success: function() {window.location='/admin'} });">Destroy
-				</a>
-			</td>
-		</tr>		
-		<% end %>
-	</table>
-	<h3>Bible Black Belt Verses</h3>
-</div>
-<div class="grid4" style="background-color:lt-grey;">
 	<h3>Create a New Resource</h3>
 	<p><a href="#" id="newPuzzle">New Puzzle</a></p>
 	<p><a href="#" id="newTileGame">New Tile Game</a></p>
@@ -31,6 +10,8 @@
 	<p><a href="#">New Lesson</a></p>
 	<p><a href="#" id="fileUpload">Upload a File</a></p>
 	<p><a href="#" id="visualPrefs">Visual Preferences</a></p>
+	<p><a href="/levels/new">New Level</a></p>
+	<p><a href="/levels/list">Level listing</a></p>
 </div>
 <div style="display:none;" id="prefsForm">
 	<form action="/<%= @group.name %>/groups/<%= @group.id %>/update" method="post" accept-charset="utf-8">
