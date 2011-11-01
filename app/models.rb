@@ -2,23 +2,20 @@
 
 class Level
   include DataMapper::Resource
-  property :id, Serial
-  property :title, String
-  has n, :units
-end
+  def units
+    # gets but doesnt set. you must do:
+    # level.tileGames << game
+    # level.save
 
-class Unit
-  include DataMapper::Resource
-  def item
-    self.tileGame || self.puzzle || self.verse
+    [self.tileGames, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
   end
   property :id, Serial
-  property :index, Integer
-  property :kind, String
-  belongs_to :level, :required => false
-  has 1, :tileGame
-  has 1, :puzzle
-  has 1, :verse
+  property :title, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  has n, :tileGames
+  has n, :puzzles
+  has n, :verses
 end
 
 class User
@@ -43,10 +40,11 @@ class Verse
   property :title, String
   property :all_words, Csv
   property :belt_color, String
+  property :index, Integer
   property :created_on, DateTime
   property :updated_at, DateTime
   has n, :users, :through => Resource
-  belongs_to :unit, :required => false
+  belongs_to :level, :required => false
 end
 
 class Group
@@ -81,6 +79,7 @@ class TileGame
   include DataMapper::Resource
   property :id, Serial
   property :title, String
+  property :index, Integer
   property :phrase, String
   property :letters, String
   property :row1, String
@@ -91,13 +90,14 @@ class TileGame
   property :row6, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  belongs_to :unit, :required => false
+  belongs_to :level, :required => false
 end
 
 class Puzzle
   include DataMapper::Resource
   property :id, Serial
   property :title, String
+  property :index, Integer
   property :body, String
   property :font, String
   property :font_size, String
@@ -119,7 +119,7 @@ class Puzzle
   property :big_image, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  belongs_to :unit, :required => false
+  belongs_to :level, :required => false
   
 end
 DataMapper.auto_upgrade!

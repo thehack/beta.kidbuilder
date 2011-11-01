@@ -10,11 +10,11 @@
 	<table>
 		<% @tile_games.each do |game| %>
 		<tr>
-			<td><a href="/<%= @group.name %>/tile_games/<%= game.id %>/show"><%= game.title %></a></td>
+			<td><a href="/tile_games/<%= game.id %>/show"><%= game.title %></a></td>
 			<td>
 				<a href="#" onclick="$.ajax({
 					type: 'POST', 
-					url:'/<%= @group.name %>/tile_games/<%= game.id %>/destroy', 
+					url:'/tile_games/<%= game.id %>/destroy', 
 					success: function() {window.location='/admin'} });">Destroy
 				</a>
 			</td>

@@ -52,7 +52,7 @@ post '/tile_games/create' do
   game.created_on = Time.now
   game.updated_at = Time.now
   game.save
-  redirect '/' + params[:name] + '/admin'
+  redirect '/admin'
 end
 
 post '/tile_games/:id/destroy' do

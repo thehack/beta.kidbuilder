@@ -1,6 +1,5 @@
 get '/levels/new' do
   @levels = Level.all
-  @units = Unit.all
   @verses = Verse.all
   @tile_games = TileGame.all
   @puzzles = Puzzle.all
@@ -17,19 +16,22 @@ get '/levels/list' do
   erb :level_list
 end
 
-get '/units/:id/show' do
-  unit = Unit.get(params[:id])
-  @level = unit.level
-  kind = unit.kind
+get '/level/:id/unit/:index/show' do
+  id = params[:id]
+  index = params[:index].to_i
+  level = Level.get(id)
+  units = level.units
+  unit = units.select { |u| u.index == index }
+  kind = unit.class.to_s
   case kind
-  when "verses"
-    @verse = unit.verse
+  when "Verse"
+    @verse = Verse.first(:level_id => id ) && Verse.first(:index => index )
     erb :bbb_show
-  when "puzzles"
-    @puzzle = unit.puzzle
+  when "Puzzle"
+    @puzzle = Puzzle.first(:level_id => id ) && Puzzle.first(:index => index )
     erb :puzzle_show
-  when "tile_games"
-    @tile_game = unit.tileGame
+  when "TileGame"
+    @tile_game = TileGame.first(:level_id => id ) && TileGame.first(:index => index )
     erb :tile_game_show
   end
 end
@@ -41,23 +43,25 @@ end
 post '/units/:title/:index/:kind/:id/create' do
   kind = params[:kind]
   id = params[:id]
+  index = params[:index]
   level = Level.first_or_create(:title => params[:title])
-  unit = Unit.create( :index => params[:index],
-                      :kind => kind)
   case kind
   when "verses"
-    piece = Verse.first(:id => id)
-    unit.verse = piece
+    verse = Verse.first(:id => id)
+    verse.index = index.to_i
+    verse.save
+    level.verses << verse
   when "puzzles"
-    piece = Puzzle.first(:id => id)
-    unit.puzzle = piece
+    puzzle = Puzzle.first(:id => id)
+    puzzle.index = index.to_i
+    puzzle.save
+    level.puzzles << puzzle
   when "tile_games"
-    piece = TileGame.first(:id => id)
-    unit.tileGame = piece
+    tile_game = TileGame.first(:id => id)
+    tile_game.index = index.to_i
+    tile_game.save
+    level.tileGames << tile_game
   end
-    level.units << unit
-    piece.save
-    unit.save
     level.save 
 end
 
