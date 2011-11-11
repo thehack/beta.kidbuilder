@@ -3,7 +3,7 @@
 	<% @levels.each do |level| %>
 	<tr><td><b><%= level.title %></b></td></tr>
 		<% level.units.each do |unit| %>
-		<tr><td>&nbsp;&nbsp;&nbsp;<%= unit.title %></td></tr>
+		<tr><td>&nbsp;&nbsp;&nbsp;<a href="/level/<%= level.id %>/unit/<%= unit.id %>/show"><%= unit.title %></a></td></tr>
 		<% end %>
 	<% end %>
 </table>

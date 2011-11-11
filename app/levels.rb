@@ -17,21 +17,27 @@ get '/levels/list' do
 end
 
 get '/level/:id/unit/:index/show' do
-  id = params[:id]
+  id = params[:id].to_i
   index = params[:index].to_i
   level = Level.get(id)
   units = level.units
-  unit = units.select { |u| u.index == index }
+  unit = units[index]
   kind = unit.class.to_s
+  @next_unit = units[index +1]
   case kind
   when "Verse"
-    @verse = Verse.first(:level_id => id ) && Verse.first(:index => index )
+    @verse = unit
+    @seconds = @verse.all_words.length/2
+    @blanks = 0
+    @correct = 100
+    @redirect_url = "/bbb/" + @verse.id.to_s + "/easy"
+    @verse_layout = @verse.body
     erb :bbb_show
   when "Puzzle"
-    @puzzle = Puzzle.first(:level_id => id ) && Puzzle.first(:index => index )
+    @puzzle = unit
     erb :puzzle_show
   when "TileGame"
-    @tile_game = TileGame.first(:level_id => id ) && TileGame.first(:index => index )
+    @tile_game = unit
     erb :tile_game_show
   end
 end
