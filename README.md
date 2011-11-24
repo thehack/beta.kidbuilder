@@ -53,7 +53,7 @@ lesson 1 > page 1
 or
 tilegame 1
 
-and an index showing which lesons have been completed.
+and an index showing which lessons have been completed.
 
 ##Brain-storming belts/lessons:
 ###God =  ♥.

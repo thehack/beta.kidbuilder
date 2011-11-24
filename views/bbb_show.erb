@@ -42,7 +42,7 @@
 	</p>
 	</form>
 	<% if @blanks == 0 %>
-		<a id="begin" href="/bbb/<%=h @verse.id %>/easy">Start Now</a>
+		<a id="begin" href="/bbb/<%=h @verse.id %>/show" onclick="document.cookie='difficulty=<%= @difficulty %>;'">Start Now</a>
 	<% else %>
 		<a id="begin" href="/bbb/<%=h @verse.id %>/show">PEEK</a>
 	<% end %>
@@ -86,7 +86,8 @@ var wordComplete = function(event) {
 		if ('<%= @redirect_url %>' == '/profile') {
 			$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
 		}
-		setTimeout(function(){window.location='<%= @redirect_url %>'}, 3000);
+		setTimeout(function(){document.cookie = "difficulty=<%= @difficulty %>;";
+					window.location='<%= @redirect_url %>'}, 3000);
 	}
 	return increment;
 };
