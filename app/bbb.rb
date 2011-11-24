@@ -64,7 +64,11 @@ get '/bbb/profile' do
 end
 
 get '/bbb/*/show' do
+  #this needs to be optimized.
+  
   cookie = request.cookies["difficulty"]
+  @verse = Verse.get(params['splat'])
+  
   case cookie
     when "easy"
       @verse = Verse.get(params['splat'])
@@ -85,7 +89,6 @@ get '/bbb/*/show' do
       @correct = bucket.length
       @difficulty = "medium"
     when "medium"
-      @verse = Verse.get(params['splat'])
       @redirect_url = "/bbb/" + @verse.id.to_s + "/show"
       @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
       words = @verse.all_words
@@ -120,7 +123,7 @@ get '/bbb/*/show' do
       @verse_layout = words.join(" ")
       @correct = bucket.length
       @difficulty = ""
-    when nil || ""
+    when nil, ""
       @verse = Verse.get(params['splat'])
       @seconds = @verse.all_words.length/2
       @blanks = 0
