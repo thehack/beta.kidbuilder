@@ -65,14 +65,12 @@ end
 
 get '/bbb/*/show' do
   #this needs to be optimized.
-  
   cookie = request.cookies["difficulty"]
   @verse = Verse.get(params['splat'])
-  
   case cookie
     when "easy"
       @verse = Verse.get(params['splat'])
-      @redirect_url = "/bbb/" + @verse.id.to_s + "/show"
+      @redirect = "window.location.reload();"
       @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
       words = @verse.all_words
       word_count = words.length
@@ -89,7 +87,7 @@ get '/bbb/*/show' do
       @correct = bucket.length
       @difficulty = "medium"
     when "medium"
-      @redirect_url = "/bbb/" + @verse.id.to_s + "/show"
+      @redirect = "window.location.reload();"
       @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
       words = @verse.all_words
       word_count = words.length
@@ -107,7 +105,7 @@ get '/bbb/*/show' do
       @difficulty = "hard"
     when "hard"
       @verse = Verse.get(params['splat'])
-      @redirect_url = "/bbb/profile"
+      @redirect = ""
       @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
       words = @verse.all_words
       word_count = words.length
@@ -128,7 +126,7 @@ get '/bbb/*/show' do
       @seconds = @verse.all_words.length/2
       @blanks = 0
       @correct = 100
-      @redirect_url = "/bbb/" + @verse.id.to_s + "/easy"
+      @redirect = "window.location.reload();"
       @verse_layout = @verse.body
       @difficulty = "easy"
     end

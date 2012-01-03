@@ -47,6 +47,7 @@ a img{border:0px;}
 #bar a:hover {text-decoration:underline;}
 #body {
 	margin-top:0px;
+	background-color: url('/images/concrete_wall.png');
 	}
 	
 h3 {font-family:Verdana, Geneva, sans-serif;color:#007fa3;}

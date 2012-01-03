@@ -33,7 +33,6 @@
 	form input {text-align:center;height:50px;font-size:40px;}
 	#verse_text {font-size:48px; line-height:70px;text-align:justify;}
 	#begin{font-size:48px; line-height:70px;text-align:center;}
-	
 </style>
 	<form>
 	<p id="verse_text"><%= @verse_layout %>
@@ -87,7 +86,7 @@ var wordComplete = function(event) {
 			$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
 		}
 		setTimeout(function(){document.cookie = "difficulty=<%= @difficulty %>;";
-					window.location='<%= @redirect_url %>'}, 3000);
+					<%= @redirect %>}, 3000);
 	}
 	return increment;
 };

@@ -27,11 +27,70 @@ get '/level/:id/unit/:index/show' do
   case kind
   when "Verse"
     @verse = unit
-    @seconds = @verse.all_words.length/2
-    @blanks = 0
-    @correct = 100
-    @redirect_url = "/bbb/" + @verse.id.to_s + "/easy"
-    @verse_layout = @verse.body
+    cookie = request.cookies["difficulty"]
+    case cookie
+      when "easy"
+        @redirect = "window.location.reload();"
+        @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
+        words = @verse.all_words
+        word_count = words.length
+        @blanks = word_count/6
+        word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
+        fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+        set = word_indexes[0..(@blanks -1)]
+        bucket = []
+        set.each do |wi|
+          bucket << words[wi]
+          words[wi] = fields[wi]
+        end 
+        @verse_layout = words.join(" ")
+        @correct = bucket.length
+        @difficulty = "medium"
+      when "medium"
+        @redirect = "window.location.reload();"
+        @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
+        words = @verse.all_words
+        word_count = words.length
+        @blanks = word_count/2
+        word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
+        fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+        set = word_indexes[0..(@blanks -1)]
+        bucket = []
+        set.each do |wi|
+          bucket << words[wi]
+          words[wi] = fields[wi]
+        end 
+        @verse_layout = words.join(" ")
+        @correct = bucket.length
+        @difficulty = "hard"
+      when "hard"
+        @redirect = ""
+        @success = "<center><iframe src='/animations/ape.html' scrolling='no' frameborder='0' width='940' height='400'><p>Your browser does not support iframes.</p></iframe></center>"
+        words = @verse.all_words
+        word_count = words.length
+        @blanks = word_count
+        word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
+        fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+        set = word_indexes[0..(@blanks -1)]
+        bucket = []
+        set.each do |wi|
+          bucket << words[wi]
+          words[wi] = fields[wi]
+        end 
+        @verse_layout = words.join(" ")
+        @correct = bucket.length
+        @difficulty = ""
+      when nil, ""
+        @seconds = @verse.all_words.length/2
+        @blanks = 0
+        @correct = 100
+        @redirect = "window.location.reload();"
+        @verse_layout = @verse.body
+        @difficulty = "easy"
+      end
+    
+    
+        
     erb :bbb_show
   when "Puzzle"
     @puzzle = unit
