@@ -1,10 +1,17 @@
 require 'RMagick'
 include Magick
+require 'base64'
+
+post '/puzzles/upload' do
+  require 'base64'
+  File.open('public/images/testimage.png', 'wb') do |f|
+    f.write(Base64.decode64(params[:base64]))
+  end
+end
 
 # Controller actions for Puzzle
 get '/puzzles/new' do
-  @fontlist = Dir.entries("#{Dir.pwd}/public/fonts").collect { |f| "/fonts/#{f}" }
-  erb :puzzle_new
+  erb :puzzle_new, :layout => false
 end
 
 get '/puzzles/:id/show' do
