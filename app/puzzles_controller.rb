@@ -3,9 +3,10 @@ include Magick
 require 'base64'
 
 post '/puzzles/upload' do
-  require 'base64'
-  File.open('public/images/testimage.png', 'wb') do |f|
-    f.write(Base64.decode64(params[:base64]))
+  if logged_in?
+    File.open('public/images/testimage.png', 'wb') do |f|
+      f.write(Base64.decode64(params[:base64]))
+    end
   end
 end
 
