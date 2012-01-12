@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
 	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors' rel='stylesheet' type='text/css'>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HTML 5 Canvas example</title>
+    <title>Puzzle Creator</title>
 	<style>
 	#strokeSelector img {
 		background-color: #ffffff;
@@ -13,7 +12,9 @@
 		background-color: #000000;
 	}
 	</style>
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
+		
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 		<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
 		
@@ -28,7 +29,7 @@
 		var x = $('#hOffset').val();
 	//	var y = $('#vOffset').val();
 		context.clearRect(0,0,940,400);
-		context.drawImage(document.getElementById('img_elem'), 0, 0);
+		context.drawImage( (document.getElementById('img_elem') ), 0, 0);
 	    context.textAlign = "left";
 	    context.textBaseline = "top";
 	    context.fillStyle = $('#colorSelector img').css('background-color');
@@ -107,16 +108,20 @@ replace it you must</textarea>
 					<input type="range" id="hOffset" value="870" name='hOffset' min="0" max="940" /><br>Vertical Position<br>
 					<input type="range" id="vOffset" value="133" name='vOffset' min="0" max="400" />
 			</div>
-			<button>save</button>
+			<button id="save">save</button>
+			<button id="chooseImage">Choose Image</button>
 				
 		<div class="first grid12">
 			
-	    <canvas id="canvas" width="940" height="400">
-			To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Chrome</a>
-		</canvas>
+		    <canvas id="canvas" width="940" height="400">
+				To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Chrome</a>
+			</canvas>
+		</div>
 	</div>
+	<div id="img_wrapper">
+		<img id='img_elem' src="/images/butterflygirl.png" alt='butterfly girl on blue' />
 	</div>
-	<img id='img_elem' src="/images/butterflygirl.png" alt='butterfly girl on blue' />
+	
 	<script type="text/javascript" charset="utf-8">
 	$('#textarea').keyup(
 		function() {
@@ -131,6 +136,12 @@ replace it you must</textarea>
 			drawMultilineText();
 		}
 	);
+
+//  For an overlay, useful for easily manipulating text
+//	$("#size").change(
+//		function() {
+//			$('#hi').css('font-size', $('#size').val())})
+	
 	$('#colorSelector').ColorPicker({
 		onShow: function (colpkr) {
 			$(colpkr).fadeIn(500);
@@ -161,10 +172,9 @@ replace it you must</textarea>
 			
 		}
 	});
-	$('#img_elem').hide();
-	
+ 	
 	$('#strokeSelector').click(function() {$('#strokeSelector').toggleClass('on')});
-	$('button').click(function() {
+	$('#save').click(function() {
 		var dataURL = canvas.toDataURL("image/png");
 		var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "") ;
 		$.post('/puzzles/upload',
@@ -173,7 +183,10 @@ replace it you must</textarea>
     			alert('success');
 		});
 	});
-
+	$('#chooseImage').click(function() {
+		$.ajax({url: '/backgrounds/list', dataType: 'html', type: 'GET', success: function(data) {say(data)}});
+	})
+	$('#img_elem').hide();
 	</script>
 </body>
 </html>

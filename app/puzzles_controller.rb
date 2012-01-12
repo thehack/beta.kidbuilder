@@ -20,6 +20,11 @@ get '/puzzles/:id/show' do
   erb :puzzle_show
 end
 
+get '/backgrounds/list' do
+  @background_list = Dir.entries("./public/images/backgrounds")[2..-1]
+  erb :backgrounds_list, :layout => false
+end
+
 get '/puzzles/list' do
   @puzzles = Puzzle.all
   erb :puzzle_list
