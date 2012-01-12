@@ -21,7 +21,7 @@ get '/puzzles/:id/show' do
 end
 
 get '/backgrounds/list' do
-  @background_list = Dir.entries("./public/images/backgrounds")[2..-1]
+  @background_list = (Dir.entries("./public/images/backgrounds").sort)[2..-1]
   erb :backgrounds_list, :layout => false
 end
 
