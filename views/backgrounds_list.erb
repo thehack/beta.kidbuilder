@@ -1,1 +1,21 @@
-<% @background_list.each do |img| %><a onclick="$('#img_wrapper').html($(this).clone().hide());"><img src="/images/backgrounds/<%= img %>" id="img_elem" width="200"/></a><% end%>
+<!DOCTYPE html><html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<% @background_list.each do |img| %>
+<div id="bgImages">
+	<a class="/images/backgrounds/<%= img %>"><img src="/images/backgrounds/<%= img %>"width="200"/></a>
+<% end %>
+</div>
+<script type="text/javascript">
+$('#bgImages a').click(function() {
+	var url = "url(" + $(this).attr('class') + ")";
+	$('#workArea').css('background-image', url);
+	console.log(url)
+	$([overlay, alertbox]).remove();
+	return false;
+});
+</script>
+</body>
+</html>

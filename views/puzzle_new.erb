@@ -1,192 +1,181 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors' rel='stylesheet' type='text/css'>
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Puzzle Creator</title>
-	<style>
-	#strokeSelector img {
-		background-color: #ffffff;
+	<title>Puzzle Creator</title>
+	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors' rel='stylesheet' type='text/css'>
+	<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
+		
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
+	<script type="text/javascript" src="/scripts/colorpicker.js"></script>
+	<script type="text/javascript" src="/scripts/puzzleMaker.js"></script>
+<style type="text/css">
+	#workArea {
+        width: 940px;
+        height: 400px;
+        background-image: url('/images/backgrounds/panda.png');
 	}
-	#colorSelector img {
-		background-color: #000000;
+	#textInput {
+		font-family: 'Luckiest Guy';
+		color:	black;
+		font-size:	48pt;
+		z-index:2;
+		background: transparent;
+		width: 940px;
+		height: 400px;
+		border: 0;
+		overflow: hidden;
+		text-align: left;
+		margin-left: 75px;
+		margin-top: 75px;
 	}
-	</style>
-		<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
-		
-		<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
-		<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
-		
-		<script type="text/javascript" src="/scripts/colorpicker.js"></script>
-    <script>
-	var drawMultilineText = function(){
-	    // set context and formatting
-		var fv = $('#font').val();
-		var size = $('#size').val();
-		var canvas = document.getElementById("canvas")
-	    var context = canvas.getContext('2d');
-		var x = $('#hOffset').val();
-	//	var y = $('#vOffset').val();
-		context.clearRect(0,0,940,400);
-		context.drawImage( (document.getElementById('img_elem') ), 0, 0);
-	    context.textAlign = "left";
-	    context.textBaseline = "top";
-	    context.fillStyle = $('#colorSelector img').css('background-color');
-		context.font =  size + 'pt ' + fv;
-		context.textAlign = $('#align').val();
-	    // prepare textarea value to be drawn as multiline text.
-	    var textval = document.getElementById("textarea").value;
-	    var textvalArr = toMultiLine(textval);
-	    var linespacing = size*1.5;
-	//    var x = 2;
-	    var y = parseInt($('#vOffset').val());
-	    // draw each line on canvas. 
-	    for(var i = 0; i < textvalArr.length; i++){
-
-	        context.fillText(textvalArr[i], x, y);
-			if ( $('#strokeSelector').hasClass('on') ) {
-				context.strokeStyle = $('#strokeSelector img').css('background-color');
-				context.strokeText(textvalArr[i], x, y);
-			}
-			
-	        y += linespacing;
-	    }
-		
-	};
-	// Creates an array where the <br/> tag splits the values.
-	var toMultiLine = function(text){
-	   var textArr = new Array();
-	   text = text.replace(/\n\r?/g, '<br/>');
-	   textArr = text.split("<br/>");
-	   return textArr;
-	};
-	$(document).ready(function() {drawMultilineText()});
-	</script>
-    <style type="text/css">
-      canvas { border: 1px solid black; }
-    </style>
-  </head>
-	<body>
-		<div class="container">
-			<div class='first grid12' id='heading'>
-				<h1 id="puzzle_maker" style="font-family:'Lobster';font-size:48px;color:#00869e;text-align:center;">Puzzle Maker</h1>
-			</div>
-			<div class="first grid12" id="controls">font:
-				<select name='font' id='font'>
-					<option value="Luckiest Guy" style="font-family: 'Luckiest Guy';">Luckiest Guy</option>
-					<option value="Impact">Impact</option>
-					<option value="Lobster">Lobster</option>
-					<option value="Trade Winds">Trade Winds</option>
-					<option value="Antic">Antic</option>
-					<option value="Geo">Geo</option>
-					<option value="Flavors">Flavors</option>
-				</select>
-				align:
-				<select name="align" id="align">
-					<option value="right">right</option>
-					<option value="center">center</option>
-					<option value="left">left</option>
-				</select>	 
-				fill: <a id="colorSelector">
-					<img src="/images/select3.png" alt="select color" />
-					</a> stroke: 
-					<a id="strokeSelector">
-					<img src="/images/select3.png" alt="select color" />
-					</a>
-			</div>
-
-			<div class='first grid4'>
-		    	<textarea id="textarea" rows="8" cols="40">This is sample Text
-if a ninja you will be
-replace it you must</textarea>
-			</div>
-			<div class="grid3">
-				Font Size<br>
-				<input type="range" id="size" value="36" name='hOffset' min="10" max="92" /><br>
-				Horizontal Position<br>
-					<input type="range" id="hOffset" value="870" name='hOffset' min="0" max="940" /><br>Vertical Position<br>
-					<input type="range" id="vOffset" value="133" name='vOffset' min="0" max="400" />
-			</div>
-			<button id="save">save</button>
-			<button id="chooseImage">Choose Image</button>
-				
-		<div class="first grid12">
-			
-		    <canvas id="canvas" width="940" height="400">
-				To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Chrome</a>
-			</canvas>
+	#toolPallet{
+		position:fixed;
+		margin-left:50px;
+		background-color:#ffffff;
+		z-index:0;
+		margin-top:100px;
+		text-align:center;
+		font-family: antic;
+	}
+	#toolPallet div{
+		background-color: #c2c2c2;
+		color:#750000;
+		border: 1px solid grey;
+		width:150px;
+		height:30px;
+		text-align:left;
+		margin:5px;
+		padding:0px;
+		overflow: hidden;
+		font-family: 'Geo';
+	}
+	#hiddenSelectors{
+		display: hidden;
+		position:absolute;
+		margin-top:200px;
+		margin-left:10px;
+	}
+	#heading h1 {
+		font-family:'Lobster';font-size:48px;color:#242424;text-align:center;
+	}
+</style>
+</head>
+<body>
+	<div id="toolPallet" >
+		<div class="fontSelect" >Luckiest Guy</div>
+		<div class="fontSelect">Lobster</div>
+		<div class="fontSelect">Trade Winds</div>
+		<div class="fontSelect">Geo</div>
+		<div class="fontSelect">Antic</div>
+					<div class="fontSelect">Flavors</div>
+		<div class="fontSelect">Impact</div>
+		<div>size<br><input type="range" id="size" value="48" name='size' min="10" max="92" />
+		</div>
+		<div>Horizontal Offset<br>
+			<input type="range" id="hOffset" value="75" name='hOffset' min="0" max="940" />
+		</div>
+		<div>Vertical Offset<br><input type="range" id="vOffset" value="75" name='vOffset' min="0" max="400" />
+		</div>
+		<div>align
+			<select name="align" id="align">
+				<option value="right">right</option>
+				<option value="center">center</option>
+				<option value="left">left</option>
+			</select>	 
+		</div>
+		<div>
+			fill <a id="colorSelector">
+			<img src="/images/select3.png" alt="select color" />
+			</a> stroke 
+			<a id="strokeSelector">
+			<img src="/images/select3.png" alt="select color" />
+			</a>
 		</div>
 	</div>
-	<div id="img_wrapper">
-		<img id='img_elem' src="/images/butterflygirl.png" alt='butterfly girl on blue' />
+	<div class="container">
+		<div class='first grid12' id='heading'>
+			<h1 id="" style="">Puzzle Maker</h1>
+		</div>
+		<div id='workArea'>
+			<textarea id='textInput'>You Can Enter
+Your Text
+Right Here.
+			</textarea>
+		</div>
+		<div class="first grid12">
+			<button id="save">save</button>
+			<button id="chooseImage">Choose Image</button>
+		</div>
+		</div>
+
 	</div>
-	
-	<script type="text/javascript" charset="utf-8">
-	$('#textarea').keyup(
-		function() {
-			drawMultilineText();
-		}
-	//	context.restore();
-		//text
 
-		 );
-	$('#font, #size, #align, #hOffset, #vOffset').change(
-		function() {
-			drawMultilineText();
-		}
-	);
-
-//  For an overlay, useful for easily manipulating text
-//	$("#size").change(
-//		function() {
-//			$('#hi').css('font-size', $('#size').val())})
-	
-	$('#colorSelector').ColorPicker({
-		onShow: function (colpkr) {
-			$(colpkr).fadeIn(500);
-			return false;
-		},
-		onHide: function (colpkr) {
-			$(colpkr).fadeOut(500);
-			return false;
-		},
-		onChange: function (hsb, hex, rgb) {
-			$('#colorSelector img').css('backgroundColor', '#' + hex);
-			drawMultilineText();
-			
-		}
-	});
-	$('#strokeSelector').ColorPicker({
-		onShow: function (colpkr) {
-			$(colpkr).fadeIn(500);
-			return false;
-		},
-		onHide: function (colpkr) {
-			$(colpkr).fadeOut(500);
-			return false;
-		},
-		onChange: function (hsb, hex, rgb) {
-			$('#strokeSelector img').css('backgroundColor', '#' + hex);
-			drawMultilineText();
-			
-		}
-	});
- 	
-	$('#strokeSelector').click(function() {$('#strokeSelector').toggleClass('on')});
-	$('#save').click(function() {
-		var dataURL = canvas.toDataURL("image/png");
-		var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "") ;
-		$.post('/puzzles/upload',
-			{base64: base64},
-			function(){
-    			alert('success');
+	<script type="text/javascript">
+		$('#colorSelector img').css('backgroundColor', '#000000');
+		$('#hOffset').change(
+			function()	{
+				$('#textInput').css('margin-left', $('#hOffset').val() + 'px' );
+			}
+		);
+		$('#vOffset').change(
+			function()	{
+				$('#textInput').css('margin-top', $('#vOffset').val() + 'px' );
+			}
+		);
+		$('#size').change(
+			function() {
+				$('#textInput').css('font-size', $('#size').val() + 'pt' );
+			}
+		);
+		$('#chooseImage').click(function() {
+			$.ajax({url: '/backgrounds/list', dataType: 'html', type: 'GET', success: function(data) {say(data)}});
 		});
-	});
-	$('#chooseImage').click(function() {
-		$.ajax({url: '/backgrounds/list', dataType: 'html', type: 'GET', success: function(data) {say(data)}});
-	})
-	$('#img_elem').hide();
+			$('#colorSelector').ColorPicker({
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelector img').css('backgroundColor', '#' + hex);
+				$('#textInput').css('color', '#' + hex );
+			}
+		});
+		$('#strokeSelector').ColorPicker({
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#strokeSelector img').css('backgroundColor', '#' + hex);
+				$('#textInput').css('-webkit-text-stroke', '1px #' + hex);
+
+			}
+		});
+		$('#align').change(function() {
+			$('#textInput').css('text-align', $(this).val());
+		});
+		$('.fontSelect').click(function(){
+			$('#textInput').css('font-family', $(this).text());
+		});
+		$.each($('.fontSelect'), function(index, value) { 
+  			$(value).css('font-family', $(value).text())
+		});
+		$('#toolPallet div').mouseover(function() {
+			$(this).css('background-color', 'grey');
+		}).mouseout(function() {
+			$(this).css('background-color', '#c2c2c2');}).click(function(){$(this).css('background-color', '#c2c2c2')});
+		
 	</script>
 </body>
 </html>
