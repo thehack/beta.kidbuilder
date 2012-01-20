@@ -3,6 +3,13 @@ include Magick
 require 'base64'
 
 post '/puzzles/upload' do
+  def double_digit(num)
+    if num.to_s.length < 2
+      "0" + num.to_s
+    else
+      num.to_s
+    end
+  end
   puzzle_title = params[:puzzleTitle]
   puts "puzzleTitle= " + puzzle_title
   File.open('public/images/' + puzzle_title +'.png', 'wb') do |f|
@@ -17,7 +24,7 @@ post '/puzzles/upload' do
     for i in 1..10
       x += 94
       newfile = file.crop(x,0,94,400)
-      newfile.write("public/images/puzzles/#{puzzle_title}/#{puzzle_title + i.to_s}.png")
+      newfile.write("public/images/puzzles/#{puzzle_title}/#{puzzle_title + double_digit(i)}.png")
     end
   redirect "/puzzles/#{puzzle_title}/show"
 end
@@ -28,8 +35,9 @@ get '/puzzles/new' do
 end
 
 get '/puzzles/:title/show' do
-  title = params[:title]
-  "<img src='/images/#{title}.png' alt='#{title} puzzle' />"
+  @title = params[:title]
+   @puzzle_tiles = (Dir.entries("./public/images/puzzles/#{@title}").sort) - ['.', '..', '.DS_Store']
+  erb :puzzle_show
 end
 
 get '/backgrounds/list' do

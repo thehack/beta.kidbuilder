@@ -1,1 +1,20 @@
-<img src="<%= @puzzle.big_image %>" alt=""/>
+<script type="text/javascript" src="/scripts/jquery-ui.js"></script>
+<div class="first grid12" id="puzzle">
+<% @puzzle_tiles.each_with_index do |tile, index| %><img src="/images/puzzles/<%= @title %>/<%= tile %>" rel="<%= index %>"alt="<%= @title %>"/><% end %>
+</div>
+<script>
+$('#puzzle').sortable({update: function(event, ui) {
+	var imageIndex = [];
+	var imgCollection = $(this).children();
+	imgCollection.each(function(index, value){
+		imageIndex += $(value).attr('rel');
+		return imageIndex;
+	});
+	console.log(imageIndex);
+	if (imageIndex === "0123456789") {
+		alert('you win!');
+		$('#puzzle').sortable(disable);
+	};
+}});
+$('')
+</script>
