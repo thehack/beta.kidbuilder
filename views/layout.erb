@@ -52,7 +52,7 @@
 				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;&nbsp;
 				<% if logged_in? %>
 				<span style="margin-left:500px">Welcome, <%= @current_user.login %></span>&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0; expires = ' + date; window.location= '/';">Log-Out</a>
+				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0;path = /;expires = ' + date; window.location= '/';">Log-Out</a>
 				<% end %>		
 			</div>
 			<%= yield %>

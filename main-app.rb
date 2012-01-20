@@ -14,6 +14,13 @@ before do
       @current_user = User.first(:salt => client_id)
     end
   end
+  def admin?
+    if logged_in? && @current_user.login == "thehack"
+      return true
+    else
+      return false
+    end
+  end
   # Common variables for the layout
   if logged_in?
     @group = @current_user.group

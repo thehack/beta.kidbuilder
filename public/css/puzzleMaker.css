@@ -1,0 +1,63 @@
+	body {
+		background-image: url('/images/brushed_alu.png');
+	}
+	#workArea {
+        background-image: url('/images/backgrounds/panda.png');
+        background-repeat: no-repeat;
+	}
+	#textInput {
+		font-family: 'Luckiest Guy';
+		color:	black;
+		font-size:	48pt;
+		z-index:2;
+		background: transparent;
+		width: 940px;
+		height: 400px;
+		border: 0;
+		overflow: hidden;
+		text-align: left;
+		margin-left: 75px;
+		margin-top: 75px;
+	}
+	#toolPallet{
+		border-top: 1px solid grey;
+		border-right: 1px solid white;
+		border-bottom: 1px solid grey;
+		border-left: 1px solid grey;
+		position:fixed;
+		margin-left:50px;
+		z-index:0;
+		margin-top:80px;
+		text-align:center;
+		font-family: antic;
+	}
+	#toolPallet div{
+		background-color: #c2c2c2;
+		color:#750000;
+		border-top: 1px solid white;
+		border-right: 1px solid grey;
+		border-bottom: 1px solid grey;
+		border-left: 1px solid white;
+				width:150px;
+		height:30px;
+		text-align:left;
+		margin:5px;
+		padding:0px;
+		overflow: hidden;
+		font-family: 'Geo';
+	}
+	#hiddenSelectors{
+		display: hidden;
+		position:absolute;
+		margin-top:200px;
+		margin-left:10px;
+	}
+	#heading h1 {
+		font-family:'Lobster';font-size:48px;color:#242424;text-align:center;
+	}
+	#save {
+		z-index:3;
+		background-color:red;
+		font-size:38px;
+		font-family: 'Antic';
+	}

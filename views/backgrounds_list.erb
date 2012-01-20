@@ -10,9 +10,11 @@
 </div>
 <script type="text/javascript">
 $('#bgImages a').click(function() {
+	$('#img_elem').replaceWith("<img src='" + $(this).attr('class') + "' id='img_elem' />");
+	$('#img_elem').hide();
 	var url = "url(" + $(this).attr('class') + ")";
 	$('#workArea').css('background-image', url);
-	console.log(url)
+
 	$([overlay, alertbox]).remove();
 	return false;
 });

@@ -9,68 +9,20 @@
 		
 	<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/puzzleMaker.css" />
+
 	<script type="text/javascript" src="/scripts/colorpicker.js"></script>
 	<script type="text/javascript" src="/scripts/puzzleMaker.js"></script>
-<style type="text/css">
-	#workArea {
-        width: 940px;
-        height: 400px;
-        background-image: url('/images/backgrounds/panda.png');
-	}
-	#textInput {
-		font-family: 'Luckiest Guy';
-		color:	black;
-		font-size:	48pt;
-		z-index:2;
-		background: transparent;
-		width: 940px;
-		height: 400px;
-		border: 0;
-		overflow: hidden;
-		text-align: left;
-		margin-left: 75px;
-		margin-top: 75px;
-	}
-	#toolPallet{
-		position:fixed;
-		margin-left:50px;
-		background-color:#ffffff;
-		z-index:0;
-		margin-top:100px;
-		text-align:center;
-		font-family: antic;
-	}
-	#toolPallet div{
-		background-color: #c2c2c2;
-		color:#750000;
-		border: 1px solid grey;
-		width:150px;
-		height:30px;
-		text-align:left;
-		margin:5px;
-		padding:0px;
-		overflow: hidden;
-		font-family: 'Geo';
-	}
-	#hiddenSelectors{
-		display: hidden;
-		position:absolute;
-		margin-top:200px;
-		margin-left:10px;
-	}
-	#heading h1 {
-		font-family:'Lobster';font-size:48px;color:#242424;text-align:center;
-	}
-</style>
 </head>
 <body>
 	<div id="toolPallet" >
-		<div class="fontSelect" >Luckiest Guy</div>
+		<div> <input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" /></div>
 		<div class="fontSelect">Lobster</div>
 		<div class="fontSelect">Trade Winds</div>
+		<div class="fontSelect" >Luckiest Guy</div>
 		<div class="fontSelect">Geo</div>
 		<div class="fontSelect">Antic</div>
-					<div class="fontSelect">Flavors</div>
+		<div class="fontSelect">Flavors</div>
 		<div class="fontSelect">Impact</div>
 		<div>size<br><input type="range" id="size" value="48" name='size' min="10" max="92" />
 		</div>
@@ -94,87 +46,34 @@
 			<img src="/images/select3.png" alt="select color" />
 			</a>
 		</div>
+		<div id='chooseImage'>Choose Image
+		</div>
 	</div>
 	<div class="container">
 		<div class='first grid12' id='heading'>
-			<h1 id="" style="">Puzzle Maker</h1>
+			<h1>Puzzle Maker</h1>
 		</div>
-		<div id='workArea'>
+		<div class='first grid12' id='workArea'>
 			<textarea id='textInput'>You Can Enter
 Your Text
 Right Here.
 			</textarea>
 		</div>
-		<div class="first grid12">
-			<button id="save">save</button>
-			<button id="chooseImage">Choose Image</button>
+		<br>
+		<div class="first grid9">&nbsp;
 		</div>
+		<div id="save" class="grid3">&nbsp;Save&nbsp;
 		</div>
-
+		<div class='first grid12'>
+			<canvas id="canvas" width="940" height="400">
+			To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Chrome</a>
+			</canvas>
+		</div>
 	</div>
 
+	<img id='img_elem' src="/images/backgrounds/panda.png" />
 	<script type="text/javascript">
-		$('#colorSelector img').css('backgroundColor', '#000000');
-		$('#hOffset').change(
-			function()	{
-				$('#textInput').css('margin-left', $('#hOffset').val() + 'px' );
-			}
-		);
-		$('#vOffset').change(
-			function()	{
-				$('#textInput').css('margin-top', $('#vOffset').val() + 'px' );
-			}
-		);
-		$('#size').change(
-			function() {
-				$('#textInput').css('font-size', $('#size').val() + 'pt' );
-			}
-		);
-		$('#chooseImage').click(function() {
-			$.ajax({url: '/backgrounds/list', dataType: 'html', type: 'GET', success: function(data) {say(data)}});
-		});
-			$('#colorSelector').ColorPicker({
-			onShow: function (colpkr) {
-				$(colpkr).fadeIn(500);
-				return false;
-			},
-			onHide: function (colpkr) {
-				$(colpkr).fadeOut(500);
-				return false;
-			},
-			onChange: function (hsb, hex, rgb) {
-				$('#colorSelector img').css('backgroundColor', '#' + hex);
-				$('#textInput').css('color', '#' + hex );
-			}
-		});
-		$('#strokeSelector').ColorPicker({
-			onShow: function (colpkr) {
-				$(colpkr).fadeIn(500);
-				return false;
-			},
-			onHide: function (colpkr) {
-				$(colpkr).fadeOut(500);
-				return false;
-			},
-			onChange: function (hsb, hex, rgb) {
-				$('#strokeSelector img').css('backgroundColor', '#' + hex);
-				$('#textInput').css('-webkit-text-stroke', '1px #' + hex);
 
-			}
-		});
-		$('#align').change(function() {
-			$('#textInput').css('text-align', $(this).val());
-		});
-		$('.fontSelect').click(function(){
-			$('#textInput').css('font-family', $(this).text());
-		});
-		$.each($('.fontSelect'), function(index, value) { 
-  			$(value).css('font-family', $(value).text())
-		});
-		$('#toolPallet div').mouseover(function() {
-			$(this).css('background-color', 'grey');
-		}).mouseout(function() {
-			$(this).css('background-color', '#c2c2c2');}).click(function(){$(this).css('background-color', '#c2c2c2')});
 		
 	</script>
 </body>
