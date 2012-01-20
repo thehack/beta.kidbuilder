@@ -5,6 +5,12 @@ require 'digest/sha1'
 
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 before do
+  def authenticate!
+    unless admin?
+      response.set_cookie("error", :value => "You have to be a logged-in administrator to do that.", :expires => (Time.new.gmtime + 3), :path => '/')
+      redirect "/"
+    end
+  end
   # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
   def logged_in?
     client_id = request.cookies["salt"]
@@ -43,6 +49,10 @@ helpers do
   end
 end
 
+before /^.*(new|edit|create|admin|destroy|upload)$/ do
+  authenticate!
+end
+
 get '/' do
   @users = User.all
   @first_few = User.all(:limit => 5, :order => [ :id.desc ])
@@ -50,14 +60,19 @@ get '/' do
 end
 
 get '/admin' do
-  @badges = Badge.all
-  @levels = Level.all
-  @puzzles = Puzzle.all
-  @quizzes = Quiz.all
-  @tile_games = TileGame.all
-  @users = User.all
-  @verses = Verse.all
-  erb :admin
+  if admin?
+    @badges = Badge.all
+    @levels = Level.all
+    @puzzles = Puzzle.all
+    @quizzes = Quiz.all
+    @tile_games = TileGame.all
+    @users = User.all
+    @verses = Verse.all
+    erb :admin
+  else
+    response.set_cookie("error", :value => "You have to be a logged-in administrator to do that.", :expires => (Time.new.gmtime + 3), :path => '/')
+    redirect "/"
+  end
 end
 
 

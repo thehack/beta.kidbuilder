@@ -5,7 +5,12 @@ require 'fileutils'
 # or just go to http://localhost:4567/user/filename with a browser
 
 get '/file_upload/:filename' do
-  erb :file_new
+  if admin?
+    erb :file_new
+  else
+    response.set_cookie("error", :value => "You have to be a logged-in administrator to do that.", :expires => (Time.new.gmtime + 3), :path => '/')
+    redirect "/"
+  end
 end
 
 post '/upload' do

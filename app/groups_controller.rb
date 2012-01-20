@@ -1,4 +1,5 @@
 # Controller actions for Group
+
 get '/groups/new' do
   erb :group_new
 end
@@ -17,7 +18,6 @@ get '/groups/:id/edit' do
 end
 
 post '/groups/create' do
-  if logged_in?
     administrator = @current_user.login
     name = params[:name]
     group = Group.create(
@@ -36,7 +36,6 @@ post '/groups/create' do
     )
     @current_user.group = name
     @current_user.save
-  end
   redirect "/#{group.name}/groups/#{group.id}/show"
 end
 
