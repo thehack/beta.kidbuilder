@@ -8,16 +8,14 @@
 
 var say = function(message) {
 	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0;
-	var closeUp = function() {
-		$([overlay, alertbox]).remove();
-	}; 
+
 	alertbox = document.createElement('div');
 	paratext = document.createElement('p');
 	closebox = document.createElement('a');
 	overlay = document.createElement('div');
 	myWidth = $(window).width();
 	myHeight = $(window).height();
-	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:white; -moz-opacity:0.6;filter: alpha(opacity=60);opacity: 0.6;");
+	overlay.setAttribute("style", "position:absolute; top:0px; left:0px; z-index:5; background-color:#000000; -moz-opacity:0.6;filter: alpha(opacity=60);opacity: 0.6;");
 	overlay.style.width = myWidth + 'px';
 	overlay.style.height = Math.max(myHeight, 776)  + 'px';
 	overlay.id = 'overlay';
@@ -36,7 +34,7 @@ var say = function(message) {
 	paratext.setAttribute("style", "margin:-10px 20px 30px 20px;text-align:center;color:red;font-family:verdana;z-index:20;");	
 	$(alertbox).fadeIn().appendTo( $('body') );
 	$( paratext ).appendTo( $( alertbox) );
-	$('#closebox').click( closeUp );
+	$('#closebox').click( function() {closeUp() });
 	closebox.onmouseover = function() {
 	    this.style.color = "red";
 	};
@@ -44,3 +42,7 @@ var say = function(message) {
 	    this.style.color = "#666666";
 	};
 };
+
+	var closeUp = function() {
+		$([overlay, alertbox]).remove();
+	}; 
