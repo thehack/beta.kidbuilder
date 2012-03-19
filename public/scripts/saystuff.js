@@ -41,8 +41,8 @@ var say = function(message) {
 	closebox.onmouseout = function() {
 	    this.style.color = "#666666";
 	};
+	var closeUp = function() {
+		$([alertbox, overlay]).remove();
+	}; 
 };
 
-	var closeUp = function() {
-		$([overlay, alertbox]).remove();
-	}; 
