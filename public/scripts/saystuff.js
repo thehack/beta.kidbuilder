@@ -8,7 +8,6 @@
 
 var say = function(message) {
 	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0;
-
 	alertbox = document.createElement('div');
 	paratext = document.createElement('p');
 	closebox = document.createElement('a');

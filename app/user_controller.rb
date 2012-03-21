@@ -32,11 +32,11 @@ post '/login' do
       end
   end
   if pers.nil?
-    response.set_cookie("error", :value => "no such person", :expires => (Time.new.gmtime + 3), :path => '/')
+      flash[:notice] = "No such user"  
   elsif pers.crypted_password == pw
     response.set_cookie("salt", :value => pers.salt, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
   else
-    response.set_cookie("error", :value => "Password doesn't Match", :expires => (Time.new.gmtime + 3), :path => '/')
+    flash[:notice] = "Password doesn't match!"  
   end
 end
 

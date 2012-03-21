@@ -24,7 +24,7 @@
 	</head>
 	<body id="body" class="color1">
 		<div id="error" style='position:absolute;top:114px;left:600px;z-index:10;color:red;font-size:26px;text-shadow: 2px 2px 2px #eee;'>
-			<%= request.cookies["error"] %>
+			<%= flash[:notice] %>
 		</div>
 		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
 			<div class="first grid6">

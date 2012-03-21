@@ -2,13 +2,16 @@ require 'sinatra'
 require 'datamapper'
 require 'database_config'
 require 'digest/sha1'
+require 'r-flash'
 
+enable :sessions
+use Rack::Flash
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 before do
   def authenticate!
     unless admin?
-      response.set_cookie("error", :value => "You have to be a logged-in administrator to do that.", :expires => (Time.new.gmtime + 3), :path => '/')
-      redirect "/"
+    flash[:notice] = "You must be a logged-in administrator to do that!"    
+     redirect "/"
     end
   end
   # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
@@ -49,9 +52,12 @@ helpers do
   end
 end
 
+# DRY authentication
 before /^.*(new|edit|create|admin|destroy|upload)$/ do
   authenticate!
 end
+
+
 
 get '/' do
   @users = User.all
