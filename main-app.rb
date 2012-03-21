@@ -2,10 +2,10 @@ require 'sinatra'
 require 'datamapper'
 require 'database_config'
 require 'digest/sha1'
-require 'r-flash'
+require 'sinatra/flash'
 
 enable :sessions
-use Rack::Flash
+# use Rack::Flash
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
 before do
   def authenticate!
