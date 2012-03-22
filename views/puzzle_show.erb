@@ -17,7 +17,7 @@ $('#puzzle').sortable({update: function(event, ui) {
 }});
 (function() {
 	say('<br>Drag the slices!<br>Fix the message.<br><br><a class="awesome blue medium">BEGIN</a>');
-	$(closebox).detach();
+//	$(closebox).detach();
 	$('#paratext a').click(function() {
 		var randomizedSlices = [];
 		$('#puzzle').children().each(function(index, value) {
@@ -27,7 +27,8 @@ $('#puzzle').sortable({update: function(event, ui) {
 			var slice = randomizedSlices[(Math.floor(Math.random()*10))];
 			$('#puzzle').prepend(slice);
 		};
-		closeUp();
+		$(overlay).remove();
+		$(alertbox).remove();
 	});
 })();
 </script>

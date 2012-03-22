@@ -5,9 +5,9 @@
 // Date: 10 Jan 2011
 // Use inline, like an alert.
 // Features to add: rounded corners, gradient for IE. A second function which returns a variable
-
+var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0, closeUp;
 var say = function(message) {
-	var alertbox, paratext, closebox, overlay, myWidth = 0, myHeight = 0;
+
 	alertbox = document.createElement('div');
 	paratext = document.createElement('p');
 	closebox = document.createElement('a');
