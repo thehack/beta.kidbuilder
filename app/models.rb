@@ -1,4 +1,3 @@
-# Configure DataMapper to use the App Engine datastore
 
 class Level
   include DataMapper::Resource
