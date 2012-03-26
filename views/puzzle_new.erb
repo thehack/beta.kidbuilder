@@ -16,7 +16,6 @@
 </head>
 <body>
 	<div id="toolPallet" >
-		<div> <input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" /></div>
 		<div class="fontSelect">Lobster</div>
 		<div class="fontSelect">Trade Winds</div>
 		<div class="fontSelect" >Luckiest Guy</div>
@@ -52,14 +51,15 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class='first grid12' id='heading'>
-			<h1>Puzzle Maker</h1>
+		<div class='first grid12'>
+			<input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
+		</div>
+		<div id='first grid12'>
+			<textarea id='puzzleBody'>You Can Enter Your Text Right Here.
+			</textarea>
 		</div>
 		<div class='first grid12' id='workArea'>
-			<textarea id='textInput'>You Can Enter
-Your Text
-Right Here.
-			</textarea>
+			
 		</div>
 		<br>
 		<div class="first grid9">&nbsp;
@@ -68,15 +68,12 @@ Right Here.
 		</div>
 		<div class='first grid12'>
 			<canvas id="canvas" width="940" height="400">
-			To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Chrome</a>
+			<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
+			<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
 			</canvas>
 		</div>
 	</div>
 
 	<img id='img_elem' src="/images/backgrounds/panda.png" />
-	<script type="text/javascript">
-
-		
-	</script>
 </body>
 </html>
