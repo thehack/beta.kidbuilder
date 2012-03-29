@@ -1,20 +1,21 @@
-
+var fontColor = '#000000';
+var puzzleBody = "Your Entered \nText Will \nGo Here.";
 var drawCanvas = function(){
     // set context and formatting
 	var fv = $('#canvas').css('font-family');
-	var size = $('#canvas').css('font-size');
-	var canvas = document.getElementById("canvas")
+	var size = $('#canvas').css('fontSize');
+	var canvas = document.getElementById("canvas");
     var context = canvas.getContext('2d');
 	var x = $('#hOffset').val();
 	context.clearRect(0,0,940,400);
 	context.drawImage( (document.getElementById('img_elem') ), 0, 0, 940, 400);
     context.textAlign = "left";
     context.textBaseline = "top";
-    context.fillStyle = $('#colorSelector img').css('background-color');
+    context.fillStyle = fontColor;
 	context.font =  size + " " + fv;
 	context.textAlign = 'left';
     // prepare textarea value to be drawn as multiline text.
-    var textval = document.getElementById("puzzleBody").value;
+    var textval = puzzleBody;
     var textvalArr = toMultiLine(textval);
 	var y = parseInt($('#vOffset').val());
    	var linespacing = parseInt(parseInt(size.match(/\d\d/)));
@@ -26,7 +27,6 @@ var drawCanvas = function(){
 //			context.strokeStyle = $('#strokeSelector img').css('background-color');
 //			context.strokeText(textvalArr[i], x, y);
         y += linespacing;
-        console.log(y + "lsp " + linespacing);
     }
 }
 
@@ -39,9 +39,8 @@ var toMultiLine = function(text){
 };
 
 $(document).ready(function() {
-	drawCanvas();
-	$('#img_elem').hide();
-	$('#colorSelector img').css('backgroundColor', '#000000');
+	var canvas = document.getElementById("canvas");
+//	$('#colorSelector img').css('backgroundColor', '#000000');
 	$('#hOffset').change(
 		function()	{
 			drawCanvas();
@@ -71,8 +70,9 @@ $(document).ready(function() {
 			return false;
 		},
 		onChange: function (hsb, hex, rgb) {
-			$('#colorSelector img').css('backgroundColor', '#' + hex);
-			$('#canvas').css('color', '#' + hex );
+//			$('#colorSelector img').css('backgroundColor', '#' + hex);
+			fontColor = '#' + hex;
+			drawCanvas();
 		}
 	});
 	$('#strokeSelector').ColorPicker({
@@ -92,6 +92,7 @@ $(document).ready(function() {
 	});
 	$('#align').change(function() {
 		$('#canvas').css('text-align', $(this).val());
+				drawCanvas();
 	});
 	$('.fontSelect').click(function(){
 		$('#canvas').css('font-family', $(this).text());
@@ -100,21 +101,19 @@ $(document).ready(function() {
 	$.each($('.fontSelect'), function(index, value) { 
 			$(value).css('font-family', $(value).text())
 	});
-	$('#toolPallet div').mouseover(function() {
-		$(this).css('background-color', 'grey');
-	}).mouseout(function() {
-		$(this).css('background-color', '#c2c2c2');}).click(function(){$(this).css('background-color', '#c2c2c2')
-	});
-	$('#save').mouseover(function() {$('#save').css('background-color', '#ff5252')}).mouseout(function() {$('#save').css('background-color', 'red')});
 	$('#save').click(function() {
 		drawCanvas();
 		var dataURL = canvas.toDataURL("image/png");
 		var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-		$.post('/puzzles/upload', {base64: base64, puzzleTitle: puzzleTitle.value},
-			function() {window.location = "/puzzles/" + puzzleTitle.value + '/show'});
+		var puzzleTitle = $('#puzzleTitle').val();
+		$.post('/puzzles/upload', {base64: base64, puzzleTitle: puzzleTitle},
+			function() {window.location = "/puzzles/" + puzzleTitle + '/show'});
 	});
 	$('#puzzleTitle').click(function() {$(this).val("")});
 	$('#puzzleBody').keyup( function () {
+		puzzleBody = $(this).val();
 		drawCanvas();
 	});
+	drawCanvas();
+	$('#img_elem').hide();
 });

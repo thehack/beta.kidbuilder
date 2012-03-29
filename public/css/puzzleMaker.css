@@ -23,21 +23,7 @@ body {
 	text-align:center;
 	font-family: antic;
 }
-#toolPallet div{
-	background-color: #c2c2c2;
-	color:#750000;
-	border-top: 1px solid white;
-	border-right: 1px solid grey;
-	border-bottom: 1px solid grey;
-	border-left: 1px solid white;
-			width:150px;
-	height:30px;
-	text-align:left;
-	margin:5px;
-	padding:0px;
-	overflow: hidden;
-	font-family: 'Geo';
-}
+
 #hiddenSelectors{
 	display: hidden;
 	position:absolute;
@@ -47,18 +33,15 @@ body {
 #heading h1 {
 	font-family:'Lobster';font-size:48px;color:#242424;text-align:center;
 }
-#save {
-	z-index:3;
-	background-color:red;
-	font-size:38px;
-	font-family: 'Antic';
-}
-#puzzleTitle, #puzzleBody {
-	width:940px;
-	min-height:40px;
-	font-size:32px;
-	color:grey;
+
+#puzzleTitle {
+	width:100px;
+
 }
 #puzzleBody{
-	min-height: 200px;
+	padding: 5px;
+	width: 100%;
+	min-height: 150px;
+	font-size:24px;
+	color:grey;
 }

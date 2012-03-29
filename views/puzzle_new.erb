@@ -6,67 +6,117 @@
 	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors|Coming+Soon' rel='stylesheet' type='text/css'>
 	<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
-		
+	<script src="/scripts/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/scripts/colorpicker.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/scripts/puzzleMaker.js" charset="utf-8"></script>
+
 	<link rel="stylesheet" media="screen" type="text/css" href="/css/colorpicker.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="/css/puzzleMaker.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/bootstrap.css" />
 
-	<script type="text/javascript" src="/scripts/colorpicker.js"></script>
-	<script type="text/javascript" src="/scripts/puzzleMaker.js"></script>
+	<style type="text/css">
+	.tools {border: 2px solid black; padding:20px;}
+	canvas {background-image: url('/images/backgrounds/panda.png');}
+	.lightbar {background-color: #f2f2f2;margin-top:-10px;}
+	a {text-decoration:none;}
+	</style>
 </head>
 <body>
-	<div id="toolPallet" >
-		<div class="fontSelect">Lobster</div>
-		<div class="fontSelect">Trade Winds</div>
-		<div class="fontSelect" >Luckiest Guy</div>
-		<div class="fontSelect">Geo</div>
-		<div class="fontSelect">Antic</div>
-		<div class="fontSelect">Flavors</div>
-		<div class="fontSelect">Impact</div>
-		<div class="fontSelect">Coming Soon</div>
+	<div class="navbar navbar-fixed-top ">
+		<div class="navbar-inner">
+			<div class="container">
+				<h1>Kidbuilder Puzzle Creator</h1>
+			</div>
+		</div>
+		<div class="subnav lightbar">
+			<div class="container">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-pencil"></i> Body Text
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<textarea id='puzzleBody'>Sample Text
+							</textarea>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn" id="chooseImage" data-toggle="dropdown" href="#"><i class="icon-picture"></i> Background
+						</a>
+					</div>
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-font"></i> Font
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="fontSelect">Lobster</a></li>
+							<li><a href="#" class="fontSelect">Trade Winds</a></li>
+							<li><a href="#" class="fontSelect">Luckiest Guy</a></li>
+							<li><a href="#" class="fontSelect">Geo</a></li>
+							<li><a href="#" class="fontSelect">Antic</a></li>
+							<li><a href="#" class="fontSelect">Flavors</a></li>
+							<li><a href="#" class="fontSelect">Impact</a></li>
+							<li><a href="#" class="fontSelect">Coming Soon</a></li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-text-height"></i> Size
+							<span class="caret"></span>
 
-		<div>size<br><input type="range" id="size" value="48" name='size' min="10" max="92" />
-		</div>
-		<div>Horizontal Offset<br>
-			<input type="range" id="hOffset" value="75" name='hOffset' min="0" max="940" />
-		</div>
-		<div>Vertical Offset<br><input type="range" id="vOffset" value="75" name='vOffset' min="0" max="400" />
-		</div>
-		<div>align
-			<select name="align" id="align">
-				<option value="right">right</option>
-				<option value="center">center</option>
-				<option value="left">left</option>
-			</select>	 
-		</div>
-		<div>
-			fill <a id="colorSelector">
-			<img src="/images/select3.png" alt="select color" />
-			</a> stroke 
-			<a id="strokeSelector">
-			<img src="/images/select3.png" alt="select color" />
-			</a>
-		</div>
-		<div id='chooseImage'>Choose Image
+						</a>
+						<div class="dropdown-menu">
+							<input type="range" id="size" value="48" name='size' min="10" max="72" />
+						</div>
+					</div>
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-arrow-right"></i> H. Offset
+							<span class="caret"></span>
+
+						</a>
+						<div class="dropdown-menu">
+							<input type="range" id="hOffset" value="75" name='hOffset' min="0" max="940" />
+						</div>
+					</div>
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-arrow-down"></i> V. Offset
+							<span class="caret"></span>
+
+						</a>
+						<div class="dropdown-menu">
+							<input type="range" id="vOffset" value="75" name='vOffset' min="0" max="400" />
+						</div>
+					</div>
+					<div class="btn-group">
+						<a id="colorSelector" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-tint"></i> Color
+						</a>
+					</div>
+					<div class="btn-group">
+						<a id="save" href="#" class="btn">
+							<i class="icon-ok"></i> Save
+						</a>
+					</div>
+					<div class="btn-group">
+						<input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
+					</div>						
+				</div>	
+			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class='first grid12'>
-			<input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
-		</div>
-		<div id='first grid12'>
-			<textarea id='puzzleBody'>You Can Enter Your Text Right Here.
-			</textarea>
-		</div>
-		<div class='first grid12' id='workArea'>
-			
-		</div>
-		<br>
-		<div class="first grid9">&nbsp;
-		</div>
-		<div id="save" class="grid3">&nbsp;Save&nbsp;
-		</div>
-		<div class='first grid12'>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<canvas id="canvas" width="940" height="400">
 			<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
 			<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
