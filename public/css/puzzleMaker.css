@@ -4,7 +4,6 @@ body {
 #canvas {
 	font-family: 'Luckiest Guy';
 	color:	black;
-	font-size:	48pt;
 }
 #workArea {
     background-image: url('/images/backgrounds/panda.png');

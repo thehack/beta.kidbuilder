@@ -4,7 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Puzzle Creator</title>
 	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors|Coming+Soon' rel='stylesheet' type='text/css'>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/scripts/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="/scripts/colorpicker.js" charset="utf-8"></script>
@@ -20,6 +22,12 @@
 	canvas {background-image: url('/images/backgrounds/panda.png');}
 	.lightbar {background-color: #f2f2f2;margin-top:-10px;}
 	a {text-decoration:none;}
+	.btn input {height:12px;width:12px;font-size:9px;margin-top:-6px;}
+	.btn { height: 18px;}
+	#puzzleTitle {width: 100px;}
+	#save {height:28px;vertical-align:baseline;}
+	#puzzleBody{width:930px;height:140px;margin-top:100px;line-height:30px;}
+	#slider { margin: 10px; }
 	</style>
 </head>
 <body>
@@ -32,19 +40,6 @@
 		<div class="subnav lightbar">
 			<div class="container">
 				<div class="btn-toolbar">
-					<div class="btn-group">
-						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-pencil"></i> Body Text
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<textarea id='puzzleBody'>Sample Text
-							</textarea>
-						</ul>
-					</div>
-					<div class="btn-group">
-						<a class="btn" id="chooseImage" data-toggle="dropdown" href="#"><i class="icon-picture"></i> Background
-						</a>
-					</div>
 					<div class="btn-group">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-font"></i> Font
 							<span class="caret"></span>
@@ -61,68 +56,65 @@
 						</ul>
 					</div>
 					<div class="btn-group">
-						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-text-height"></i> Size
-							<span class="caret"></span>
-
+						<a class="btn" href="#">
+							<i class="icon-text-height"></i> Size <input id="sizeInput" value="32" type="text" />
 						</a>
-						<div class="dropdown-menu">
-							<input type="range" id="size" value="48" name='size' min="10" max="72" />
-						</div>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="caret"></span>
+						</a>
+
+						<ul class="dropdown-menu">
+							<% for i in 1..16 %>
+							<li><a href="#" class="size"><%= 10 + 4*i %></a></li>
+							<% end %>
+							<li><hr></li>
+							<li><a href="#" id="customSize">Custom</a></li>
+						</ul>
 					</div>
 					<div class="btn-group">
-						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-arrow-right"></i> H. Offset
+						<a id="colorSelector" class="btn" href="#">
+							<i class="icon-tint"></i> Color
 							<span class="caret"></span>
-
 						</a>
-						<div class="dropdown-menu">
-							<input type="range" id="hOffset" value="75" name='hOffset' min="0" max="940" />
-						</div>
+					</div>					
+					<div class="btn-group">
+						<a class="btn" id="chooseImage" data-toggle="dropdown" href="#"><i class="icon-picture"></i> Background
+						</a>
 					</div>
 					<div class="btn-group">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="icon-arrow-down"></i> V. Offset
 							<span class="caret"></span>
-
 						</a>
 						<div class="dropdown-menu">
 							<input type="range" id="vOffset" value="75" name='vOffset' min="0" max="400" />
 						</div>
 					</div>
-					<div class="btn-group">
-						<a id="colorSelector" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-tint"></i> Color
-						</a>
-					</div>
-					<div class="btn-group">
-						<a id="save" href="#" class="btn">
-							<i class="icon-ok"></i> Save
-						</a>
-					</div>
-					<div class="btn-group">
-						<input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
-					</div>						
+					<div class=" btn-group">
+						<button id="save" href="#" class="btn" ><input type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
+							<i class="icon-ok"></i> Save</button>
+					</div>				
 				</div>	
 			</div>
 		</div>
 	</div>
 	<div class="container">
-		<div class='first grid12'>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<canvas id="canvas" width="940" height="400">
-			<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
-			<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
-			</canvas>
-		</div>
+		<textarea class="" id='puzzleBody'>Click Here
+To Begin
+Entering Text.</textarea>
+		<br>
 	</div>
+	<div class="container">
+		<div id="slider"></div>
+		<br>
+	</div>
+	<div class="container">
+		<canvas id="canvas" width="940" height="400">
+		<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
+		<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
+		</canvas>
+	</div>
+
 
 	<img id='img_elem' src="/images/backgrounds/panda.png" />
 </body>

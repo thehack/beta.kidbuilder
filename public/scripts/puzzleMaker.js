@@ -1,24 +1,25 @@
+var puzzleBody = "Your text Will show up here.";
+var x = 25;
 var fontColor = '#000000';
-var puzzleBody = "Your Entered \nText Will \nGo Here.";
 var drawCanvas = function(){
     // set context and formatting
 	var fv = $('#canvas').css('font-family');
-	var size = $('#canvas').css('fontSize');
+	var size =  $('#sizeInput').val();
 	var canvas = document.getElementById("canvas");
     var context = canvas.getContext('2d');
-	var x = $('#hOffset').val();
+	var x = parseInt(parseInt( $('#slider a').css('left') )*9.4);
 	context.clearRect(0,0,940,400);
 	context.drawImage( (document.getElementById('img_elem') ), 0, 0, 940, 400);
     context.textAlign = "left";
     context.textBaseline = "top";
     context.fillStyle = fontColor;
-	context.font =  size + " " + fv;
+	context.font = size + "pt " + fv;
 	context.textAlign = 'left';
     // prepare textarea value to be drawn as multiline text.
     var textval = puzzleBody;
     var textvalArr = toMultiLine(textval);
 	var y = parseInt($('#vOffset').val());
-   	var linespacing = parseInt(parseInt(size.match(/\d\d/)));
+   	var linespacing = parseInt(parseInt(size*1.3));
     console.log('linespacing: ' + linespacing + ' textval: ' + textval + 'textvalArr: ' +textvalArr);
 
     // draw each line on canvas. 
@@ -39,8 +40,28 @@ var toMultiLine = function(text){
 };
 
 $(document).ready(function() {
+	var cleared;
+
+	$('#puzzleBody').click(function(){
+		if (cleared !== 1) {
+			$(this).val("");
+			cleared = 1;
+		}
+	});
+ $("#slider").slider({min: 0, max: 100}).bind( "slide", function(event, ui) {
+  var hOffset = ui.value;
+  drawCanvas();
+});;
 	var canvas = document.getElementById("canvas");
-//	$('#colorSelector img').css('backgroundColor', '#000000');
+	$('#customSize').click( function() {
+		$('#sizeInput').focus().val("");
+	});
+	$('#sizeInput').keyup(function() {
+		drawCanvas();
+	});
+	$('#sizeInput').click(function() {
+		$('this').val("");
+	});
 	$('#hOffset').change(
 		function()	{
 			drawCanvas();
@@ -51,9 +72,9 @@ $(document).ready(function() {
 			drawCanvas();
 		}
 	);
-	$('#size').change(
+	$('.size').click(
 		function() {
-			$('#canvas').css('font-size', $('#size').val() + 'pt' );
+			$('#sizeInput').val( $(this).text() );
 			drawCanvas();
 		}
 	);
@@ -70,7 +91,6 @@ $(document).ready(function() {
 			return false;
 		},
 		onChange: function (hsb, hex, rgb) {
-//			$('#colorSelector img').css('backgroundColor', '#' + hex);
 			fontColor = '#' + hex;
 			drawCanvas();
 		}
@@ -92,7 +112,7 @@ $(document).ready(function() {
 	});
 	$('#align').change(function() {
 		$('#canvas').css('text-align', $(this).val());
-				drawCanvas();
+		drawCanvas();
 	});
 	$('.fontSelect').click(function(){
 		$('#canvas').css('font-family', $(this).text());
@@ -114,6 +134,5 @@ $(document).ready(function() {
 		puzzleBody = $(this).val();
 		drawCanvas();
 	});
-	drawCanvas();
 	$('#img_elem').hide();
 });
