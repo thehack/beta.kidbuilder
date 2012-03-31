@@ -1,5 +1,6 @@
 var puzzleBody = "Your text Will show up here.";
-var x = 25;
+var vOffset = 30;
+var hOffset = 30;
 var fontColor = '#000000';
 var drawCanvas = function(){
     // set context and formatting
@@ -7,7 +8,7 @@ var drawCanvas = function(){
 	var size =  $('#sizeInput').val();
 	var canvas = document.getElementById("canvas");
     var context = canvas.getContext('2d');
-	var x = parseInt(parseInt( $('#slider a').css('left') )*9.4);
+	var x = hOffset;
 	context.clearRect(0,0,940,400);
 	context.drawImage( (document.getElementById('img_elem') ), 0, 0, 940, 400);
     context.textAlign = "left";
@@ -18,7 +19,7 @@ var drawCanvas = function(){
     // prepare textarea value to be drawn as multiline text.
     var textval = puzzleBody;
     var textvalArr = toMultiLine(textval);
-	var y = parseInt($('#vOffset').val());
+	var y = vOffset;
    	var linespacing = parseInt(parseInt(size*1.3));
     console.log('linespacing: ' + linespacing + ' textval: ' + textval + 'textvalArr: ' +textvalArr);
 
@@ -40,18 +41,25 @@ var toMultiLine = function(text){
 };
 
 $(document).ready(function() {
-	var cleared;
 
+	// Clear this textarea, but only the first time it is clicked.
+	var cleared;
 	$('#puzzleBody').click(function(){
 		if (cleared !== 1) {
 			$(this).val("");
 			cleared = 1;
 		}
 	});
- $("#slider").slider({min: 0, max: 100}).bind( "slide", function(event, ui) {
-  var hOffset = ui.value;
-  drawCanvas();
-});;
+
+	// Set up Sliders.
+	$("#slider").slider({min: 0, max: 100, value: 30}).bind( "slide", function(event, ui) {
+		hOffset = parseInt(parseInt(ui.value)*9.4);
+		drawCanvas();
+	});
+	$("#vSlider").slider({min: 0, max: 100, orientation: 'vertical', value: 30}).bind( "slide", function(event, ui) {
+		vOffset = 400 - parseInt(ui.value)*4;
+		drawCanvas();
+	});
 	var canvas = document.getElementById("canvas");
 	$('#customSize').click( function() {
 		$('#sizeInput').focus().val("");
@@ -62,16 +70,6 @@ $(document).ready(function() {
 	$('#sizeInput').click(function() {
 		$('this').val("");
 	});
-	$('#hOffset').change(
-		function()	{
-			drawCanvas();
-		}
-	);
-	$('#vOffset').change(
-		function()	{
-			drawCanvas();
-		}
-	);
 	$('.size').click(
 		function() {
 			$('#sizeInput').val( $(this).text() );
