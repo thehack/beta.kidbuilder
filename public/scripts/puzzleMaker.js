@@ -1,7 +1,7 @@
-var puzzleBody = "Your text Will show up here.";
 var vOffset = 30;
 var hOffset = 30;
 var fontColor = '#000000';
+var puzzleBody = "It\nShows Up\nHere"
 var drawCanvas = function(){
     // set context and formatting
 	var fv = $('#canvas').css('font-family');
@@ -34,14 +34,13 @@ var drawCanvas = function(){
 
 // Creates an array where the <br/> tag splits the values.
 var toMultiLine = function(text){
-   var textArr = new Array();
+   var textArr = [];
    text = text.replace(/\n\r?/g, '<br/>');
    textArr = text.split("<br/>");
    return textArr;
 };
 
 $(document).ready(function() {
-
 	// Clear this textarea, but only the first time it is clicked.
 	var cleared;
 	$('#puzzleBody').click(function(){
@@ -51,15 +50,13 @@ $(document).ready(function() {
 		}
 	});
 
-	// Set up Sliders.
-	$("#slider").slider({min: 0, max: 100, value: 30}).bind( "slide", function(event, ui) {
-		hOffset = parseInt(parseInt(ui.value)*9.4);
-		drawCanvas();
-	});
-	$("#vSlider").slider({min: 0, max: 100, orientation: 'vertical', value: 30}).bind( "slide", function(event, ui) {
-		vOffset = 400 - parseInt(ui.value)*4;
-		drawCanvas();
-	});
+	// Set up draggable positioner
+		$('#hmSlider').draggable({ appendTo: $('#canvas'), drag: function(element, ui) {
+			hOffset = ui.position.left + 30;
+			vOffset = ui.position.top + 30;
+			drawCanvas()
+		}});
+		
 	var canvas = document.getElementById("canvas");
 	$('#customSize').click( function() {
 		$('#sizeInput').focus().val("");
@@ -133,4 +130,5 @@ $(document).ready(function() {
 		drawCanvas();
 	});
 	$('#img_elem').hide();
+drawCanvas();
 });

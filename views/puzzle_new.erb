@@ -26,9 +26,12 @@
 	.btn { height: 18px;}
 	#puzzleTitle {width: 100px;}
 	#save {height:28px;vertical-align:baseline;}
-	#puzzleBody{width:930px;height:140px;margin-top:100px;line-height:30px;}
-	#slider { position:absolute;z-index:1;width:940px; }
-	.abs {position:absolute;z-index:1;height:400px;}
+	#puzzleBody{width:930px;height:110px;margin-top:80px;line-height:30px;}
+	#slider { position:absolute;z-index:1;width:940px;max-height:0px;}
+	#vSlider {position:absolute;z-index:1;height:400px;max-width:0px;}
+	.ui-slider-handle {text-align:center;}
+	#slider a {}
+	#hmSlider{margin-top:-390px;margin-left:10px;background-color:white;border:1px solid black;border-radius:5px;-moz-border-radius:5px;width:15px;height:15px;text-align:center;opacity: 0.5;-moz-opacity: 0.5;filter:alpha(opacity=5);}
 	</style>
 </head>
 <body>
@@ -91,21 +94,22 @@
 		</div>
 	</div>
 	<div class="container">
-		<textarea class="" id='puzzleBody'> </textarea>
-		<br>
+		<textarea class="" id='puzzleBody'>Your
+Text
+Here</textarea>
 		<br>
 	</div>
 
 	<div class="container">
-		<div id="slider"></div>
-		<div class="abs" id="vSlider"></div>
 		<canvas id="canvas" width="940" height="400">
 		<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
 		<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
 		</canvas>
 	</div>
-
-
+	<div class="container"><div id="hmSlider"><span><i class="icon-move"></i></span></div></div>
 	<img id='img_elem' src="/images/backgrounds/panda.png" />
+	<script type="text/javascript">
+
+	</script>
 </body>
 </html>
