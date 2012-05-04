@@ -5,7 +5,6 @@ class Level
     # gets but doesnt set. you must do:
     # level.tileGames << game
     # level.save
-
     [self.tileGames, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
   end
   property :id, Serial
@@ -29,7 +28,15 @@ class User
   property :coins, Integer
   property :animal, String
   belongs_to :group
+  has n, :tileGames, :through => Resource
+  has n, :puzzles, :through => Resource
   has n, :verses, :through => Resource
+  def units
+    # gets but doesnt set. you must do:
+    # user.tileGames << game
+    # user.save
+    [self.tileGames, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
+  end
 end
 
 class Verse
@@ -42,8 +49,8 @@ class Verse
   property :index, Integer
   property :created_on, DateTime
   property :updated_at, DateTime
-  has n, :users, :through => Resource
   belongs_to :level, :required => false
+  has n, :users, :through => Resource
 end
 
 class Group
@@ -90,6 +97,8 @@ class TileGame
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
+  has n, :users, :through => Resource
+
 end
 
 class Puzzle
@@ -119,6 +128,8 @@ class Puzzle
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
+  has n, :users, :through => Resource
+
   
 end
 DataMapper.auto_upgrade!
