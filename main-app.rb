@@ -36,7 +36,7 @@ before do
   else
     @group = Group.first(:name => 'world')
   end
-  @five_games = TileGame.all( :limit => 5, :order => [ :updated_at.desc ] )
+  @five_games = Game.all( :limit => 5, :order => [ :updated_at.desc ] )
   @five_bbbs = Verse.all( :limit => 5, :order => [ :updated_at.desc ] )
   @five_puzzles = Puzzle.all( :limit => 5, :order => [ :updated_at.desc ] )
   @belts = %w[white yellow green red purple black]
@@ -71,7 +71,7 @@ get '/admin' do
     @levels = Level.all
     @puzzles = Puzzle.all
     @quizzes = Quiz.all
-    @tile_games = TileGame.all
+    @games = Game.all
     @users = User.all
     @verses = Verse.all
     erb :admin

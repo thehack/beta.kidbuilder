@@ -77,7 +77,7 @@
 			<div class='grid3 color6 linkbox'>
 				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
 				<% @five_games.each do |game| %>
-					<p><a href="/tile_games/<%= game.id %>/show"><%=h game.title %></a></p>
+					<p><a href="/games/<%= game.id %>/show"><%=h game.title %></a></p>
 				<% end %>
 			</div>
 			<br/>

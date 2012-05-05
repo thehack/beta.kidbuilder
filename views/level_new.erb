@@ -68,10 +68,10 @@ input {outline:none;}
 	<a href="/puzzles/<%= puzzle.id %>/show" rel="/puzzles/<%= puzzle.id %>/create"><%= puzzle.title %></a>
 	<% end %>	
 </div>
-<div id="tileGames" class="grid2">
+<div id="games" class="grid2">
 	<h3>Tile Games</h3>
-	<% @tile_games.each do |tile_game| %>
-	<a href="/tile_games/<%= tile_game.id %>/show" rel="/tile_games/<%= tile_game.id %>/create"><%= tile_game.title %></a>
+	<% @games.each do |game| %>
+	<a href="/games/<%= game.id %>/show" rel="/games/<%= game.id %>/create"><%= game.title %></a>
 	<% end %>
 </div>		
 <script>
@@ -84,7 +84,7 @@ $(function() {
 //		appendTo: "body",
 		helper: "clone"
 	});
-	$( "#tileGames a" ).draggable({
+	$( "#games a" ).draggable({
 //		appendTo: "body",
 		helper: "clone"
 	});

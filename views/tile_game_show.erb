@@ -34,33 +34,33 @@
 	<!-- six rows of letters. these go behind the colourful squares. -->
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row1[(i), 1] %><% if @tile_game.row1[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row1[(i), 1] %><% if @game.row1[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row2[(i), 1] %><% if @tile_game.row2[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row2[(i), 1] %><% if @game.row2[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row3[(i), 1] %><% if @tile_game.row3[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row3[(i), 1] %><% if @game.row3[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row4[(i), 1] %><% if @tile_game.row4[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row4[(i), 1] %><% if @game.row4[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row5[(i), 1] %><% if @tile_game.row5[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row5[(i), 1] %><% if @game.row5[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
 	<div class="letterbox">
-		<%= @tile_game.row6[(i), 1] %><% if @tile_game.row6[(i)] == 32 %>&nbsp;<% end %>
+		<%= @game.row6[(i), 1] %><% if @game.row6[(i)] == 32 %>&nbsp;<% end %>
 	</div>
 	<% end %>
 </div>
@@ -68,28 +68,28 @@
 <div style="position:absolute;width:940px;margin-left:2px;" id="tile_covers">
 
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row1[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row1[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row2[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row2[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row3[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row3[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row4[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row4[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row5[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row5[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 	<% 12.times do |i| %>
-	<div class="letterbox <% if @tile_game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @tile_game.row6[(i), 1] %>">&nbsp;
+	<div class="letterbox <% if @game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row6[(i), 1] %>">&nbsp;
 	</div>
 	<% end %>
 

@@ -1,17 +1,16 @@
-
 class Level
   include DataMapper::Resource
   def units
     # gets but doesnt set. you must do:
-    # level.tileGames << game
+    # level.games << game
     # level.save
-    [self.tileGames, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
+    [self.games, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
   end
   property :id, Serial
   property :title, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  has n, :tileGames
+  has n, :games
   has n, :puzzles
   has n, :verses
 end
@@ -27,15 +26,17 @@ class User
   property :score, Integer
   property :coins, Integer
   property :animal, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
   belongs_to :group
-  has n, :tileGames, :through => Resource
+  has n, :games, :through => Resource
   has n, :puzzles, :through => Resource
   has n, :verses, :through => Resource
   def units
     # gets but doesnt set. you must do:
-    # user.tileGames << game
+    # user.games << game
     # user.save
-    [self.tileGames, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
+    [self.games, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
   end
 end
 
@@ -56,7 +57,6 @@ end
 class Group
   include DataMapper::Resource
   property :id, Serial
-  property :administrator, String
   property :email, String
   property :name, String, :required => true
   property :logo, String
@@ -81,7 +81,7 @@ class Quiz
   property :id, Serial
 end
 
-class TileGame
+class Game
   include DataMapper::Resource
   property :id, Serial
   property :title, String
@@ -98,7 +98,6 @@ class TileGame
   property :updated_at, DateTime
   belongs_to :level, :required => false
   has n, :users, :through => Resource
-
 end
 
 class Puzzle
@@ -128,8 +127,40 @@ class Puzzle
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
-  has n, :users, :through => Resource
-
-  
+  has n, :users, :through => Resource  
 end
 DataMapper.auto_upgrade!
+
+# first user and group
+if Group.all == []
+  group = Group.create( :id => 1, 
+                        :email => "tim.inman@gmail.com",
+                        :name => 'world',
+                        :logo => 'kidbuilder2.png',
+                        :color1 => "666666",
+                        :color2 => "0F87ff",
+                        :color3 => '0F87ff',
+                        :color4 => 'f55200',
+                        :color5 => '8fe300',
+                        :color6 => 'fd00d6',
+                        :created_on => Time.now,
+                        :updated_at => Time.now )
+  email = 'tim.inman@gmail.com'
+  login = 'thehack'
+  salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
+  password = '953NE8921'
+
+  user = User.create(
+    :email => email,
+    :login => login,
+    :crypted_password => Digest::SHA1.hexdigest("--#{salt}--#{password}--"),
+    :salt => salt,
+    :belt => 'white',
+    :score => 0,
+    :coins => 0,
+    :created_on => Time.now,
+    :updated_at => Time.now )
+  group.users << user
+  group.save
+  puts "just created admin user in #{user.group.name}."
+end

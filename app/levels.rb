@@ -1,7 +1,7 @@
 get '/levels/new' do
   @levels = Level.all
   @verses = Verse.all
-  @tile_games = TileGame.all
+  @games = Game.all
   @puzzles = Puzzle.all
   erb :level_new
 end
@@ -36,11 +36,11 @@ post '/units/:title/:index/:kind/:id/create' do
     puzzle.index = index.to_i
     puzzle.save
     level.puzzles << puzzle
-  when "tile_games"
-    tile_game = TileGame.first(:id => id)
-    tile_game.index = index.to_i
-    tile_game.save
-    level.tileGames << tile_game
+  when "games"
+    game = Game.first(:id => id)
+    game.index = index.to_i
+    game.save
+    level.games << game
   end
     level.save 
 end

@@ -1,23 +1,23 @@
-# Controller actions for TileGame
-get '/tile_games/new' do
-  erb :tile_game_new
+# Controller actions for Game
+get '/games/new' do
+  erb :game_new
 end
 
-get '/tile_games/:id/show' do  
-  @tile_game = TileGame.get(params[:id])
-  erb :tile_game_show
+get '/games/:id/show' do  
+  @game = Game.get(params[:id])
+  erb :game_show
 end
 
-get '/tile_games/list' do
-  @tile_games = TileGame.all
-  erb :tile_game_list
+get '/games/list' do
+  @games = Game.all
+  erb :game_list
 end
 
-get '/tile_games/:id/edit' do
-  erb :tile_game_edit
+get '/games/:id/edit' do
+  erb :game_edit
 end
 
-post '/tile_games/create' do
+post '/games/create' do
   s = params[:phrase]
   lines = []
   cnt = 0
@@ -41,7 +41,7 @@ post '/tile_games/create' do
   add_to_end = 6 - (rows.length + add_to_start)
   add_to_start.times { rows.unshift([" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]) }
   add_to_end.times { rows << [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "] }
-  game = TileGame.new
+  game = Game.new
   game.title = params[:title]
   game.row1 = rows[0]
   game.row2 = rows[1]
@@ -55,11 +55,11 @@ post '/tile_games/create' do
   redirect '/admin'
 end
 
-post '/tile_games/:id/destroy' do
-  game = TileGame.get(params[:id])
+post '/games/:id/destroy' do
+  game = Game.get(params[:id])
   game.destroy
 end
 
-post '/tile_games/:id/update' do
-  @tile_game = TileGame.get(params[:id])
+post '/games/:id/update' do
+  @game = Game.get(params[:id])
 end

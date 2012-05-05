@@ -5,7 +5,7 @@
 	<h1>Administration</h1>
 	<h3>Create a New Resource</h3>
 	<p><a href="/puzzles/new" id="newPuzzle">New Puzzle</a></p>
-	<p><a href="#" id="newTileGame">New Tile Game</a></p>
+	<p><a href="#" id="newGame">New Tile Game</a></p>
 	<p><a href="#" id="new_bbb">New Bible Black Belt</a></p>
 	<p><a href="#">New Lesson</a></p>
 	<p><a href="#" id="fileUpload">Upload a File</a></p>
@@ -33,7 +33,7 @@
 //	new Control.ColorPicker("colorfield" + idx); 
 //});
 //for the new wordgames
-$('#newTileGame').bind('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/tile_games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
+$('#newGame').bind('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/games/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
 //for the new bbb
 $('#new_bbb').bind('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="title" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% @belts.each do |belt| %><option><%= belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
 //file upload
