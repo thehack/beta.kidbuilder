@@ -1,0 +1,142 @@
+<style>
+.letterbox {
+	float:left;
+	border:4px solid black;
+	width:70px;
+	height:48px;
+	font-size:32px;
+	text-align:center;
+	z-index:0;
+	padding-top: 8px;
+	font-weight: 800;
+}
+.black {background-color:black;}
+.green {
+	background-image: url('/images/blue.png');
+}
+.spacer {
+	background-color:black;
+	width:4px;
+	height:384px;
+	float:left;}
+.blue {
+	background-image: url('/images/green.png');
+}
+</style>
+	
+<div class="first grid12" style="margin-left:2px;width:936px;">
+	<div class="black">
+		<br/>
+	</div>
+</div>
+
+<div class="first grid12" style="margin-left:2px;">
+	<!-- six rows of letters. these go behind the colourful squares. -->
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row1[(i), 1] %><% if @game.row1[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row2[(i), 1] %><% if @game.row2[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row3[(i), 1] %><% if @game.row3[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row4[(i), 1] %><% if @game.row4[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row5[(i), 1] %><% if @game.row5[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox">
+		<%= @game.row6[(i), 1] %><% if @game.row6[(i)] == 32 %>&nbsp;<% end %>
+	</div>
+	<% end %>
+</div>
+<!-- colourful squares. -->
+<div style="position:absolute;width:940px;margin-left:2px;" id="tile_covers">
+
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row1[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row2[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row3[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row4[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row5[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+	<% 12.times do |i| %>
+	<div class="letterbox <% if @game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row6[(i), 1] %>">&nbsp;
+	</div>
+	<% end %>
+
+</div>
+<div class="first grid12" style="margin-left:2px;width:936px;">
+	<div class="black">
+		<br/>
+	</div>
+</div>
+
+<!-- This only exists to prevent the user from cheating by swiping all keys at once. -->
+<div style="position:absolute;width:940px;" id="scoreboard">
+	<div id="recieving">
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function winGame() {
+			Event.stopObserving(document);
+			say("you win!")
+};
+
+$(document).bind( 'keydown', function(event) {
+	if (event.keyCode > 64 && event.keyCode < 91 &&  $('recieving')) {
+		$("." + (String.fromCharCode(event.keyCode))).addClass('found').removeClass('blue');
+		var x = $('.found');
+		var blues = $('.blue');
+		var greens = 60 - blues.length;
+		if (x.length < greens && $('.' + (String.fromCharCode(event.keyCode))).size() >=1) {
+			$('#scoreboard').html("<div id='status'></div>");
+//			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
+		 Sound.play('/sounds/chime.mp3');
+		};
+		if ( $( "." + (String.fromCharCode(event.keyCode))).size() < 1) {
+			$('#scoreboard').html("<div id='status'></div>"),
+//			Element.replace.delay('.25', 'status', "<div id='recieving' style='font-size:16px; font-weight: bold; margin-top: 5px; color: #ffffff;'></div>");
+//			Element.removeClassName('outerframe', 'blackbg');
+//			Element.addClassName('outerframe', 'redbg');
+					 		 
+			Sound.play('/sounds/2buzz.mp3');
+//						Element.removeClassName.delay('.5', 'outerframe', 'redbg');
+//						Element.addClassName.delay('.5', 'outerframe', 'blackbg');
+		};	
+		if (blues.length == 0) { winGame();
+		}; 
+	};
+});
+</script>
