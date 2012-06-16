@@ -35,6 +35,10 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 ##TO ACCESS CONSOLE:
 	irb -r main-app.rb
 
+## Nginx Server
+
+Stop nginx: sudo /etc/init.d/nginx stop
+Start nginx: sudo /opt/nginx/sbin/nginx
 
 ##Milestones
 Finish and debug puzzle maker. Make it work in IE8
