@@ -4,6 +4,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/scripts/saystuff.js" type="text/javascript" charset="utf-8"></script>
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
 		<script type="text/javascript" charset="utf-8">		
 		//	var kungFu = new Image();
 		//	kungFu.src = "/sounds/kung_fu.mp3";
@@ -11,135 +13,76 @@
 				setTimeout("window.location='/'", 1500)
 			}
 		</script>
-		<link rel="stylesheet" href="/css/simpler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script type="/scripts/bootstrap.js"></script>
+		<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
 		<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		<style>
-		.color1 { background-color:#<%= @group.color1 %>; }
-		.color2 { background-color:#<%= @group.color2 %>; }
-		.color3 { background-color:#<%= @group.color3 %>; }
-		.color4 { background-color:#<%= @group.color4 %>; }
-		.color5 { background-color:#<%= @group.color5 %>; }
-		.color6 { background-color:#<%= @group.color6 %>; }
+			.color1 { background-color:#<%= @group.color1 %>; }
+			.color2 { background-color:#<%= @group.color2 %>; }
+			.color3 { background-color:#<%= @group.color3 %>; }
+			.color4 { background-color:#<%= @group.color4 %>; }
+			.color5 { background-color:#<%= @group.color5 %>; }
+			.color6 { background-color:#<%= @group.color6 %>; }
 		</style>
 	</head>
-	<body id="body" class="color1">
-		<div id="error" style='position:absolute;top:114px;left:600px;z-index:10;color:red;font-size:26px;text-shadow: 2px 2px 2px #eee;'>
-			<%= flash[:notice] %>
+	<body id="body">
+		<div class="navbar  navbar-fixed-top" id="navbar">
+	  		<div class="navbar-inner">
+	    		<div class="container">
+	    			<a class="brand" style="font-family: 'Lobster', cursive;font-size:32px"href="#">KidBuilder.net</a>
+					<ul class="nav" style="margin-top:12px;">
+					  <li><a href="#">Home</a></li>
+					  <li><a href="#">Badges</a></li>
+					  <li><a href="#">People</a></li>
+					  <%if logged_in? %>
+					  <li><a href="#" class="pull-right" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0;path = /;expires = ' + date; window.location= '/';">Log-Out</a></li>
+					  <% end %>
+					</ul>
+	    		</div>
+	  		</div>
 		</div>
-		<div class="container clearfix white" style="padding: 10px 20px 20px 20px;">
-			<div class="first grid6">
-				<div id='logo'>
-					<a href="/"><img src="/groupfiles/<%= @group.name %>/<%= @group.logo %>" height="98" alt="logo">
-					</a>
+		<br>
+		<br>
+		<div class="container">
+			<div class="row" style="display:none;" id="error">
+				<div class="span12">
+					<div class="alert alert-error" >
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<b>ERROR!</b> <%= flash[:notice] %>
+					</div>
 				</div>
 			</div>
-			<div class='grid3'>
-			&nbsp;
-			</div>
-			<div class="grid3" style="text-align:right;">
-					<% if logged_in? %>
-						<div>
-							<a href="javascript:say('Group: <%= @group.name %>');">
-								<img style="border:solid black 1px;" src='/images/profilepic.png' height="100" alt='profile'/>
-							</a>	
-						</div>
-					<% else %>
-						<a class="large magenta awesome" id='login_link' href="#">&nbsp;&nbsp;Log-In&nbsp;&nbsp;&nbsp;</a>
-						<p><a class="large orange awesome" id='signup_link' href="#">&nbsp;Sign-Up&nbsp;</a></p>
-					<% end %>
-			</div>
-			<div id="bar"class="first grid12 color2">
-				&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;Badges&nbsp;&nbsp;&nbsp;
-				<% if logged_in? %>
-				<span style="margin-left:500px">Welcome, <%= @current_user.login %></span>&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0;path = /;expires = ' + date; window.location= '/';">Log-Out</a>
-				<% end %>		
-			</div>
+			<br>
+			<br>
 			<%= yield %>
-			<div id="separate" class="first grid12">
-				<br>
+			<br>
+		</div>
+		<div class="navbar navbar-fixed-bottom" style="background-color:#ccc;border-top:1px solid #fff;min-height:40px;">
+			<div class="container">
+				<div class="row" style="margin-top:10px;text-align:center;">
+					<div class="span3"><a>© 2012 Tim Inman</a>
+					</div>
+					<div class="span3">
+						<a>Privacy Policy</a>
+					</div>
+					<div class="span3">
+						<a>Terms and Conditions</a>
+					</div>
+					<div class="span3">
+						<a href="">more</a>
+
+					</div>
+				</div>
 			</div>
-			<div class='first grid3 color3 linkbox'>
-				<h3 style='color:white;text-align:center;'>Levels</h3>
-			</div>
-			<div class='grid3 color4 linkbox' >
-				<h3 style='color:white;text-align:center;'>Bible Black Belt</h3>
-					<% @five_bbbs.each do |bbb| %>
-						<p><a href="/bbb/<%= bbb.id %>/show"><%=h bbb.title %></a></p>
-					<% end %>
-			</div>	
-			<div class='grid3 color5 linkbox'>
-				<h3 style='color:white;text-align:center;'>Puzzle</h3>
-				<% @five_puzzles.each do |puzzle| %>
-					<p><a href="/puzzles/<%= puzzle.id %>/show"><%=h puzzle.title %></a></p>
-				<% end %>
-			</div>
-			<div class='grid3 color6 linkbox'>
-				<h3 style='color:white;text-align:center;'>Tile-Game</h3>
-				<% @five_games.each do |game| %>
-					<p><a href="/games/<%= game.id %>/show"><%=h game.title %></a></p>
-				<% end %>
-			</div>
-			<br/>
 		</div>
 		<!-- container bottom of page -->
-		<div id='login_form' style='text-align:left;display:none;'>
-				<p>Login</p>
-					<p class='label'>Nickname</p>
-					<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
-					<p class='label'>Password</p>
-					<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
-					<a id="loginSubmit" class="medium magenta awesome" href="#" onclick="
-						$.ajax({
-							type: 'POST', 
-							url: '/login',
-							data: { 
-								nickname: $('#paratext #login_form #login_nickname').val(), 
-								password: $('#paratext #login_form #login_password').val(),
-							},
-							complete: function() {
-								window.location = '/';
-							} 
-						})">submit
-					</a>
-				<br/>
-		</div>
-		<div id="signup" style='display:none;text-align:left;'>
-				<p>SignUp</p>
-					<p class='label'>Nickname</p>
-					<p><input type='text' id="nickname" size='26' name="nickname"/></p>
-					<p class='label'>Email</p>
-					<p><input type='text' id="email" size='26' name="email"/></p>
-					<p class='label'>Password</p>
-					<p><input type="password" size='26' id="password" name="password"/></p>
-					<a id="signupSubmit" class="medium magenta awesome" href="#" onclick = "
-						$.ajax({
-							type: 'POST', 
-							url: '/signup',
-							data: { 
-								nickname: $('#paratext #signup #nickname').val(),
-								email: $('#paratext #signup #email').val(),
-								password: $('#paratext #signup #password').val()
-							},
-							complete: function(){window.location='/';	
-							} 
-						});">submit
-					</a>
-				<br/>
-		</div>
-		<script type='text/javascript'>
-		if ($('#login_link') || $('#signup_link')) {
-			$('#login_link').click( function () {
-				say('');
-				$('#login_form').clone().show().appendTo('#paratext');
-				$('#paratext #login_form input#login_nickname').focus();
-			} );
-			$('#signup_link').click( function () {
-				say('');
-				$('#signup').clone().show().appendTo('#paratext');
-				$('#paratext #signup input#nickname').focus();
-			} ); 
-		};
+		<script type="text/javascript">
+		var error = "<%= flash[:notice] %>";
+		if (error != "") {
+			$('#error').show();
+		}
 		</script>
 	</body>
 </html>

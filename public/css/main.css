@@ -11,25 +11,14 @@
 
 #body {
 	margin-top:0px;
-	background-image: url('/images/concrete_wall.jpg');
+	background-color: #f2f2f2;
 	}
 
-a img{border:0px;}
-#logo a {
-	color:green;
-	font-weight:bold;
- 	text-shadow: 2px 2px 2px black;
-	font-size:48px;
-	font-family: 'Ubuntu';
-}
-#logo a:hover {
-	color:orange;
-	font-weight:bold;
- 	text-shadow: 2px 2px 2px black;
-	font-size:48px;
-	text-decoration:none;
-}
-.logo {font-family: 'Cherry Cream Soda', serif;
+a img {border:0px;}
+.linkbox a {color:white;font-size:16px;line-height:20px;}
+.linkbox a:hover {color:#282828;}
+.logo {
+	font-family: 'Cherry Cream Soda', serif;
 	text-align:center;
 	font-size: 36px;
 	font-style: normal;
@@ -41,21 +30,8 @@ a img{border:0px;}
  	word-spacing: 0em;
 	line-height: 1.2;
 }
+
 #stage {min-height:400px;}
-#bar {
-	margin-bottom:10px; 
-	line-height:24px;
-	color:white;
-	background-image: url('/images/diagonal.png');
-	}
-#bar a { color:white;}
-#bar a:hover {text-decoration:underline;}
-
-h3 {font-family:Verdana, Geneva, sans-serif;color:#007fa3;}
-
-div {font-family:Verdana, Geneva, sans-serif; color:#333333;}
-
-#header {}
 
 .seperatorNill {
 	height:10px;
@@ -71,20 +47,8 @@ div {font-family:Verdana, Geneva, sans-serif; color:#333333;}
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	}
-	
-#background_hills {
-	background: url('/images/background.png');
 
-	}
-	
-#separate {
-	line-height:12px;
-}
 .biggish {font-family: 'Gill Sans', 'Impact', sans-serif; font-size:26px;}
-
-a {text-decoration:none;}
-
-a:hover {text-decoration:underline;}
 
 /* Buttons */
 .awesome, .awesome:visited {
@@ -126,24 +90,3 @@ a:hover {text-decoration:underline;}
 .orange.awesome:hover							{ background-color: #d45500; }
 .carrot.awesome, .carrot.awesome:visited		{ background-color: #f55200; }
 .carrot.awesome:hover							{ background-color: #a53700; }
-
-/** FORMS **/
-
-.input {
-	border: 1px solid #fefefe;
-	/** remember to change image path **/
-	background: url(/images/form.png) repeat-x #ffffff;
-	font-family: tahoma, helvetica, sans-serif;
-	margin-top:0px;
-	font-style: normal;
-	font-size: 14px;
-	color: #454743;
-}
-
-.label {
-	line-height:6px;
-	margin-bottom:-10px;
-	font-family: tahoma, helvetica, sans-serif;
-	font-size: 13px;
-	color: #0a5dff;
-}

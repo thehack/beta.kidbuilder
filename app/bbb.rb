@@ -76,7 +76,7 @@ get '/bbb/*/show' do
       word_count = words.length
       @blanks = word_count/6
       word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
-      fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+      fields = words.collect { |word| "<input type='text' class='bbbInput' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
       set = word_indexes[0..(@blanks -1)]
       bucket = []
       set.each do |wi|
@@ -93,7 +93,7 @@ get '/bbb/*/show' do
       word_count = words.length
       @blanks = word_count/2
       word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
-      fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+      fields = words.collect { |word| "<input type='text' class='bbbInput' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
       set = word_indexes[0..(@blanks -1)]
       bucket = []
       set.each do |wi|
@@ -111,7 +111,7 @@ get '/bbb/*/show' do
       word_count = words.length
       @blanks = word_count
       word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
-      fields = words.collect { |word| "<input type='text' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+      fields = words.collect { |word| "<input type='text' class='bbbInput' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
       set = word_indexes[0..(@blanks -1)]
       bucket = []
       set.each do |wi|

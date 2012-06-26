@@ -2,6 +2,12 @@
 I made a little script to generate a controller and associated views:
 ./script/generate.rb modelname # generates a basic crud controller
 
+##Bootstrap
+I have configured it not to be responsive for >1200px screen width. I don't like it that wide and it messes up my stage which is necessarily a fixed width.
+
+## Less
+lessc .less/bootstrap.less --compile public/css/bootstrap.css
+
 ##Git Workflow:
 on my local machine:
 	

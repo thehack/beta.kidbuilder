@@ -1,5 +1,77 @@
-<div id='stage' style="background-image: url('/images/bee.png');" class="first grid12">
+<div class="row">
+	<div id="stage" class="span12" style="background-image: url('/images/bee.png');background-repeat:no-repeat;">
+		<div class="row">
 
+			<div class="span7">
+				<div class="hero-unit">
+					<h1 style="color:#222222;">God's Words are Good.</h1>
+				  	<p>On Kidbuilder, you learn as you play. You'll find out about God's love and living the best kind of life!</p>
+					<br>
+					<a class="btn btn-primary btn-large" id='login_link' data-toggle="modal" href="#loginForm">&nbsp;&nbsp;Log-In&nbsp;&nbsp;&nbsp;
+					</a>
+					<a class="btn btn-primary btn-large" id='signup_link' data-toggle="modal" href="#signupForm">&nbsp;Sign-Up&nbsp;</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-	
-	
+
+<!-- hidden modals -->
+<div class="modal hide" id="loginForm">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Log In</h3>
+	</div>
+	<div class="modal-body">
+		<span class='label'>Nickname</span>
+			<p><input type='text' id="login_nickname" name="nickname" size='26'/></p>
+			<span class='label'>Password</span>
+			<p><input type="password" id="login_password" name="loginpassword" size='26'/></p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" id="loginSubmit "class="btn btn-primary" onclick="
+				$.ajax({
+					type: 'POST', 
+					url: '/login',
+					data: { 
+						nickname: $('#login_nickname').val(), 
+						password: $('#login_password').val(),
+					},
+					complete: function() {
+						window.location = '/';
+					} 
+				})">Submit</a>
+	</div>
+</div>
+<div class="modal hide" id="signupForm">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Sign Up</h3>
+	</div>
+	<div class="modal-body">
+		<span class='label'>Nickname</span>
+		<p><input type='text' id="signupNickname" size='26' name="nickname"/></p>
+		<span class='label'>Email</span>
+		<p><input type='text' id="signupEmail" size='26' name="email"/></p>
+		<span class='label'>Password</span>
+		<p><input type="password" size='26' id="signupPassword" name="password"/></p>
+
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a id="signupSubmit" class="btn btn-primary" href="#" onclick = "
+			$.ajax({
+				type: 'POST', 
+				url: '/signup',
+				data: { 
+					nickname: $('#signupNickname').val(),
+					email: $('#signupEmail').val(),
+					password: $('#signupPassword').val()
+				},
+				complete: function(){window.location='/';	
+				} 
+			});">Save
+		</a>
+	</div>
+</div>
