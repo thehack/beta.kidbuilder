@@ -31,20 +31,44 @@
 		<div class="navbar  navbar-fixed-top" id="navbar">
 	  		<div class="navbar-inner">
 	    		<div class="container">
-	    			<a class="brand" style="font-family: 'Lobster', cursive;font-size:32px"href="#">KidBuilder.net</a>
-					<ul class="nav" style="margin-top:12px;">
-					  <li><a href="#">Home</a></li>
-					  <li><a href="#">Badges</a></li>
-					  <li><a href="#">People</a></li>
+					<a class="brand" style="font-family: 'Lobster', cursive;font-size:32px;text-align:center;"href="#">KidBuilder.net</a>
+			
+					<ul class="nav pull-right" style="margin-top:12px;">
 					  <%if logged_in? %>
 					  <li><a href="#" class="pull-right" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0;path = /;expires = ' + date; window.location= '/';">Log-Out</a></li>
 					  <% end %>
 					</ul>
-	    		</div>
-	  		</div>
+				</div> 
+			</div>
+	    </div>
+	    <br>
+	    <br>
+		<br>
+		<div class="subnav subnav-fixed">
+			<div class="container">
+				<ul class="nav nav-pills" style="text-align:center;">
+					<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Levels <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<li class=""><a href="#buttonGroups">Button groups</a></li>
+						<li class=""><a href="#buttonDropdowns">Button dropdowns</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Tile-Games <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<% @five_games.each do |game|%>
+						<li class="active"><a href="/games/<%=h game.id %>/show"><%=h game.title %></a></li>
+						<% end %>
+						</ul>
+					</li>
+					<li class=""><a href="#labels">FITB'S</a></li>
+					<li class=""><a href="#badges">PUZZLES</a></li>
+					<li class=""><a href="#typography">BADGES</a></li>
+					<li class=""><a href="#thumbnails">STATS</a></li>
+				</ul>
+			</div>
 		</div>
-		<br>
-		<br>
 		<div class="container">
 			<div class="row" style="display:none;" id="error">
 				<div class="span12">
@@ -54,9 +78,7 @@
 					</div>
 				</div>
 			</div>
-			<br>
-			<br>
-			<%= yield %>
+						<%= yield %>
 			<br>
 		</div>
 		<div class="navbar navbar-fixed-bottom" style="background-color:#ccc;border-top:1px solid #fff;min-height:40px;">
