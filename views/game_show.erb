@@ -3,11 +3,11 @@
 	float:left;
 	border:4px solid black;
 	width:70px;
-	height:48px;
-	font-size:32px;
+	height:56px;
+	font-size:36px;
 	text-align:center;
 	z-index:0;
-	padding-top: 8px;
+	line-height: 56px;
 	font-weight: 800;
 }
 .black {background-color:black;}
@@ -23,83 +23,85 @@
 	background-image: url('/images/green.png');
 }
 </style>
-	
-<div class="first grid12" style="margin-left:2px;width:936px;">
-	<div class="black">
-		<br/>
+<div class="row">
+	<div class=" span12" style="margin-left:2px;width:936px;">
+		<div class="black">
+			<br/>
+		</div>
 	</div>
 </div>
+<div class="row">
+	<div class=" span12" style="margin-left:2px;">
+		<!-- six rows of letters. these go behind the colourful squares. -->
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row1[(i), 1] %><% if @game.row1[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row2[(i), 1] %><% if @game.row2[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
 
-<div class="first grid12" style="margin-left:2px;">
-	<!-- six rows of letters. these go behind the colourful squares. -->
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row1[(i), 1] %><% if @game.row1[(i)] == 32 %>&nbsp;<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row3[(i), 1] %><% if @game.row3[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row4[(i), 1] %><% if @game.row4[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row5[(i), 1] %><% if @game.row5[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox">
+			<%= @game.row6[(i), 1] %><% if @game.row6[(i)] == 32 %>&nbsp;<% end %>
+		</div>
+		<% end %>
 	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row2[(i), 1] %><% if @game.row2[(i)] == 32 %>&nbsp;<% end %>
-	</div>
-	<% end %>
+	<!-- colourful squares. -->
+	<div style="position:absolute;width:940px;margin-left:2px;" id="tile_covers">
 
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row3[(i), 1] %><% if @game.row3[(i)] == 32 %>&nbsp;<% end %>
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row4[(i), 1] %><% if @game.row4[(i)] == 32 %>&nbsp;<% end %>
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row5[(i), 1] %><% if @game.row5[(i)] == 32 %>&nbsp;<% end %>
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox">
-		<%= @game.row6[(i), 1] %><% if @game.row6[(i)] == 32 %>&nbsp;<% end %>
-	</div>
-	<% end %>
-</div>
-<!-- colourful squares. -->
-<div style="position:absolute;width:940px;margin-left:2px;" id="tile_covers">
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row1[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row2[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
 
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row1[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row1[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row2[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row2[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row3[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row4[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row5[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-	<% 12.times do |i| %>
-	<div class="letterbox <% if @game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row6[(i), 1] %>">&nbsp;
-	</div>
-	<% end %>
-
-</div>
-<div class="first grid12" style="margin-left:2px;width:936px;">
-	<div class="black">
-		<br/>
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row3[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row3[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row4[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row4[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row5[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row5[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
+		<% 12.times do |i| %>
+		<div class="letterbox <% if @game.row6[(i)] == 32 %>green<% else %>blue<% end %> <%= @game.row6[(i), 1] %>">&nbsp;
+		</div>
+		<% end %>
 	</div>
 </div>
-
+<div class="row">
+	<div class=" span12" style="margin-left:2px;width:936px;">
+		<div class="black">
+			<br/>
+		</div>
+	</div>
+</div>
 <!-- This only exists to prevent the user from cheating by swiping all keys at once. -->
 <div style="position:absolute;width:940px;" id="scoreboard">
 	<div id="recieving">

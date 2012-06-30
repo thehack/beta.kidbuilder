@@ -36,9 +36,10 @@ before do
   else
     @group = Group.first(:name => 'world')
   end
-  @five_games = Game.all( :limit => 5, :order => [ :updated_at.desc ] )
-  @five_bbbs = Verse.all( :limit => 5, :order => [ :updated_at.desc ] )
-  @five_puzzles = Puzzle.all( :limit => 5, :order => [ :updated_at.desc ] )
+  @levels = Level.all
+  @eight_games = Game.all( :limit => 8, :order => [ :updated_at.desc ] )
+  @eight_bbbs = Verse.all( :limit => 8, :order => [ :updated_at.desc ] )
+  @eight_puzzles = Puzzle.all( :limit => 8, :order => [ :updated_at.desc ] )
   @belts = %w[white yellow green red purple black]
 end
 
