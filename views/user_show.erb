@@ -1,1 +1,14 @@
-<p>LOGIN: <%= @user.login %></p>
+<div class="row">
+	<div class="span12"><h1>
+		<%= @user.login %></h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span6">
+		<h3>Badges</h1>
+		<% @user.badges.each do |badge| %>
+		<img src="/images/<%=h badge.icon_url %>" alt="<%=h badge.name %>" />&nbsp;&nbsp;&nbsp;
+		<% end %> 
+	</div>
+</div>

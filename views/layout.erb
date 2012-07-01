@@ -86,7 +86,7 @@
 						</ul>
 					</li>
 					<li class="btn"><a href="#typography">BADGES</a></li>
-					<li class="btn"><a href="#thumbnails">STATS</a></li>
+					<% if logged_in? %><li class="btn"><a href="/user/<%=h @current_user.id %>/show">STATS</a></li><% end %>
 			
 				</ul>
 			</div>
