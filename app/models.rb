@@ -32,7 +32,7 @@ class User
   has n, :games, :through => Resource
   has n, :puzzles, :through => Resource
   has n, :verses, :through => Resource
-  has n, :badges, :through => :badge_user
+  has n, :badges, :through => Resource
   def units
     # gets but doesnt set. you must do:
     # user.games << game
@@ -79,17 +79,8 @@ class Badge
   property  :icon_url, String
   property  :price, Integer
   property  :group, String
-  has n, :users, :through => :badge_user
+  has n, :users, :through => Resource
 end
-
-class BadgeUser
-  include DataMapper::Resource
-  property :id, Serial
-  storage_names[:legacy] = 'user_badges'
-  belongs_to :user
-  belongs_to :badge
-end
-
 
 class Quiz
   include DataMapper::Resource
