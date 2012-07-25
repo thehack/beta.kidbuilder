@@ -121,8 +121,9 @@ $(document).ready(function() {
 		var dataURL = canvas.toDataURL("image/png");
 		var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 		var puzzleTitle = $('#puzzleTitle').val();
-		$.post('/puzzles/upload', {base64: base64, puzzleTitle: puzzleTitle},
-			function() {window.location = "/puzzles/" + puzzleTitle + '/show'});
+		$.post('/puzzles/upload', {base64: base64, puzzleTitle: puzzleTitle}
+			
+			).success( function(data) {window.location = "/puzzles/" + data + '/show'});
 	});
 	$('#puzzleTitle').click(function() {$(this).val("")});
 	$('#puzzleBody').keyup( function () {

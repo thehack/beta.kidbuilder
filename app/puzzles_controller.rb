@@ -3,6 +3,10 @@ include Magick
 require 'base64'
 
 post '/puzzles/upload' do
+  puzzle_title = params[:puzzleTitle]
+  puzzle = Puzzle.create( :title => puzzle_title)
+
+#required variables and methods  
   def double_digit(num)
     if num.to_s.length < 2
       "0" + num.to_s
@@ -10,12 +14,16 @@ post '/puzzles/upload' do
       num.to_s
     end
   end
-  puzzle_title = params[:puzzleTitle]
+
+
   puts "puzzleTitle= " + puzzle_title
+
+# open a create one file  
   File.open('public/images/' + puzzle_title +'.png', 'wb') do |f|
     f.write(Base64.decode64(params[:base64]))
     f.close()
   end
+
 # chop it up
     file = Magick::ImageList.new('public/images/'+ puzzle_title + '.png')
     FileUtils.mkdir_p "public/images/puzzles/#{puzzle_title}"
@@ -26,7 +34,9 @@ post '/puzzles/upload' do
       newfile = file.crop(x,0,94,400)
       newfile.write("public/images/puzzles/#{puzzle_title}/#{puzzle_title + double_digit(i)}.png")
     end
-  redirect "/puzzles/#{puzzle_title}/show"
+
+"#{puzzle.id}"
+  
 end
 
 # Controller actions for Puzzle
@@ -34,9 +44,10 @@ get '/puzzles/new' do
   erb :puzzle_new, :layout => false
 end
 
-get '/puzzles/:title/show' do
-  @title = params[:title]
-   @puzzle_tiles = (Dir.entries("./public/images/puzzles/#{@title}").sort) - ['.', '..', '.DS_Store']
+get '/puzzles/:id/show' do
+  @puzzle = Puzzle.get(params[:id])
+  @title = @puzzle.title
+  @puzzle_tiles = (Dir.entries("./public/images/puzzles/#{@title}").sort) - ['.', '..', '.DS_Store']
   erb :puzzle_show
 end
 

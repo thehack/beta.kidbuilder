@@ -110,26 +110,6 @@ class Puzzle
   include DataMapper::Resource
   property :id, Serial
   property :title, String
-  property :index, Integer
-  property :body, String
-  property :font, String
-  property :font_size, String
-  property :background_image, String
-  property :foreground_image, String
-  property :foreground_offset, Integer
-  property :part_one, String
-  property :part_one, String
-  property :part_one, String
-  property :part_two, String
-  property :part_three, String
-  property :part_four, String
-  property :part_five, String
-  property :part_six, String
-  property :part_seven, String
-  property :part_eight, String
-  property :part_nine, String
-  property :part_ten, String
-  property :big_image, String
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
