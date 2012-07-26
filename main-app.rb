@@ -1,6 +1,6 @@
 require 'sinatra'
-require 'datamapper'
-require 'database_config'
+require 'data_mapper'
+require './database_config'
 require 'digest/sha1'
 require 'sinatra/flash'
 
