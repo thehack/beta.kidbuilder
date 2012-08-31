@@ -1,3 +1,7 @@
+##Requires
+Ruby 1.8.7 with up-to-date gems
+imagemagick => on os x 'brew install imagemagick'
+
 ##Shortcuts
 I made a little script to generate a controller and associated views:
 ./script/generate.rb modelname # generates a basic crud controller
