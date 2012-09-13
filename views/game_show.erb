@@ -106,7 +106,7 @@
 
 <script type="text/javascript">
 // I switched the colors, so blue means green and green means blue.
-// When I created this game I understood Prototpye.js and not vanilla javascript, which is why I based scoring on the DOM.
+// When I created this game I could use Prototpype.js but not vanilla javascript, which is why I based scoring on the DOM.
 var gameActive = true;
 var winGame = function() {
 			// need a jQuery way to say: Event.stopObserving(document);
@@ -115,9 +115,6 @@ var winGame = function() {
 };
 
 $(document).bind( 'keydown', function(event) {
-	var blocking = function() {
-		setTimeout(function() {}, 500);
-	};
 	if (event.keyCode > 64 && event.keyCode < 91 && (gameActive == true)) {
 		$("." + (String.fromCharCode(event.keyCode))).addClass('found').removeClass('blue');
 		var x = $('.found');
@@ -125,11 +122,12 @@ $(document).bind( 'keydown', function(event) {
 		var greens = 72 - blues.length;
 		if (x.length < greens && $('.' + (String.fromCharCode(event.keyCode))).size() >= 1) {
 			$('#scoreboard').html("<div id='status'></div>");
-
+			blockInput(120);
 //		 	Sound.play('/sounds/chime.mp3');
 		};
 		if ( $( "." + (String.fromCharCode(event.keyCode))).size() < 1) {
 			console.log('BUZZ');
+			blockInput(120);
 //			Sound.play('/sounds/2buzz.mp3');
 
 		};	
@@ -137,4 +135,12 @@ $(document).bind( 'keydown', function(event) {
 		}; 
 	};
 });
+
+// To keep it fun. Pressing all the keys at once won't solve the puzzle.
+var blockInput = function(mills) {
+	gameActive = false;
+	setTimeout(function() {
+		gameActive = true;
+	}, mills);
+}; 
 </script>
