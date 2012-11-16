@@ -48,13 +48,17 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 ## Nginx Server
 
 Stop nginx: sudo /etc/init.d/nginx stop
+
+
 Start nginx: sudo /opt/nginx/sbin/nginx
 
-##Milestones
+##TODO
 Finish and debug puzzle maker.
 Make Puzzle maker work in IE8
 Award system  for points, 
 database link between user
+autofocus on first field of login popup
+allow email or username for sign-in
 
 ##Brain-storming belts/lessons:
 ###God is LOVE.
