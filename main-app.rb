@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 require './database_config'
