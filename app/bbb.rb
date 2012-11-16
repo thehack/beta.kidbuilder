@@ -63,7 +63,7 @@ get '/bbb/profile' do
   end
 end
 
-get '/bbb/*/show' do
+get '/verses/*/show' do
   #this needs to be optimized.
   cookie = request.cookies["difficulty"]
   @verse = Verse.get(params['splat'])

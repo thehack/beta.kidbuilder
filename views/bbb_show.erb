@@ -43,9 +43,9 @@
 	</form>
 	<center>
 	<% if @blanks == 0 %>
-		<a class="btn btn-large" id="begin" href="/bbb/<%=h @verse.id %>/show" onclick="document.cookie='difficulty=<%= @difficulty %>;'">Start Now</a>
+		<a class="btn btn-large" id="begin" href="/verses/<%=h @verse.id %>/show" onclick="document.cookie='difficulty=<%= @difficulty %>;'">Start Now</a>
 	<% else %>
-		<a class="btn" id="begin" href="/bbb/<%=h @verse.id %>/show">PEEK</a>
+		<a class="btn" id="begin" href="/verses/<%=h @verse.id %>/show">PEEK</a>
 	<% end %>
 </center>
 <div style="z-index:2;position:absolute;top:100px;font-size:400px;left:50%;color:red;"id="countdown"></div>
@@ -95,17 +95,5 @@ var wordComplete = function(event) {
 };
 $('#verse_text').keyup( wordComplete );
 
-//var seconds = 10;
-// old Prototype code
-//if (<%= @blanks %> == 0) {
-//	new PeriodicalExecuter(function(pe) {
-//		seconds -= 1;
-//		$('#countdown').update(seconds);
-//		if (seconds <= 0) {pe.stop; window.location = '<%= @redirect_url %>'};
-//		} , 1);
-//}
-//else {
-//	$('countdown').hide;
-//}
 
 </script>

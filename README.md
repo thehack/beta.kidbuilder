@@ -51,8 +51,8 @@ Stop nginx: sudo /etc/init.d/nginx stop
 Start nginx: sudo /opt/nginx/sbin/nginx
 
 ##Milestones
-Finish and debug puzzle maker. Make it work in IE8
-Badges
+Finish and debug puzzle maker.
+Make Puzzle maker work in IE8
 Award system  for points, 
 database link between user
 

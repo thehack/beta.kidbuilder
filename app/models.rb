@@ -110,6 +110,7 @@ class Puzzle
   include DataMapper::Resource
   property :id, Serial
   property :title, String
+  property :index, Integer  
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
