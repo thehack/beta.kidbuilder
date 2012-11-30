@@ -30,27 +30,6 @@ post '/verse/*/update' do
   redirect '/admin'
 end
 
-post '/bbb/*/award' do
-  if logged_in?
-    belts = %w[white yellow green red purple black]
-    verse = Verse.get(params['splat'])
-    @current_user.verses << verse
-    verse.users << @current_user
-    verse.save
-    @current_user.save
-    belt_attempt = belts[(belts.index(@current_user.belt) + 1)]
-    belt_verses = Verse.all(:belt_color => belt_attempt)
-    @user_verses = @current_user.verses
-    user_belt_verses = @user_verses & belt_verses
-    if belt_verses.count == user_belt_verses.count
-        @current_user.belt = belt_attempt
-    end
-    @current_user.save
-  else
-  "you are not logged in."
-  end  
-end
-
 get '/bbb/profile' do  
   if logged_in?
     @versecount = @current_user.verses.length
@@ -144,4 +123,27 @@ post '/bbb/*/animal' do
   if logged_in?
   @current_user.update(:animal => params['splat'])
   end  
+end
+
+post '/verse/:id/complete' do
+  if logged_in?
+
+    verse = Verse.get(params[:id])
+    user = @current_user
+    level = verse.level
+
+    # have they already completed the verse?
+    if @current_user.verses.include? verse
+      "already have that one"
+    else
+      user.verses << verse
+      user.save
+      # if they have all the units in the level give them the level
+      if (level.units - user.units).empty?
+        user.levels << level
+        user.save
+      end
+    end
+  end
+  # redirect or something here.
 end

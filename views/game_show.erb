@@ -109,8 +109,8 @@
 // When I created this game I could use Prototpype.js but not vanilla javascript, which is why I based scoring on the DOM.
 var gameActive = true;
 var winGame = function() {
-			// need a jQuery way to say: Event.stopObserving(document);
-			alert("you win!");
+			$.post('/game/<%= @game.id %>/complete');
+						alert("you win!");
 			return gameActive = false;
 };
 

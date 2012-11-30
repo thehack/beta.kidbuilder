@@ -44,22 +44,22 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 
 ##TO ACCESS CONSOLE:
 	irb -r main-app.rb
-
 ## Nginx Server
-
 Stop nginx: sudo /etc/init.d/nginx stop
-
-
 Start nginx: sudo /opt/nginx/sbin/nginx
-
 ##TODO
 Finish and debug puzzle maker.
 Make Puzzle maker work in IE8
-Award system  for points, 
-database link between user
 autofocus on first field of login popup
-allow email or username for sign-in
-
+completely get rid of sayStuff.js and replace with bootstrap modals
+puzzlemaker to use layout instead of loading independently
+badges/new doesn't work properly yet.
+sounds for tile game and puzzle game.
+usernames, emails must be unique
+verse fill-in game needs to be broken up into three levels, each a separate entity.
+redirects after successful attempts.
+after successful level/new, redirect to levels/list.
+fix resourse to singular: ex: 'puzzle/1/show' not '/puzzles/1/show'
 ##Brain-storming belts/lessons:
 ###God is LOVE.
 ###God, the Great Inventor.

@@ -6,7 +6,7 @@ get '/levels/new' do
   erb :level_new
 end
 
-get '/levels/:id/show' do
+get '/level/:id/show' do
   @level = Level.get(params[:id])
   erb :level_show
 end
