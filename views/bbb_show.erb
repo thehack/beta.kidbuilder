@@ -85,8 +85,10 @@ var wordComplete = function(event) {
 		$('#versetext').unbind('keyup');
 		hooyah.play();
 		$('#verse_text').replaceWith("<%= @success %>");
-		if ('<%= @redirect_url %>' == '/profile') {
-			$.ajax({ url: '/<%= @verse.id %>/award', type: 'POST'});
+		if ( document.cookie.slice(11,15) == 'hard') {
+						$.post('/verse/<%= @verse.id %>/complete');
+						
+;
 		}
 		setTimeout(function(){document.cookie = "difficulty=<%= @difficulty %>;";
 					<%= @redirect %>}, 3000);

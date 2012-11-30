@@ -30,13 +30,13 @@ post '/games/create' do
     lines[cnt] << w + " "
   }
   rows = []
-# figure out how many blanks go at the beginning and end of each row.
+# how many blanks go at the beginning and end of each row?
   lines.each do |l|
     prepend_spaces = ((12 - l.length)*0.5).round
     append_spaces = 12- (prepend_spaces + l.length)
     rows << " " * prepend_spaces + l + " " * append_spaces
   end
-# figure out how many blank rows go at the beginning and end of the puzzle.
+# how many blank rows go at the beginning and end of the puzzle?
   add_to_start = (6 - rows.length)/2
   add_to_end = 6 - (rows.length + add_to_start)
   add_to_start.times { rows.unshift([" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]) }
@@ -63,3 +63,25 @@ end
 post '/games/:id/update' do
   @game = Game.get(params[:id])
 end
+
+post '/game/:id/complete' do
+  if logged_in?
+
+    game = Game.get(params[:id])
+    level = game.level
+    user = @current_user
+    # have they already completed the game?
+    if @current_user.games.include? game
+    else
+      user.games << game
+      user.save
+      # if they have all the units in the level give them the level
+      if (level.units - user.units).empty?
+        user.levels << level
+        user.save
+      end
+    end
+  end
+  # redirect or something here.
+end
+

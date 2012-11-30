@@ -2,7 +2,7 @@ class Level
   include DataMapper::Resource
   def units
     # gets but doesnt set. you must do:
-    # level.games << game
+    # level.games << game 
     # level.save
     [self.games, self.puzzles, self.verses].flatten.sort_by { |unit| unit.index }
   end
@@ -10,6 +10,7 @@ class Level
   property :title, String
   property :created_on, DateTime
   property :updated_at, DateTime
+  has n, :users, :through => Resource
   has n, :games
   has n, :puzzles
   has n, :verses
@@ -29,6 +30,7 @@ class User
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :group
+  has n, :levels, :through => Resource
   has n, :games, :through => Resource
   has n, :puzzles, :through => Resource
   has n, :verses, :through => Resource
@@ -121,17 +123,17 @@ DataMapper.auto_upgrade!
 # first user and group
 if Group.all == []
   group = Group.create( :id => 1, 
-                        :email => "tim.inman@gmail.com",
-                        :name => 'world',
-                        :logo => 'kidbuilder2.png',
-                        :color1 => "666666",
-                        :color2 => "0F87ff",
-                        :color3 => '0F87ff',
-                        :color4 => 'f55200',
-                        :color5 => '8fe300',
-                        :color6 => 'fd00d6',
-                        :created_on => Time.now,
-                        :updated_at => Time.now )
+    :email => "tim.inman@gmail.com",
+    :name => 'world',
+    :logo => 'kidbuilder2.png',
+    :color1 => "666666",
+    :color2 => "0F87ff",
+    :color3 => '0F87ff',
+    :color4 => 'f55200',
+    :color5 => '8fe300',
+    :color6 => 'fd00d6',
+    :created_on => Time.now,
+    :updated_at => Time.now )
   email = 'tim.inman@gmail.com'
   login = 'thehack'
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")

@@ -18,7 +18,8 @@ $('#puzzle').sortable({forcePaaxis: 'x', cursor: 'crosshair', update: function(e
 	});
 	console.log(imageIndex);
 	if (imageIndex === "0123456789") {
-		alert('you win!');
+		$.post('/puzzle/<%= @puzzle.id %>/complete');
+		alert('win!');
 		$('#puzzle').sortable('disable');
 	};
 }});

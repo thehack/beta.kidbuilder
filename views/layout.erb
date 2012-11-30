@@ -50,7 +50,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">LEVELS <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 						<% @levels.each do |level |%>
-						<li class=""><a href="#"><%= level.title%></a></li>
+						<li class=""><a href="/level/<%= level.id %>/show"><%= level.title%></a></li>
 						<% end %>
 						</ul>
 					</li>

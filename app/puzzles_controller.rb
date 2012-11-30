@@ -72,3 +72,25 @@ end
 post '/puzzles/:id/update' do
   @puzzle = Puzzle.get(params[:id])
 end
+
+post '/puzzle/:id/complete' do
+  if logged_in?
+
+    puzzle = Puzzle.get(params[:id])
+    user = @current_user
+    level = puzzle.level
+    # have they already completed the unit?
+    if @current_user.puzzles.include? puzzle
+    else
+      user.puzzles << puzzle
+      user.save
+      # if they have all the units in the level give them the level
+      if (level.units - user.units).empty?
+        user.levels << level
+        user.save
+      end
+    end
+  end
+  # redirect or something here.
+end
+
