@@ -59,7 +59,6 @@ before /^.*(new|edit|create|admin|destroy|upload)$/ do
 end
 
 
-
 get '/' do
   @users = User.all
   @first_few = User.all(:limit => 5, :order => [ :id.desc ])

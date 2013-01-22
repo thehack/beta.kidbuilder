@@ -60,6 +60,8 @@ verse fill-in game needs to be broken up into three levels, each a separate enti
 redirects after successful attempts.
 after successful level/new, redirect to levels/list.
 fix resourse to singular: ex: 'puzzle/1/show' not '/puzzles/1/show'
+sort out why ruby 1.9.2 breaks the tile game and the fill in the blanks game - the tiles are all green and the fillin words get brackets.
+
 ##Brain-storming belts/lessons:
 ###God is LOVE.
 ###God, the Great Inventor.

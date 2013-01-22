@@ -52,3 +52,45 @@ end
 post '/levels/:id/update' do
   @level = Level.get(params[:id])
 end
+
+# A quick and dirty pluralize method - I don't want to require ActiveSupport just for this!
+class String
+  def pluralize
+    #the case of quizzes
+    if self[-1..-1] == "z"
+      self + "zes"
+    else
+      self + "s"
+    end
+  end
+end
+
+# DRY way to award completion of units (Game, Quiz, Verse, Puzzle), and levels
+post '/:class_name/:id/complete' do
+  if logged_in?
+    class_name = params[:class_name]
+    plural_class_name = class_name.pluralize
+    id = params[:id]
+    unit = eval(class_name.capitalize + ".get(" + id + ")")
+    user = @current_user
+    level = unit.level
+    # have they already completed the quiz?
+    if eval("user." + plural_class_name + ".include? unit")
+    else
+      eval("user." + plural_class_name + " << unit")
+      user.save
+      # if they have all the units in the level give them the level
+      if (level.units - user.units).empty?
+        user.levels << level
+        user.save
+      end
+    end
+  end
+  # a redirect url goes here
+  # if they are not logged in, it goes to probably the next similar item or back to their profile.
+  # if they are logged in it goes to the next unit or the next level if all units are completed
+  # this is how I will look up next unit: 
+  # next_index = unit.index +1
+  # next_unit = unit.level.units[next_index]
+  # next_unit_url = "/" + next.unit.class.to_s + "/" + next_unit.id + "/show" 
+end

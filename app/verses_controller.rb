@@ -55,7 +55,7 @@ get '/verses/*/show' do
       word_count = words.length
       @blanks = word_count/6
       word_indexes = (0..(word_count - 1)).to_a.sort_by { rand }
-      fields = words.collect { |word| "<input type='text' class='bbbInput' rel='#{word}' style='width: #{(word.to_s.length)*40}px;'>"}
+      fields = words.collect { |word| "<input type='text' class='bbbInput' rel='"+ word.join+"' style='width: #{(word.join.length)*40}px;'>"}
       set = word_indexes[0..(@blanks -1)]
       bucket = []
       set.each do |wi|
@@ -125,25 +125,3 @@ post '/bbb/*/animal' do
   end  
 end
 
-post '/verse/:id/complete' do
-  if logged_in?
-
-    verse = Verse.get(params[:id])
-    user = @current_user
-    level = verse.level
-
-    # have they already completed the verse?
-    if @current_user.verses.include? verse
-      "already have that one"
-    else
-      user.verses << verse
-      user.save
-      # if they have all the units in the level give them the level
-      if (level.units - user.units).empty?
-        user.levels << level
-        user.save
-      end
-    end
-  end
-  # redirect or something here.
-end
