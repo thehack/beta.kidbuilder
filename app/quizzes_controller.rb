@@ -28,24 +28,3 @@ post '/quiz/:id/update' do
   @quiz = Quiz.get(params[:id])
 end
 
-post '/quiz/:id/complete' do
-  if logged_in?
-
-    quiz = Quiz.get(params[:id])
-    user = @current_user
-    level = quiz.level
-    # have they already completed the quiz?
-    if @current_user.quizs.include? quiz
-    else
-      user.quizs << quiz
-      user.save
-      # if they have all the units in the level give them the level
-      if (level.units - user.units).empty?
-        user.levels << level
-        user.save
-      end
-    end
-  end
-  # redirect or something here.
-end
-

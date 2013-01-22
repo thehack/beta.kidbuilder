@@ -20,14 +20,14 @@ end
 post '/games/create' do
   s = params[:phrase]
   lines = []
-  cnt = 0
+  count = 0
   s.upcase!
 #split the phrase into a list of words, stuff each line as full as possible with words.
   s.gsub(/[(,?!\'":;.)]/, '').split(" ").each { |w|
-    lines[cnt] ||= ''
-    cnt = cnt + 1 if ( ( lines[cnt].length + w.length + 1) > 12 && lines[cnt]!='' )
-    lines[cnt] ||= ''
-    lines[cnt] << w + " "
+    lines[count] ||= ''
+    count = count + 1 if ( ( lines[count].length + w.length + 1) > 12 && lines[count]!='' )
+    lines[count] ||= ''
+    lines[count] << w + " "
   }
   rows = []
 # how many blanks go at the beginning and end of each row?
@@ -63,25 +63,3 @@ end
 post '/games/:id/update' do
   @game = Game.get(params[:id])
 end
-
-post '/game/:id/complete' do
-  if logged_in?
-
-    game = Game.get(params[:id])
-    level = game.level
-    user = @current_user
-    # have they already completed the game?
-    if @current_user.games.include? game
-    else
-      user.games << game
-      user.save
-      # if they have all the units in the level give them the level
-      if (level.units - user.units).empty?
-        user.levels << level
-        user.save
-      end
-    end
-  end
-  # redirect or something here.
-end
-
