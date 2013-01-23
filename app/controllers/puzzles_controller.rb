@@ -15,7 +15,6 @@ post '/puzzle/upload' do
     end
   end
 
-
   puts "puzzleTitle= " + puzzle_title
 
 # open a create one file  
@@ -34,13 +33,12 @@ post '/puzzle/upload' do
       newfile = file.crop(x,0,94,400)
       newfile.write("public/images/puzzles/#{puzzle_title}/#{puzzle_title + double_digit(i)}.png")
     end
-
-"#{puzzle.id}"
-  
+  "#{puzzle.id}"
 end
 
 # Controller actions for Puzzle
 get '/puzzle/new' do
+  @background_list = (Dir.entries("./public/images/backgrounds").sort) - ['.', '..', '.DS_Store']
   erb :puzzle_new, :layout => false
 end
 

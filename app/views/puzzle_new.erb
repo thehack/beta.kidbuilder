@@ -26,7 +26,6 @@
 	.btn { height: 18px;}
 	#puzzleTitle {width: 100px;}
 	#save {height:28px;vertical-align:baseline;}
-	#puzzleBody{width:930px;height:110px;margin-top:80px;line-height:30px;}
 	#slider { position:absolute;z-index:1;width:940px;max-height:0px;}
 	#vSlider {position:absolute;z-index:1;height:400px;max-width:0px;}
 	.ui-slider-handle {text-align:center;}
@@ -94,12 +93,29 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
 	<div class="container">
-		<textarea class="" id='puzzleBody'>Your
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="span9"><textarea class="" id='puzzleBody'>Your
 Text
 Here</textarea>
 		<br>
-	</div>
+
+			</div>
+			<div class="span3">
+				<div id="bgImages" style="overflow-x:scroll;max-height:160px;"><p>
+				<% for img in @background_list %>
+					<a class="/images/backgrounds/<%= img %>"><img src="/images/backgrounds/<%= img %>"></a>
+				<% end %></p>
+				</div>
+			</div>
+		</div>
+		
 
 	<div class="container">
 		<canvas id="canvas" width="940" height="400">
@@ -109,8 +125,18 @@ Here</textarea>
 	</div>
 	<div class="container"><div id="hmSlider"><span><i class="icon-move"></i></span></div></div>
 	<img id='img_elem' src="/images/backgrounds/panda.png" />
+	
 	<script type="text/javascript">
+		$('#bgImages a').click(function() {
+			$('#img_elem').replaceWith("<img src='" + $(this).attr('class') + "' id='img_elem' />");
+			$('#img_elem').hide();
+			var url = "url(" + $(this).attr('class') + ")";
+			$('#workArea').css('background-image', url);
 
+			$([overlay, alertbox]).remove();
+			drawCanvas();
+			return false;
+		});
 	</script>
 </body>
 </html>
