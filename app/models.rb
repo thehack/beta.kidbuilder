@@ -19,8 +19,8 @@ end
 class User
   include DataMapper::Resource
   property :id, Serial
-  property :email, String
-  property :login, String
+  property :email, String, :unique => true
+  property :login, String, :unique => true
   property :crypted_password, String
   property :salt, String
   property :belt, String

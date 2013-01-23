@@ -53,14 +53,12 @@ Make Puzzle maker work in IE8
 autofocus on first field of login popup
 completely get rid of sayStuff.js and replace with bootstrap modals
 puzzlemaker to use layout instead of loading independently
-badges/new doesn't work properly yet.
+badge/new doesn't work properly yet.
 sounds for tile game and puzzle game.
-usernames, emails must be unique
 verse fill-in game needs to be broken up into three levels, each a separate entity.
 redirects after successful attempts.
-after successful level/new, redirect to levels/list.
-fix resourse to singular: ex: 'puzzle/1/show' not '/puzzles/1/show'
-sort out why ruby 1.9.2 breaks the tile game and the fill in the blanks game - the tiles are all green and the fillin words get brackets.
+after successful level/new, redirect to /levels.
+
 
 ##Brain-storming belts/lessons:
 ###God is LOVE.

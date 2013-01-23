@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/scripts/saystuff.js" type="text/javascript" charset="utf-8"></script>
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="/scripts/bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8">		
+		//	var kungFu = new Image();
+		//	kungFu.src = "/sounds/kung_fu.mp3";
+			function waitUpdate() {
+				setTimeout("window.location='/'", 1500)
+			}
+		</script>
+		<script type="/scripts/bootstrap.js"></script>
+		<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/css/responsive.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+		<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<style>
+			.color1 { background-color:#<%= @group.color1 %>; }
+			.color2 { background-color:#<%= @group.color2 %>; }
+			.color3 { background-color:#<%= @group.color3 %>; }
+			.color4 { background-color:#<%= @group.color4 %>; }
+			.color5 { background-color:#<%= @group.color5 %>; }
+			.color6 { background-color:#<%= @group.color6 %>; }
+		</style>
+	</head>
+	<body id="body">
+		<div class="navbar  navbar-fixed-top" id="navbar">
+	  		<div class="navbar-inner">
+	    		<div class="container">
+					<a class="brand" style="font-family: 'Lobster', cursive;font-size:36px;text-align:center;"href="/">KidBuilder.net</a>
+			
+					<ul class="nav pull-right" style="margin-top:12px;">
+					  <%if logged_in? %>
+					  <li><a href="#" class="pull-right" onclick="var date = new Date(1970,04, 05, 0,00,04).toUTCString(); document.cookie = 'salt = 0;path = /;expires = ' + date; window.location= '/';">Log-Out</a></li>
+					  <% end %>
+					</ul>
+				</div> 
+			</div>
+	    </div>
+	    <br>
+	    <br><br>
+		<div class="subnav subnav-fixed" style="">
+			<div class="container">
+				<ul class="nav nav-pills btn-group" style="text-align:center;">
+					<li class="btn dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">LEVELS <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<% @levels.each do |level |%>
+						<li class=""><a href="/level/<%= level.id %>/show"><%= level.title%></a></li>
+						<% end %>
+						</ul>
+					</li>
+					<li class="btn dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">TILE GAMES <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<% @eight_games.each do |game|%>
+							<li><a href="/game/<%=h game.id %>/show"><%=h game.title %></a></li>
+						<% end %>
+						</ul>
+					</li>
+					<li class="btn dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">FILL-INS <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<% @eight_bbbs.each do |bbb|%>
+							<li><a href="/verse/<%=h bbb.id %>/show"><%=h bbb.title %></a></li>
+						<% end %>
+						</ul>
+					</li>
+					<li class="btn dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">PUZZLES <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<% @eight_puzzles.each do |puzzle|%>
+							<li><a href="/puzzle/<%=h puzzle.id %>/show"><%=h puzzle.title %></a></li>
+						<% end %>
+						</ul>
+					</li>
+					<li class="btn dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">QUIZZES <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<li class=""><a href="">1</a></li>
+						<li class=""><a href="#">2</a></li>
+						</ul>
+					</li>
+					<li class="btn"><a href="/badges">BADGES</a></li>
+					<% if logged_in? %><li class="btn"><a href="/user/<%=h @current_user.id %>/show">STATS</a></li><% end %>
+					<li class="btn"><a href="/users">USERS</a></li>
+			
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row" style="display:none;" id="error">
+				<div class="span12">
+					<div class="alert alert-error" >
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<b>ERROR!</b> <%= flash[:notice] %>
+					</div>
+				</div>
+			</div>
+						<%= yield %>
+			<br>
+		</div>
+		<div class="navbar navbar-fixed-bottom" style="background-color:#ccc;border-top:1px solid #fff;min-height:40px;">
+			<div class="container">
+				<div class="row" style="margin-top:10px;text-align:center;">
+					<div class="span3"><a>© 2012 Tim Inman</a>
+					</div>
+					<div class="span3">
+						<a>Privacy Policy</a>
+					</div>
+					<div class="span3">
+						<a>Terms and Conditions</a>
+					</div>
+					<div class="span3">
+						<a href="">more</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- container bottom of page -->
+		<script type="text/javascript">
+		var error = "<%= flash[:notice] %>";
+		if (error != "") {
+			$('#error').show();
+		}
+		</script>
+	</body>
+</html>

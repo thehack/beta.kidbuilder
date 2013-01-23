@@ -5,6 +5,9 @@ require './database_config'
 require 'digest/sha1'
 require 'sinatra/flash'
 
+# move views to app/views
+set :views, Proc.new { File.join(root, "app/views") }
+
 enable :sessions
 # use Rack::Flash
 Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
