@@ -1,0 +1,47 @@
+<script src="/scripts/colorPicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="/scripts/yahoo.color.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/css/colorPicker.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<div class ="first grid12">
+	<h1>Administration</h1>
+	<h3>Create a New Resource</h3>
+	<p><a href="/puzzle/new" id="newPuzzle">New Puzzle</a></p>
+	<p><a href="#" id="newGame">New Tile Game</a></p>
+	<p><a href="#" id="new_bbb">New Bible Black Belt</a></p>
+	<p><a href="#">New Lesson</a></p>
+	<p><a href="#" id="fileUpload">Upload a File</a></p>
+	<p><a href="#" id="visualPrefs">Visual Preferences</a></p>
+	<p><a href="/level/new">New Level</a></p>
+	<p><a href="/levels">Level listing</a></p>
+</div>
+<div style="display:none;" id="prefsForm">
+	<form action="/<%= @group.name %>/group/<%= @group.id %>/update" method="post" accept-charset="utf-8">
+			<p>Group Name&nbsp;&nbsp;<input type="text" name="group_name" value="<%= @group.name %>"></p>
+			<p>Logo&nbsp;&nbsp;<input type="text" name="logo" value="<%= @group.logo %>"></p>		
+			<p>color 1 #<input type="text" id="colorfield1" name="color1" value="<%= @group.color1 %>"></p>
+			<p>color 2 #<input type="text" id="colorfield2" name="color2" value="<%= @group.color2 %>"></p> 
+			<p>color 3 #<input type="text" id="colorfield3" name="color3" value="<%= @group.color3 %>"></p> 
+			<p>color 4 #<input type="text" id="colorfield4" name="color4" value="<%= @group.color4 %>"></p>
+			<p>color 5 #<input type="text" id="colorfield5" name="color5" value="<%= @group.color5 %>"></p>
+			<p>color 6 #<input type="text" id="colorfield6" name="color6" value="<%= @group.color6 %>"></p>
+	<p><input type="submit" class="awesome small royal" value="Save Changes &rarr;"></p>
+	</form>
+</div>
+
+<script type='text/javascript'>
+// this makes the color picker work. it neeeds to be adapted to jQuery
+//["1","2","3","4","5","6"].each(function(idx) {
+//	new Control.ColorPicker("colorfield" + idx); 
+//});
+//for the new wordgames
+$('#newGame').bind('click', function() { say('Enter your phrase.<br/>Less than 60 characters.<br/><form method="post" action="/game/create"><textarea name="title" cols="40" rows="1"></textarea><br/><textarea name="phrase" cols="40" rows="5"></textarea><br/><input type="submit" value="Submit" /></form>');});
+//for the new bbb
+$('#new_bbb').bind('click', function() { say('<div><form action="/verse/create" method="post" accept-charset="utf-8"><p><input type="text" name="body" size="50" id="verse_body" value="Verse Body"></p><p><input type="text" name="title" value="Reference" id=""></p><p><select name="belt" id="belt" selected="white" size="1"><% @belts.each do |belt| %><option><%= belt %></option><% end %></select></p><p><input type="submit" value="Continue &rarr;"></p></form></div>');});
+//file upload
+$('#fileUpload').bind('click', function() { say('<div><h3>Upload a file</h3><form action="/upload" method="post" enctype="multipart/form-data"><p><label for="file">File:</label><input type="file" name="file"></p><p><input name="commit" type="submit" value="Upload" /></p></form></div><br/>');});
+// visual prefs
+$('#visualPrefs').click( function () {
+	say('<img src=\'/images/ajax-loader.gif\' />');
+	var prefs = $('#prefsForm').show();
+	$('#paratext').html(prefs);	
+	} );
+</script>

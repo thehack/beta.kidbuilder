@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Puzzle Creator</title>
+	<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Lobster|Antic|Luckiest+Guy|Geo|Flavors|Coming+Soon' rel='stylesheet' type='text/css'>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<script src="/scripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<script src="/scripts/sayStuff.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/scripts/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/scripts/colorPicker.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/scripts/puzzleMaker.js" charset="utf-8"></script>
+
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/colorPicker.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/simpler.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/puzzleMaker.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="/css/bootstrap.css" />
+
+	<style type="text/css">
+	.tools {border: 2px solid black; padding:20px;}
+	canvas {background-image: url('/images/backgrounds/panda.png');}
+	.lightbar {background-color: #f2f2f2;margin-top:-10px;}
+	a {text-decoration:none;}
+	.btn input {height:12px;width:12px;font-size:9px;margin-top:-6px;}
+	.btn { height: 18px;}
+	#puzzleTitle {width: 100px;}
+	#save {height:28px;vertical-align:baseline;}
+	#puzzleBody{width:930px;height:110px;margin-top:80px;line-height:30px;}
+	#slider { position:absolute;z-index:1;width:940px;max-height:0px;}
+	#vSlider {position:absolute;z-index:1;height:400px;max-width:0px;}
+	.ui-slider-handle {text-align:center;}
+	#slider a {}
+	#hmSlider{margin-top:-390px;margin-left:10px;background-color:white;border:1px solid black;border-radius:5px;-moz-border-radius:5px;width:15px;height:15px;text-align:center;opacity: 0.5;-moz-opacity: 0.5;filter:alpha(opacity=5);}
+	</style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top ">
+		<div class="navbar-inner">
+			<div class="container">
+				<h1>Kidbuilder Puzzle Creator</h1>
+			</div>
+		</div>
+		<div class="subnav lightbar">
+			<div class="container">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-font"></i> Font
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="fontSelect">Lobster</a></li>
+							<li><a href="#" class="fontSelect">Trade Winds</a></li>
+							<li><a href="#" class="fontSelect">Luckiest Guy</a></li>
+							<li><a href="#" class="fontSelect">Geo</a></li>
+							<li><a href="#" class="fontSelect">Antic</a></li>
+							<li><a href="#" class="fontSelect">Flavors</a></li>
+							<li><a href="#" class="fontSelect">Impact</a></li>
+							<li><a href="#" class="fontSelect">Coming Soon</a></li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn" href="#">
+							<i class="icon-text-height"></i> Size <input id="sizeInput" value="32" type="text" />
+						</a>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="caret"></span>
+						</a>
+
+						<ul class="dropdown-menu">
+							<% for i in 1..16 %>
+							<li><a href="#" class="size"><%= 10 + 4*i %></a></li>
+							<% end %>
+							<li><hr></li>
+							<li><a href="#" id="customSize">Custom</a></li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a id="colorSelector" class="btn" href="#">
+							<i class="icon-tint"></i> Color
+							<span class="caret"></span>
+						</a>
+					</div>					
+					<div class="btn-group">
+						<a class="btn" id="chooseImage" data-toggle="dropdown" href="#"><i class="icon-picture"></i> Background
+						</a>
+					</div>
+					<div class="btn-group">
+						<input class="btn" type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
+						<button id="save" href="#" class="btn" >
+							<i class="icon-ok"></i> Save</button>
+					</div>				
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<textarea class="" id='puzzleBody'>Your
+Text
+Here</textarea>
+		<br>
+	</div>
+
+	<div class="container">
+		<canvas id="canvas" width="940" height="400">
+		<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
+		<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
+		</canvas>
+	</div>
+	<div class="container"><div id="hmSlider"><span><i class="icon-move"></i></span></div></div>
+	<img id='img_elem' src="/images/backgrounds/panda.png" />
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>

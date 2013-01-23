@@ -1,0 +1,5 @@
+<p>
+	<% @badges.each do |badge| %>
+	<img src="/images/<%= badge.icon_url %>" alt="<%=h badge.name %>"/>&nbsp;
+	<% end %>
+<p>	

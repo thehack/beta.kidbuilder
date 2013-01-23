@@ -1,0 +1,3 @@
+<% %w[maleape malekoala maledog femalekoala femalecat femaleelephant].each do |character| %>
+<a href="#" onclick="$.ajax({type: 'POST', url: '/<%= character %>/animal', complete: function(){window.location='/profile'});"><img src="/images/animals/<%= @current_user.belt %><%= character %>.png" style="width:150px;height:150px;" alt="<%= character %>"/></a>
+<% end %>

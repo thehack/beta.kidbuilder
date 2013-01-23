@@ -1,0 +1,13 @@
+<div id="newverse">
+	<form action="/verse/<%=h @verse.id %>/update" method="post" accept-charset="utf-8">
+		<p><input type="text" name="body" size="50" id="verse_body" value="<%=h @verse.body %>"></p>
+		<p><input type="text" name="title" value="<%=h @verse.title %>" id=""></p>
+		<p><select name="belt" id="belt" selected="white" size="1">
+			<% for belt in @belts %>
+			<option><%=h belt %></option>
+			<% end %>
+			</select>
+		</p>
+		<p><input type="submit" value="Continue &rarr;"></p>
+	</form>
+</div>

@@ -1,0 +1,101 @@
+<script type="text/javascript" charset="utf-8">
+	function setFocus() {
+	document.forms[0].elements[0].focus()
+	}
+	window.onload=setFocus;
+	// preload the hooyah
+	var hooyah = document.createElement('video');
+	var punch = document.createElement('video');
+	var woosh = document.createElement('video');
+	var ring = document.createElement('video');
+	punch.setAttribute('src', '/sounds/punch.mp3');
+	woosh.setAttribute('src', '/sounds/woosh.mp3');
+	hooyah.setAttribute('src', '/sounds/hooyah.mp3');
+	ring.setAttribute('src', '/sounds/ring.mp3');
+	ring.volume = 0.1;		
+	punch.volume = 0.3;
+	hooyah.load();
+	punch.load();
+	woosh.load();
+	ring.load();
+</script>
+<style>
+	form .greenOutline {border:solid 2px green;background-color:lightyellow;}
+	form .redOutline {border:solid 2px red;background-color:#FFBDBD;}
+	.golden {
+		text-align:center;
+		border:solid 2px #B89600;
+		background-color:#FFDF4F;
+		font-size: 40px;
+		margin-left:5px;
+		margin-right:5px;
+		padding: 5px 28px 5px 28px;}
+	form .bbbInput {text-align:center;height:50px;font-size:40px;}
+	#verse_text {font-size:48px; line-height:70px;text-align:justify;}
+	#begin{font-size:48px; line-height:70px;text-align:center;}
+</style>
+	<br>
+	<form>
+	<p id="verse_text"><%= @verse_layout %>
+	</p>
+	<p><%= @verse.title %>
+	</p>
+	</form>
+	<center>
+	<% if @blanks == 0 %>
+		<a class="btn btn-large" id="begin" href="/verse/<%=h @verse.id %>/show" onclick="document.cookie='difficulty=<%= @difficulty %>;'">Start Now</a>
+	<% else %>
+		<a class="btn" id="begin" href="/verse/<%=h @verse.id %>/show">PEEK</a>
+	<% end %>
+</center>
+<div style="z-index:2;position:absolute;top:100px;font-size:400px;left:50%;color:red;"id="countdown"></div>
+<script type="text/javascript" charset="utf-8">
+
+var answers = {};
+var increment = 0;
+var wordComplete = function(event) {
+	var element = event.target;
+	var word = $(element).attr('rel').toLowerCase();
+	var entry = $(element).val().toLowerCase().replace(/^\s+/,"");
+	var wordSoFar = word.substring(0, entry.length );
+//	var character = entry.charAt(entry.length - 1);
+	$(element).removeClass('greenOutline redOutline');
+	
+	if ( entry != wordSoFar ) {
+		$(element).addClass('redOutline');
+		woosh.play();
+	}
+	else if ( entry != "" ) {
+		$(element).addClass('greenOutline');
+		punch.play();
+	} 
+	if ( entry ==  word ) { 
+		increment = increment +1;
+		$(element).toggleClass('golden');
+		answers[increment] = $(element).attr('rel').toString();
+	console.log(Object.keys(answers).length + "," + <%= @correct %>);
+		ring.play();
+		
+		if ($(element).next('input') != null) {
+			$(element).next('input').focus();}
+			$(element).replaceWith("<span class='golden'>" + $(element).attr('rel').toString() + "</span");
+			
+	}
+	if (Object.keys(answers).length == <%= @correct %>) {
+		$('#versetext').unbind('keyup');
+		hooyah.play();
+		$('#verse_text').replaceWith("<%= @success %>");
+		if ( document.cookie.slice(11,15) == 'hard') {
+						$.post('/verse/<%= @verse.id %>/complete');
+						
+;
+		}
+		setTimeout(function(){document.cookie = "difficulty=<%= @difficulty %>;";
+					<%= @redirect %>}, 3000);
+	}
+	return increment;
+};
+$('#verse_text').keyup( wordComplete );
+
+
+</script>
