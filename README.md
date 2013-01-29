@@ -47,17 +47,6 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 ## Nginx Server
 Stop nginx: sudo /etc/init.d/nginx stop
 Start nginx: sudo /opt/nginx/sbin/nginx
-##TODO
-Finish and debug puzzle maker.
-Make Puzzle maker work in IE8
-autofocus on first field of login popup
-completely get rid of sayStuff.js and replace with bootstrap modals
-puzzlemaker to use layout instead of loading independently
-badge/new doesn't work properly yet.
-sounds for tile game and puzzle game.
-verse fill-in game needs to be broken up into three levels, each a separate entity.
-redirects after successful attempts.
-after successful level/new, redirect to /levels.
 
 
 ##Brain-storming belts/lessons:

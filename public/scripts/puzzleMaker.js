@@ -2,12 +2,13 @@ var vOffset = 30;
 var hOffset = 30;
 var fontColor = '#000000';
 var puzzleBody = "It\nShows Up\nHere"
+
 var drawCanvas = function(){
     // set context and formatting
 	var fv = $('#canvas').css('font-family');
 	var size =  $('#sizeInput').val();
 	var canvas = document.getElementById("canvas");
-    var context = canvas.getContext('2d');
+	var context = canvas.getContext('2d');
 	var x = hOffset;
 	context.clearRect(0,0,940,400);
 	context.drawImage( (document.getElementById('img_elem') ), 0, 0, 940, 400);
@@ -21,11 +22,12 @@ var drawCanvas = function(){
     var textvalArr = toMultiLine(textval);
 	var y = vOffset;
    	var linespacing = parseInt(parseInt(size*1.3));
-    console.log('linespacing: ' + linespacing + ' textval: ' + textval + 'textvalArr: ' +textvalArr);
+//    console.log('linespacing: ' + linespacing + ' textval: ' + textval + 'textvalArr: ' +textvalArr);
 
     // draw each line on canvas. 
     for(var i = 0; i < textvalArr.length; i++){
         context.fillText(textvalArr[i], x, y);
+//			eventually C
 //			context.strokeStyle = $('#strokeSelector img').css('background-color');
 //			context.strokeText(textvalArr[i], x, y);
         y += linespacing;
@@ -38,6 +40,15 @@ var toMultiLine = function(text){
    text = text.replace(/\n\r?/g, '<br/>');
    textArr = text.split("<br/>");
    return textArr;
+};
+var slices = [];
+var sliceAndDice = function(i) {
+	var sliceCanvas = document.getElementById('slices');
+	var context = sliceCanvas.getContext('2d');
+	context.clearRect(0,0,94,400);
+	context.drawImage( canvas, i*94, 0, 94, 400, 0, 0, 94, 400);
+	slices[i] = sliceCanvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
+	console.log('slice' + i + slices[i] + "\n\n\n")
 };
 
 $(document).ready(function() {
@@ -118,10 +129,14 @@ $(document).ready(function() {
 	});
 	$('#save').click(function() {
 		drawCanvas();
-		var dataURL = canvas.toDataURL("image/png");
-		var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+		for (var i = 0; i < 10; i++) {
+			sliceAndDice(i)
+		};
+
+	//	var dataURL = canvas.toDataURL("image/png");
+	//	var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 		var puzzleTitle = $('#puzzleTitle').val();
-		$.post('/puzzle/upload', {base64: base64, puzzleTitle: puzzleTitle}
+		$.post('/puzzle/upload', {slices: slices, puzzleTitle: puzzleTitle}
 			
 			).success( function(data) {window.location = "/puzzle/" + data + '/show'});
 	});
@@ -131,5 +146,6 @@ $(document).ready(function() {
 		drawCanvas();
 	});
 	$('#img_elem').hide();
-drawCanvas();
+	drawCanvas();
+
 });

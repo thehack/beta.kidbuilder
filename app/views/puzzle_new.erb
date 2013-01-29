@@ -19,14 +19,13 @@
 
 	<style type="text/css">
 	.tools {border: 2px solid black; padding:20px;}
-	canvas {background-image: url('/images/backgrounds/panda.png');}
+	#canvas {background-image: url('/images/backgrounds/panda.png');}
 	.lightbar {background-color: #f2f2f2;margin-top:-10px;}
 	a {text-decoration:none;}
 	.btn input {height:12px;width:12px;font-size:9px;margin-top:-6px;}
 	.btn { height: 18px;}
 	#puzzleTitle {width: 100px;}
 	#save {height:28px;vertical-align:baseline;}
-	#puzzleBody{width:930px;height:110px;margin-top:80px;line-height:30px;}
 	#slider { position:absolute;z-index:1;width:940px;max-height:0px;}
 	#vSlider {position:absolute;z-index:1;height:400px;max-width:0px;}
 	.ui-slider-handle {text-align:center;}
@@ -82,10 +81,6 @@
 						</a>
 					</div>					
 					<div class="btn-group">
-						<a class="btn" id="chooseImage" data-toggle="dropdown" href="#"><i class="icon-picture"></i> Background
-						</a>
-					</div>
-					<div class="btn-group">
 						<input class="btn" type='text' value='Name Your Puzzle' id='puzzleTitle' name="puzzleTitle" />
 						<button id="save" href="#" class="btn" >
 							<i class="icon-ok"></i> Save</button>
@@ -94,23 +89,47 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
 	<div class="container">
-		<textarea class="" id='puzzleBody'>Your
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="span9"><textarea class="" id='puzzleBody'>Your
 Text
 Here</textarea>
 		<br>
-	</div>
 
+			</div>
+			<div class="span3">
+				<div id="bgImages" style="overflow-x:scroll;max-height:160px;"><p>
+				<% for img in @background_list %>
+					<a class="/images/backgrounds/<%= img %>"><img src="/images/backgrounds/<%= img %>"></a>
+				<% end %></p>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<canvas id="canvas" width="940" height="400">
-		<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
-		<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
+			<p>To use the puzzle-creator, you must install a modern web-browser. Here's one:  <a href='https://www.google.com/chrome/'>Google's Chrome</a></p>
+			<p>Here's another: <a href="http://www.mozilla.org/" >Mozilla Firefox</a></p
 		</canvas>
 	</div>
 	<div class="container"><div id="hmSlider"><span><i class="icon-move"></i></span></div></div>
+	<canvas id="slices" width="94" height="400"></canvas>
 	<img id='img_elem' src="/images/backgrounds/panda.png" />
 	<script type="text/javascript">
-
+		$('#bgImages a').click(function() {
+			$('#img_elem').replaceWith("<img src='" + $(this).attr('class') + "' id='img_elem' />");
+			$('#img_elem').hide();
+			var url = "url(" + $(this).attr('class') + ")";
+			$('#workArea').css('background-image', url);
+			drawCanvas();
+			return false;
+		});
 	</script>
 </body>
 </html>
