@@ -9,6 +9,7 @@ verse fill-in game needs to be broken up into three levels, each a separate enti
 redirects after successful attempts.
 after successful level/new, redirect to /levels.
 Make Puzzle maker work in IE8 // If possible
+Set up for Google Chrome Frame
 
 ##Bugs
 bug: if puzzle isn't in a level, it's not a unit, so completing it returns a 500 error.
