@@ -46,7 +46,7 @@ var sliceAndDice = function(i) {
 	var sliceCanvas = document.getElementById('slices');
 	var context = sliceCanvas.getContext('2d');
 	context.clearRect(0,0,94,400);
-	context.drawImage( canvas, i*94, 0, 94, 400, 0, 0, 94, 400);
+	context.drawImage( document.getElementById('canvas'), i*94, 0, 94, 400, 0, 0, 94, 400);
 	slices[i] = sliceCanvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
 	console.log('slice' + i + slices[i] + "\n\n\n")
 };
