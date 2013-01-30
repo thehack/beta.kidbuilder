@@ -42,7 +42,7 @@ post '/units/:title/:index/:kind/:id/create' do
       game.save
       level.games << game
   end
-    level.save 
+    level.save
 end
 
 post '/level/:id/destroy' do

@@ -49,3 +49,45 @@ body {
 	min-height: 400px;
 	width:94px;
 }
+.tools {
+	border: 2px solid black; padding:20px;
+}
+#canvas {
+	background-image: url('/images/backgrounds/panda.png');
+}
+.lightbar {
+	background-color: #f2f2f2;margin-top:-10px;
+}
+a {text-decoration:none;}
+.btn input {
+	height:12px;width:12px;font-size:9px;margin-top:-6px;
+}
+.btn {
+	height: 18px;
+}
+#puzzleTitle {
+	width: 100px;
+}
+#save {
+	height:28px;vertical-align:baseline;
+}
+
+.ui-slider-handle {
+	text-align:center;
+}
+#hmSlider{
+	margin-top:-390px;
+	margin-left:10px;
+	background-color:white;
+	border:1px solid black;
+	border-radius:5px;
+	width:15px;
+	height:15px;
+	text-align:center;
+	opacity: 0.5;
+}
+.buttons {position:absolute;top:70px;left:20px;}
+.btn-group .btn {max-width: 60px;}
+.hmSlider:hover {
+	opacity: 1;
+}

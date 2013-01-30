@@ -30,7 +30,7 @@ end
 # Controller actions for Puzzle
 get '/puzzle/new' do
   @background_list = (Dir.entries("./public/images/backgrounds").sort) - ['.', '..', '.DS_Store']
-  erb :puzzle_new, :layout => false
+  erb :puzzle_new
 end
 
 get '/puzzle/:id/show' do

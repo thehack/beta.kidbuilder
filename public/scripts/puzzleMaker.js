@@ -22,14 +22,9 @@ var drawCanvas = function(){
     var textvalArr = toMultiLine(textval);
 	var y = vOffset;
    	var linespacing = parseInt(parseInt(size*1.3));
-//    console.log('linespacing: ' + linespacing + ' textval: ' + textval + 'textvalArr: ' +textvalArr);
-
     // draw each line on canvas. 
     for(var i = 0; i < textvalArr.length; i++){
         context.fillText(textvalArr[i], x, y);
-//			eventually C
-//			context.strokeStyle = $('#strokeSelector img').css('background-color');
-//			context.strokeText(textvalArr[i], x, y);
         y += linespacing;
     }
 }
@@ -41,6 +36,8 @@ var toMultiLine = function(text){
    textArr = text.split("<br/>");
    return textArr;
 };
+
+// slice up an image into 10 pieces, save the pieces, base64 encoded in an array.
 var slices = [];
 var sliceAndDice = function(i) {
 	var sliceCanvas = document.getElementById('slices');
@@ -48,12 +45,13 @@ var sliceAndDice = function(i) {
 	context.clearRect(0,0,94,400);
 	context.drawImage( document.getElementById('canvas'), i*94, 0, 94, 400, 0, 0, 94, 400);
 	slices[i] = sliceCanvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
-	console.log('slice' + i + slices[i] + "\n\n\n")
 };
 
 $(document).ready(function() {
 	// Clear this textarea, but only the first time it is clicked.
 	var cleared;
+	var canvas = document.getElementById("canvas");
+
 	$('#puzzleBody').click(function(){
 		if (cleared !== 1) {
 			$(this).val("");
@@ -62,13 +60,12 @@ $(document).ready(function() {
 	});
 
 	// Set up draggable positioner
-		$('#hmSlider').draggable({ appendTo: $('#canvas'), drag: function(element, ui) {
-			hOffset = ui.position.left + 30;
-			vOffset = ui.position.top + 30;
-			drawCanvas()
-		}});
+	$('#hmSlider').draggable({ appendTo: $('#canvas'), drag: function(element, ui) {
+		hOffset = ui.position.left + 30;
+		vOffset = ui.position.top + 30;
+		drawCanvas();
+	}});
 		
-	var canvas = document.getElementById("canvas");
 	$('#customSize').click( function() {
 		$('#sizeInput').focus().val("");
 	});
@@ -101,21 +98,6 @@ $(document).ready(function() {
 			drawCanvas();
 		}
 	});
-	$('#strokeSelector').ColorPicker({
-		onShow: function (colpkr) {
-			$(colpkr).fadeIn(500);
-			return false;
-		},
-		onHide: function (colpkr) {
-			$(colpkr).fadeOut(500);
-			return false;
-		},
-		onChange: function (hsb, hex, rgb) {
-			$('#strokeSelector img').css('backgroundColor', '#' + hex);
-			$('#canvas').css('-webkit-text-stroke', '1px #' + hex);
-
-		}
-	});
 	$('#align').change(function() {
 		$('#canvas').css('text-align', $(this).val());
 		drawCanvas();
@@ -132,20 +114,29 @@ $(document).ready(function() {
 		for (var i = 0; i < 10; i++) {
 			sliceAndDice(i)
 		};
-
-	//	var dataURL = canvas.toDataURL("image/png");
-	//	var base64 = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 		var puzzleTitle = $('#puzzleTitle').val();
-		$.post('/puzzle/upload', {slices: slices, puzzleTitle: puzzleTitle}
-			
-			).success( function(data) {window.location = "/puzzle/" + data + '/show'});
+		$.ajax({type: 'POST',
+				url: '/puzzle/upload', 
+				beforeSend: function() {$(document.body).spin()},
+				data: {slices: slices, puzzleTitle: puzzleTitle},
+				success: function(data) {window.location = "/puzzle/" + data + '/show'} 
+		});
 	});
 	$('#puzzleTitle').click(function() {$(this).val("")});
+	$('#bgImages a').click(function() {
+		$('#img_elem').replaceWith("<img src='" + $(this).attr('class') + "' id='img_elem' />");
+		$('#img_elem').hide();
+		var url = "url(" + $(this).attr('class') + ")";
+		$('#workArea').css('background-image', url);
+		drawCanvas();
+		return false;
+	});
 	$('#puzzleBody').keyup( function () {
 		puzzleBody = $(this).val();
 		drawCanvas();
 	});
 	$('#img_elem').hide();
+	$('ul.nav').hide(); // don't really need all the nav. simple and clean
 	drawCanvas();
 
 });
