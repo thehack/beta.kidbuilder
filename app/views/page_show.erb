@@ -1,0 +1,10 @@
+<%=h for row in @rows %>
+<div class="row">
+	<%=h for span in row.spans %>
+	<div class="span<%=h span.col_width %>"><%=h span.generated_content %>
+	</div>
+	<% end %>
+</div>
+<% end %>
+
+
