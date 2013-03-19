@@ -1,3 +1,10 @@
+
+## A few new ideas
+Each group admin would be able to choose from all the lessons, the front page would just have the lessons he has chosen to feature. This way stand alone games with several levels could really be lessons, but just be featured as a game to beat.
+
+New game idea: a verticle platformer like DK but starting at the top going down ladders, collect words and time bonuses in chest. timed game. must guess verse before time out. if you die you just start back at the top.
+
+
 ##Requires
 Ruby 1.8.7 with up-to-date gems
 imagemagick => on os x 'brew install imagemagick'

@@ -1,0 +1,25 @@
+<style type="text/css">
+.added {min-height: 20px;background-color: white;}
+.addedCol {background-color:yellow;}
+</style>
+<a contenteditable="true" id="addRow">+ Add a Row</a>
+<button>Save</button>
+
+<script type="text/javascript">
+var nextRowNumber = 0;
+$('#addRow').click(function(){
+	$('#stage').append("<div class='row added' id='" + nextRowNumber + "'><div contenteditable='true' class='span1 addedCol'><a class='addCol'>+ Add Column</a><a class='increase'> g </a> replace this text</div></div>");
+	nextRowNumber +=1;
+	$('.addCol').unbind('click');
+	$('.addCol').bind('click', function() {
+		$(event.target.parentNode.parentNode).append("<div class='span3 addedCol'>span</div>");
+	});
+	$('.increase').unbind('click');
+	$('.increase').bind('click', function() {
+		var num =2
+		$(event.target.parentNode).removeClass('span1').addClass('span' + num);
+		num += 1;
+	});
+});
+
+</script>

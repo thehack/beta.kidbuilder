@@ -1,3 +1,50 @@
+
+class Badge
+  include DataMapper::Resource
+  property  :id, Serial
+  property  :name, String
+  property  :icon_url, String
+  property  :price, Integer
+  property  :group, String
+  has n, :users, :through => Resource
+end
+
+class Game
+  include DataMapper::Resource
+  property :id, Serial
+  property :title, String
+  property :index, Integer
+  property :phrase, String
+  property :letters, String
+  property :row1, String
+  property :row2, String
+  property :row3, String
+  property :row4, String
+  property :row5, String
+  property :row6, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  belongs_to :level, :required => false
+  has n, :users, :through => Resource
+end
+
+class Group
+  include DataMapper::Resource
+  property :id, Serial
+  property :email, String
+  property :name, String, :required => true
+  property :logo, String
+  property :color1, String
+  property :color2, String
+  property :color3, String
+  property :color4, String
+  property :color5, String
+  property :color6, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  has n, :users
+end
+
 class Level
   include DataMapper::Resource
   def units
@@ -14,6 +61,63 @@ class Level
   has n, :games
   has n, :puzzles
   has n, :verses
+end
+
+class Puzzle
+  include DataMapper::Resource
+  property :id, Serial
+  property :title, String
+  property :index, Integer  
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  belongs_to :level, :required => false
+  has n, :users, :through => Resource  
+end
+
+class Page
+  include DataMapper::Resource
+  property :id, Serial
+  property :index, Integer  
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  belongs_to :level, :required => false
+  has n, :rows, :through => Resource  
+end
+
+class Row
+  include DataMapper::Resource  
+  property :id, Serial
+  property :index, Integer  
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  belongs_to :page
+  has n, :spans, :through => Resource  
+end
+
+class Span
+  include DataMapper::Resource
+  property :id, Serial
+  property :type, String
+  property :col_width, Integer
+  property :content, String
+  property :index, Integer
+  property :src, String
+  property :created_on, DateTime
+  property :updated_at, DateTime
+  belongs_to :row
+  types = {
+    :video => "<video src='#{self.src}'>#{self.content}</video>", 
+    :image => "<img src='#{self.src}'>#{self.content}",
+    :text => self.content
+  }
+  def generated_content
+    return types[self.type.to_sym]
+  end
+end
+
+class Quiz
+  include DataMapper::Resource
+  property :id, Serial
 end
 
 class User
@@ -57,67 +161,7 @@ class Verse
   has n, :users, :through => Resource
 end
 
-class Group
-  include DataMapper::Resource
-  property :id, Serial
-  property :email, String
-  property :name, String, :required => true
-  property :logo, String
-  property :color1, String
-  property :color2, String
-  property :color3, String
-  property :color4, String
-  property :color5, String
-  property :color6, String
-  property :created_on, DateTime
-  property :updated_at, DateTime
-  has n, :users
-end
 
-class Badge
-  include DataMapper::Resource
-  property  :id, Serial
-  property  :name, String
-  property  :icon_url, String
-  property  :price, Integer
-  property  :group, String
-  has n, :users, :through => Resource
-end
-
-class Quiz
-  include DataMapper::Resource
-  property :id, Serial
-end
-
-class Game
-  include DataMapper::Resource
-  property :id, Serial
-  property :title, String
-  property :index, Integer
-  property :phrase, String
-  property :letters, String
-  property :row1, String
-  property :row2, String
-  property :row3, String
-  property :row4, String
-  property :row5, String
-  property :row6, String
-  property :created_on, DateTime
-  property :updated_at, DateTime
-  belongs_to :level, :required => false
-  has n, :users, :through => Resource
-end
-
-class Puzzle
-  include DataMapper::Resource
-  property :id, Serial
-  property :title, String
-  property :index, Integer  
-  property :created_on, DateTime
-  property :updated_at, DateTime
-  belongs_to :level, :required => false
-  has n, :users, :through => Resource  
-end
 DataMapper.auto_upgrade!
 
 # first user and group
