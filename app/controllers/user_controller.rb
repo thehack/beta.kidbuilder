@@ -12,7 +12,7 @@ post '/signup' do
   :belt => 'white',
   :salt => salt,
   :score => 0,
-  :coins => 0,
+  :coins => 0
   )
   response.set_cookie("salt", :value => user.salt, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
 end
