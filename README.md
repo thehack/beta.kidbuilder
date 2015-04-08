@@ -20,13 +20,16 @@ on my local machine:
     git pull
 
 make edits. test.
+
     git commit -a -m "message"
     git push origin master
 
 ssh into server.
+    
     git pull
 
 Here's a one-liner to remove deleted files from the git repo:
+    
     git ls-files -d -z | xargs -0 git update-index --remove
 
 ##Setup
