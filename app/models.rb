@@ -28,23 +28,6 @@ class Game
   has n, :users, :through => Resource
 end
 
-class Group
-  include DataMapper::Resource
-  property :id, Serial
-  property :email, String
-  property :name, String, :required => true
-  property :logo, String
-  property :color1, String
-  property :color2, String
-  property :color3, String
-  property :color4, String
-  property :color5, String
-  property :color6, String
-  property :created_on, DateTime
-  property :updated_at, DateTime
-  has n, :users
-end
-
 class Level
   include DataMapper::Resource
   def units
@@ -133,7 +116,6 @@ class User
   property :animal, String
   property :created_on, DateTime
   property :updated_at, DateTime
-  belongs_to :group
   has n, :levels, :through => Resource
   has n, :games, :through => Resource
   has n, :puzzles, :through => Resource
@@ -163,23 +145,11 @@ class Verse
   end
 end
 
-
 DataMapper.auto_upgrade!
 
 # first user and group
-if Group.all == []
-  group = Group.create( :id => 1, 
-    :email => "tim.inman@gmail.com",
-    :name => 'world',
-    :logo => 'kidbuilder2.png',
-    :color1 => "666666",
-    :color2 => "0F87ff",
-    :color3 => '0F87ff',
-    :color4 => 'f55200',
-    :color5 => '8fe300',
-    :color6 => 'fd00d6',
-    :created_on => Time.now,
-    :updated_at => Time.now )
+if User.all == []
+
   email = 'tim.inman@gmail.com'
   login = 'thehack'
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
@@ -195,7 +165,5 @@ if Group.all == []
     :coins => 0,
     :created_on => Time.now,
     :updated_at => Time.now )
-  group.users << user
-  group.save
-  puts "just created admin user in #{user.group.name}."
+
 end

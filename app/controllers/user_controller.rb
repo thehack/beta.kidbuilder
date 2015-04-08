@@ -1,6 +1,5 @@
 # User Authentication Views
 post '/signup' do
-  group = Group.first(:name => 'world') #this will change
   login = params[:nickname]
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
   email = params[:email]
@@ -13,8 +12,7 @@ post '/signup' do
   :belt => 'white',
   :salt => salt,
   :score => 0,
-  :coins => 0,
-  :group => group
+  :coins => 0
   )
   response.set_cookie("salt", :value => user.salt, :expires => (Time.new.gmtime + 60*60*24*360), :path => '/')
 end

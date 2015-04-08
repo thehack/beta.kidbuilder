@@ -8,9 +8,11 @@ require 'sinatra/flash'
 # move views to app/views
 set :views, Proc.new { File.join(root, "app/views") }
 
-enable :sessions
 # use Rack::Flash
-Dir['./app/**/*.rb'].each{ |f| require f } #Require controllers and models in app folder
+enable :sessions
+
+#Require controllers and models in app folder
+Dir['./app/**/*.rb'].each{ |f| require f } 
 before do
   def authenticate!
     unless admin?
@@ -18,6 +20,7 @@ before do
      redirect "/"
     end
   end
+  
   # For user authentication. Gets a unique cookie from the client and returns a global current user to the views.  
   def logged_in?
     client_id = request.cookies["salt"]
@@ -35,11 +38,6 @@ before do
     end
   end
   # Common variables for the layout
-  if logged_in?
-    @group = @current_user.group
-  else
-    @group = Group.first(:name => 'world')
-  end
   @levels = Level.all
   @eight_games = Game.all( :limit => 8, :order => [ :updated_at.desc ] )
   @eight_bbbs = Verse.all( :limit => 8, :order => [ :updated_at.desc ] )

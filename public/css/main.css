@@ -1,10 +1,10 @@
 .white {background-color:#ffffff;}
-.royal {background-color:#0f87ff;}
-.carrot {background-color:#f55200;}
-.lime {background-color:#8fe300;}
+.royal, .color2, .color3,  {background-color:#0f87ff;}
+.carrot, .color4 {background-color:#f55200;}
+.lime, .color5 {background-color:#8fe300;}
 .pink {background-color:#f200cf;}
 .cherry {background-color:#de0000;}
-.grey {background-color:#666666;}
+.grey, .color1{background-color:#666666;}
 .linkbox {min-height:195px;border-radius:10px;-moz-border-radius:10px;}
 .linkbox p {margin-left:15px;line-height: 10px;}
 .outline {border:1px solid #666666;}
