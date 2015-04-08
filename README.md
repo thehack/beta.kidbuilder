@@ -1,17 +1,13 @@
+##Ideas to Implement
 
-## A few new ideas
-Each group admin would be able to choose from all the lessons, the front page would just have the lessons he has chosen to feature. This way stand alone games with several levels could really be lessons, but just be featured as a game to beat.
+####New game idea
+A verticle platformer like DK but starting at the top going down ladders, collect words and time bonuses in chest. timed game. must guess verse before time out. if you die you just start back at the top.
 
-New game idea: a verticle platformer like DK but starting at the top going down ladders, collect words and time bonuses in chest. timed game. must guess verse before time out. if you die you just start back at the top.
-
+####Bundler
 
 ##Requires
-Ruby 1.8.7 with up-to-date gems
+Ruby 2.1.5 with up-to-date gems
 imagemagick => on os x 'brew install imagemagick'
-
-##Shortcuts
-I made a little script to generate a controller and associated views:
-./script/generate.rb modelname # generates a basic crud controller
 
 ##Bootstrap
 I have configured it not to be responsive for >1200px screen width. I don't like it that wide and it messes up my stage which is necessarily a fixed width.
@@ -22,11 +18,12 @@ lessc .less/bootstrap.less --compile public/css/bootstrap.css
 ##Git Workflow:
 on my local machine:
 	
-	git add .
-	git commit -m "message"
+  git pull
+make edits. test.
+	git commit -a -m "message"
 	git push origin master
 
-ssh into Dreamhost.
+ssh into server.
 
 	git pull
 
@@ -51,10 +48,11 @@ It needs (locally and on the server) a database_config.rb file that gets ignored
 
 ##TO ACCESS CONSOLE:
 	irb -r main-app.rb
-## Nginx Server
-Stop nginx: sudo /etc/init.d/nginx stop
-Start nginx: sudo /opt/nginx/sbin/nginx
 
+## Thin Server
+  screen rvmsudo thin -p80 start
+  Ctrl+a, Ctrl+d // to detatch
+  screen -r //to reatatch
 
 ##Brain-storming belts/lessons:
 ###God is LOVE.
