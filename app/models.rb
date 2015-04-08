@@ -152,13 +152,15 @@ class Verse
   property :id, Serial
   property :body, Text
   property :title, String
-  property :all_words, Csv
   property :belt_color, String
   property :index, Integer
   property :created_on, DateTime
   property :updated_at, DateTime
   belongs_to :level, :required => false
   has n, :users, :through => Resource
+  def all_words
+    self.body.gsub(/[!.?,:;"]|\[.\]/ , "").split
+  end
 end
 
 
