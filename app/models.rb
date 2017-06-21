@@ -153,7 +153,7 @@ if User.all == []
   email = 'tim.inman@gmail.com'
   login = 'thehack'
   salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")
-  password = '953NE8921'
+  password = '*********'
 
   user = User.create(
     :email => email,
