@@ -56,7 +56,7 @@ helpers do
 end
 
 # DRY authentication
-before /^.*(new|edit|create|admin|destroy|upload)$/ do
+before /^.*(new|edit|create|admin|destroy|upload)$/, :mustermann_opts => { :type => :regexp, :check_anchors => false } do
   authenticate!
 end
 

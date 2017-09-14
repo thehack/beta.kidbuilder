@@ -1,0 +1,148 @@
+[ 2014-12-07 18:25:33.8991 18456/7f48ccc55780 agents/Watchdog/Main.cpp:1220 ]: Starting PassengerAgent watchdog...
+[ 2014-12-07 18:25:33.9090 18459/7f54eee07780 agents/HelperAgent/Main.cpp:881 ]: Starting PassengerAgent server...
+[ 2014-12-07 18:25:33.9093 18459/7f54eee07780 agents/HelperAgent/Main.cpp:254 ]: PassengerAgent server running in single-application mode.
+[ 2014-12-07 18:25:33.9093 18459/7f54eee07780 agents/HelperAgent/Main.cpp:255 ]: Serving app     : /home/fam/beta.kidbuilder
+[ 2014-12-07 18:25:33.9094 18459/7f54eee07780 agents/HelperAgent/Main.cpp:256 ]: App type        : rack
+[ 2014-12-07 18:25:33.9094 18459/7f54eee07780 agents/HelperAgent/Main.cpp:257 ]: App startup file: config.ru
+[ 2014-12-07 18:25:33.9132 18459/7f54eee07780 agents/HelperAgent/Main.cpp:635 ]: PassengerAgent server online, PID 18459
+[ 2014-12-07 18:25:33.9266 18466/7f3496be6780 agents/LoggingAgent/Main.cpp:431 ]: Starting PassengerAgent logger...
+[ 2014-12-07 18:25:33.9271 18466/7f3496be6780 agents/LoggingAgent/Main.cpp:312 ]: PassengerAgent logger online, PID 18466
+App 18487 stdout: 
+App 18504 stdout: 
+App 18487 stderr:         SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+App 18487 stderr:         This poses a security threat. It is strongly recommended that you
+App 18487 stderr:         provide a secret to prevent exploits that may be possible from crafted
+App 18487 stderr:         cookies. This will not be supported in future versions of Rack, and
+App 18487 stderr:         future versions will even invalidate your existing user cookies.
+App 18487 stderr: 
+App 18487 stderr:         Called from: /home/fam/.rvm/gems/ruby-2.1.5/gems/rack-1.6.0.beta2/lib/rack/builder.rb:86:in `new'.
+App 18511 stdout: 
+[ 2014-12-07 18:25:42.2526 18459/7f54dffff700 ServerKit/Server.h:892 ]: [Client 2.2] Disconnecting client with error: client socket write error: Broken pipe (errno=32)
+App 18487 stderr:         SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+App 18487 stderr:         This poses a security threat. It is strongly recommended that you
+App 18487 stderr:         provide a secret to prevent exploits that may be possible from crafted
+App 18487 stderr:         cookies. This will not be supported in future versions of Rack, and
+App 18487 stderr:         future versions will even invalidate your existing user cookies.
+App 18487 stderr: 
+App 18487 stderr:         Called from: /home/fam/.rvm/gems/ruby-2.1.5/gems/rack-1.6.0.beta2/lib/rack/builder.rb:86:in `new'.
+App 18519 stdout: 
+
+[ 2014-12-07 18:26:12.2593 18459/7f54ecfe2700 agents/HelperAgent/Main.cpp:447 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ 2014-12-07 18:26:12.2594 18459/7f54eee07780 agents/HelperAgent/Main.cpp:804 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ 2014-12-07 18:26:12.2594 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18504, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:26:12.2594 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18511, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:26:12.2595 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18519, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:26:12.2597 18459/7f54dffff700 ServerKit/Server.h:892 ]: [Client 2.4] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:26:12.2598 18459/7f54dffff700 ServerKit/Server.h:892 ]: [Client 2.3] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:26:12.2599 18459/7f54dffff700 ServerKit/Server.h:453 ]: [ServerThr.2] Shutdown finished
+[ 2014-12-07 18:26:12.2600 18459/7f54df7fe700 ServerKit/Server.h:453 ]: [AdminServer] Shutdown finished
+[ 2014-12-07 18:26:12.2600 18459/7f54ecfe2700 ServerKit/Server.h:892 ]: [Client 1.4] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:26:12.2601 18459/7f54ecfe2700 ServerKit/Server.h:892 ]: [Client 1.3] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:26:12.2602 18459/7f54ecfe2700 ServerKit/Server.h:453 ]: [ServerThr.1] Shutdown finished
+[ 2014-12-07 18:26:12.2603 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18504, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:26:12.2604 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18511, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:26:12.2604 18459/7f54eee07780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18519, application /home/fam/beta.kidbuilder#default
+
+[ 2014-12-07 18:26:12.2661 18466/7f34955c2700 agents/LoggingAgent/Main.cpp:338 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ 2014-12-07 18:26:12.2661 18466/7f3496be6780 agents/LoggingAgent/Main.cpp:400 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ 2014-12-07 18:26:12.2662 18466/7f34955c2700 ServerKit/Server.h:453 ]: [LoggerAdminServer] Shutdown finished
+[ 2014-12-07 18:26:12.2663 18466/7f3496be6780 agents/LoggingAgent/Main.cpp:425 ]: PassengerAgent logger shutdown finished
+[ 2014-12-07 18:26:12.3918 18459/7f54eee07780 agents/HelperAgent/Main.cpp:866 ]: PassengerAgent server shutdown finished
+[ 2014-12-07 18:26:32.9860 18579/7fe72d4e1780 agents/Watchdog/Main.cpp:1220 ]: Starting PassengerAgent watchdog...
+[ 2014-12-07 18:26:32.9951 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:881 ]: Starting PassengerAgent server...
+[ 2014-12-07 18:26:32.9954 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:254 ]: PassengerAgent server running in single-application mode.
+[ 2014-12-07 18:26:32.9954 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:255 ]: Serving app     : /home/fam/beta.kidbuilder
+[ 2014-12-07 18:26:32.9954 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:256 ]: App type        : rack
+[ 2014-12-07 18:26:32.9955 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:257 ]: App startup file: config.ru
+[ 2014-12-07 18:26:32.9959 18582/7f6537f6f780 agents/HelperAgent/Main.cpp:900 ]: ERROR: Cannot bind a TCP socket on address '0.0.0.0' port 80: Address already in use (errno=98)
+     in 'int Passenger::createServer(const Passenger::StaticString&, unsigned int, bool)' (IOUtils.cpp:237)
+     in 'void startListening()' (Main.cpp:271)
+     in 'int runServer()' (Main.cpp:884)
+
+[ 2014-12-07 18:26:32.9971 18580/7fe72d4e1780 agents/Watchdog/Main.cpp:1141 ]: ERROR: Unable to start the Phusion Passenger helper agent: it seems to have crashed during startup for an unknown reason, with exit code 1
+     in 'void startAgents(const Passenger::WatchdogAgent::WorkingObjectsPtr&, std::vector<boost::shared_ptr<AgentWatcher>, std::allocator<boost::shared_ptr<AgentWatcher> > >&)' (Main.cpp:1126)
+     in 'int watchdogMain(int, char**)' (Main.cpp:1260)
+
+[ 2014-12-07 18:26:34.0060 18580/7fe72d4e1780 agents/Watchdog/Main.cpp:345 ]: Cannot open cleanup PID file /tmp/passenger-standalone.14w4efj/temp_dir_toucher.pid
+[ 2014-12-07 18:27:15.4608 18624/7f990cd34780 agents/Watchdog/Main.cpp:1220 ]: Starting PassengerAgent watchdog...
+[ 2014-12-07 18:27:15.4691 18627/7f92da265780 agents/HelperAgent/Main.cpp:881 ]: Starting PassengerAgent server...
+[ 2014-12-07 18:27:15.4692 18627/7f92da265780 agents/HelperAgent/Main.cpp:254 ]: PassengerAgent server running in single-application mode.
+[ 2014-12-07 18:27:15.4692 18627/7f92da265780 agents/HelperAgent/Main.cpp:255 ]: Serving app     : /home/fam/beta.kidbuilder
+[ 2014-12-07 18:27:15.4692 18627/7f92da265780 agents/HelperAgent/Main.cpp:256 ]: App type        : rack
+[ 2014-12-07 18:27:15.4693 18627/7f92da265780 agents/HelperAgent/Main.cpp:257 ]: App startup file: config.ru
+[ 2014-12-07 18:27:15.4695 18627/7f92da265780 agents/HelperAgent/Main.cpp:900 ]: ERROR: Cannot bind a TCP socket on address '0.0.0.0' port 80: Address already in use (errno=98)
+     in 'int Passenger::createServer(const Passenger::StaticString&, unsigned int, bool)' (IOUtils.cpp:237)
+     in 'void startListening()' (Main.cpp:271)
+     in 'int runServer()' (Main.cpp:884)
+
+[ 2014-12-07 18:27:15.4702 18625/7f990cd34780 agents/Watchdog/Main.cpp:1141 ]: ERROR: Unable to start the Phusion Passenger helper agent: it seems to have crashed during startup for an unknown reason, with exit code 1
+     in 'void startAgents(const Passenger::WatchdogAgent::WorkingObjectsPtr&, std::vector<boost::shared_ptr<AgentWatcher>, std::allocator<boost::shared_ptr<AgentWatcher> > >&)' (Main.cpp:1126)
+     in 'int watchdogMain(int, char**)' (Main.cpp:1260)
+
+[ 2014-12-07 18:27:16.4791 18625/7f990cd34780 agents/Watchdog/Main.cpp:345 ]: Cannot open cleanup PID file /tmp/passenger-standalone.15blil2/temp_dir_toucher.pid
+[ 2014-12-07 18:28:40.5225 18656/7fda26879780 agents/Watchdog/Main.cpp:1220 ]: Starting PassengerAgent watchdog...
+[ 2014-12-07 18:28:40.5322 18659/7f246696c780 agents/HelperAgent/Main.cpp:881 ]: Starting PassengerAgent server...
+[ 2014-12-07 18:28:40.5324 18659/7f246696c780 agents/HelperAgent/Main.cpp:254 ]: PassengerAgent server running in single-application mode.
+[ 2014-12-07 18:28:40.5325 18659/7f246696c780 agents/HelperAgent/Main.cpp:255 ]: Serving app     : /home/fam/beta.kidbuilder
+[ 2014-12-07 18:28:40.5325 18659/7f246696c780 agents/HelperAgent/Main.cpp:256 ]: App type        : rack
+[ 2014-12-07 18:28:40.5325 18659/7f246696c780 agents/HelperAgent/Main.cpp:257 ]: App startup file: config.ru
+[ 2014-12-07 18:28:40.5363 18659/7f246696c780 agents/HelperAgent/Main.cpp:635 ]: PassengerAgent server online, PID 18659
+[ 2014-12-07 18:28:40.5506 18664/7ff4820fe780 agents/LoggingAgent/Main.cpp:431 ]: Starting PassengerAgent logger...
+[ 2014-12-07 18:28:40.5510 18664/7ff4820fe780 agents/LoggingAgent/Main.cpp:312 ]: PassengerAgent logger online, PID 18664
+App 18687 stdout: 
+App 18704 stdout: 
+App 18687 stderr:         SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+App 18687 stderr:         This poses a security threat. It is strongly recommended that you
+App 18687 stderr:         provide a secret to prevent exploits that may be possible from crafted
+App 18687 stderr:         cookies. This will not be supported in future versions of Rack, and
+App 18687 stderr:         future versions will even invalidate your existing user cookies.
+App 18687 stderr: 
+App 18687 stderr:         Called from: /home/fam/.rvm/gems/ruby-2.1.5/gems/rack-1.6.0.beta2/lib/rack/builder.rb:86:in `new'.
+App 18712 stdout: 
+App 18687 stderr:         SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+App 18687 stderr:         This poses a security threat. It is strongly recommended that you
+App 18687 stderr:         provide a secret to prevent exploits that may be possible from crafted
+App 18687 stderr:         cookies. This will not be supported in future versions of Rack, and
+App 18687 stderr:         future versions will even invalidate your existing user cookies.
+App 18687 stderr: 
+App 18687 stderr:         Called from: /home/fam/.rvm/gems/ruby-2.1.5/gems/rack-1.6.0.beta2/lib/rack/builder.rb:86:in `new'.
+App 18722 stdout: 
+App 18687 stderr:         SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+App 18687 stderr:         This poses a security threat. It is strongly recommended that you
+App 18687 stderr:         provide a secret to prevent exploits that may be possible from crafted
+App 18687 stderr:         cookies. This will not be supported in future versions of Rack, and
+App 18687 stderr:         future versions will even invalidate your existing user cookies.
+App 18687 stderr: 
+App 18687 stderr:         Called from: /home/fam/.rvm/gems/ruby-2.1.5/gems/rack-1.6.0.beta2/lib/rack/builder.rb:86:in `new'.
+App 18784 stdout: 
+
+[ 2014-12-07 18:29:45.7027 18659/7f2465348700 agents/HelperAgent/Main.cpp:447 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ 2014-12-07 18:29:45.7028 18659/7f246696c780 agents/HelperAgent/Main.cpp:804 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ 2014-12-07 18:29:45.7028 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18704, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7029 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18712, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7029 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18722, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7029 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18784, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7030 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.7] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7032 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.6] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7033 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.5] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7033 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.4] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7034 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.3] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7034 18659/7f2464b47700 ServerKit/Server.h:892 ]: [Client 2.2] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7035 18659/7f2464b47700 ServerKit/Server.h:453 ]: [ServerThr.2] Shutdown finished
+[ 2014-12-07 18:29:45.7037 18659/7f245f7fe700 ServerKit/Server.h:453 ]: [AdminServer] Shutdown finished
+[ 2014-12-07 18:29:45.7037 18659/7f2465348700 ServerKit/Server.h:892 ]: [Client 1.7] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7038 18659/7f2465348700 ServerKit/Server.h:892 ]: [Client 1.6] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7039 18659/7f2465348700 ServerKit/Server.h:892 ]: [Client 1.5] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7039 18659/7f2465348700 ServerKit/Server.h:892 ]: [Client 1.4] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7040 18659/7f2465348700 ServerKit/Server.h:892 ]: [Client 1.3] Disconnecting client with error: server is shutting down
+[ 2014-12-07 18:29:45.7040 18659/7f2465348700 ServerKit/Server.h:453 ]: [ServerThr.1] Shutdown finished
+[ 2014-12-07 18:29:45.7041 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18704, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7042 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18712, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7042 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18722, application /home/fam/beta.kidbuilder#default
+[ 2014-12-07 18:29:45.7042 18659/7f246696c780 agents/HelperAgent/Main.cpp:722 ]: Disconnecting long-running connections for process 18784, application /home/fam/beta.kidbuilder#default
+
+[ 2014-12-07 18:29:45.7340 18664/7ff480ada700 agents/LoggingAgent/Main.cpp:338 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ 2014-12-07 18:29:45.7340 18664/7ff4820fe780 agents/LoggingAgent/Main.cpp:400 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ 2014-12-07 18:29:45.7340 18664/7ff480ada700 ServerKit/Server.h:453 ]: [LoggerAdminServer] Shutdown finished
+[ 2014-12-07 18:29:45.7342 18664/7ff4820fe780 agents/LoggingAgent/Main.cpp:425 ]: PassengerAgent logger shutdown finished
+[ 2014-12-07 18:29:45.9422 18659/7f246696c780 agents/HelperAgent/Main.cpp:866 ]: PassengerAgent server shutdown finished
